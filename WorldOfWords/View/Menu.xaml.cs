@@ -23,7 +23,7 @@ namespace WorldOfWords.View
         public Menu()
         {
             InitializeComponent();
-            DataContext = new MenuViewModel();
+            DataContext = new MenuViewModel(MenuFrame);
         }
     }
 }

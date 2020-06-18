@@ -18,7 +18,7 @@ namespace WorldOfWords.Infrastructure.Services
             _context = context;
         }
 
-        public async Task Create(WordArgs args)
+        public void Create(WordArgs args)
         {
             var word = new Word()
             {
@@ -31,58 +31,58 @@ namespace WorldOfWords.Infrastructure.Services
             };
 
             _context.Words.Add(word);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task Delete(string id)
+        public void Delete(string id)
         {
-            var word = await GetWord(id);
+            var word = GetWord(id);
             _context.Words.Remove(word);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task Edit(WordArgs args)
+        public void Edit(WordArgs args)
         {
-            var word = await GetWord(args.Id);
+            var word = GetWord(args.Id);
             word.Examples = args.Examples;
             word.Name = args.Name;
             word.Picture = args.Picture;
             word.Statuses = args.Statuses;
             word.TranslateName = args.TranslateName;
 
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task<List<Word>> GetAcquaintedWords()
+        public List<Word> GetAcquaintedWords()
         {
-            return await _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 25
-                && x.Statuses.Sum() / x.Statuses.Count <= 50).ToListAsync();
+            return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 25
+                && x.Statuses.Sum() / x.Statuses.Count <= 50).ToList();
         }
 
-        public async Task<List<Word>> GetAlmostStudiedWords()
+        public List<Word> GetAlmostStudiedWords()
         {
-            return await _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 50 
-                && x.Statuses.Sum() / x.Statuses.Count <= 75).ToListAsync();
+            return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 50 
+                && x.Statuses.Sum() / x.Statuses.Count <= 75).ToList();
         }
 
-        public async Task<List<Word>> GetAllWords()
+        public List<Word> GetAllWords()
         {
-            return await _context.Words.ToListAsync();
+            return _context.Words.ToList();
         }
 
-        public async Task<List<Word>> GetNotStudiedWords()
+        public List<Word> GetNotStudiedWords()
         {
-            return await _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count < 25).ToListAsync();
+            return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count < 25).ToList();
         }
 
-        public async Task<List<Word>> GetStudiedWords()
+        public List<Word> GetStudiedWords()
         {
-            return await _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 75).ToListAsync();
+            return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 75).ToList();
         }
 
-        public async Task<Word> GetWord(string id)
+        public Word GetWord(string id)
         {
-            return await _context.Words.FirstOrDefaultAsync(x => x.Id.ToString() == id);
+            return _context.Words.FirstOrDefault(x => x.Id.ToString() == id);
         }
     }
 }

@@ -12,14 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WorldOfWords.Infrastructure;
+using WorldOfWords.Infrastructure.Services;
+using WorldOfWords.ViewModel;
 
 namespace WorldOfWords.View
 {
     public partial class AllWords : Page
     {
-        public AllWords()
+        public AllWords(Frame menuFrame)
         {
             InitializeComponent();
+            DataContext = new AllWordsViewModel(menuFrame, new WordService(new WorldOfWordsDbContext()));
         }
     }
 }

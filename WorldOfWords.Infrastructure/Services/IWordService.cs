@@ -10,14 +10,14 @@ namespace WorldOfWords.Infrastructure.Services
 {
     public interface IWordService
     {
-        Task Create(WordArgs args);
-        Task<Word> GetWord(string id);
-        Task<List<Word>> GetAllWords();
-        Task<List<Word>> GetStudiedWords();
-        Task<List<Word>> GetNotStudiedWords();
-        Task<List<Word>> GetAlmostStudiedWords();
-        Task<List<Word>> GetAcquaintedWords();
-        Task Edit(WordArgs args);
-        Task Delete(string id);
+        void Create(WordArgs args);
+        Word GetWord(string id);
+        List<Word> GetAllWords();
+        List<Word> GetStudiedWords();
+        List<Word> GetNotStudiedWords();
+        List<Word> GetAlmostStudiedWords();
+        List<Word> GetAcquaintedWords();
+        void Edit(WordArgs args);
+        void Delete(string id);
     }
 }

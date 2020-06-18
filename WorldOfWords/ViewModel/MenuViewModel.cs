@@ -9,12 +9,18 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using WorldOfWords.View;
+using WorldOfWords.Infrastructure.Services;
 
 namespace WorldOfWords.ViewModel
 {
     public class MenuViewModel : INotifyPropertyChanged
     {
-        Uri menuUri;
+        Frame _menuFrame;
+
+        public MenuViewModel(Frame menuFrame)
+        {
+            _menuFrame = menuFrame;
+        }
 
         private RelayCommand allWordsCommand;
         public RelayCommand AllWordsCommand
@@ -24,24 +30,22 @@ namespace WorldOfWords.ViewModel
                 return allWordsCommand ??
                   (allWordsCommand = new RelayCommand(obj =>
                   {
-                      MenuUri = new Uri("AllWords.xaml", UriKind.Relative);
+                      _menuFrame.Navigate(new AllWords(_menuFrame));
                   }));
             }
         }
 
-        public Uri MenuUri
+        private RelayCommand back;
+        public RelayCommand Back
         {
-            get { return menuUri; }
-            set
+            get
             {
-                menuUri = value;
-                OnPropertyChanged("MenuUri");
+                return back ??
+                  (back = new RelayCommand(obj =>
+                  {
+                      _menuFrame.NavigationService.Source = null;
+                  }));
             }
-        }
-
-        public MenuViewModel()
-        {
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -13,11 +13,12 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="Menu">
+                <MenuItem Header="Back" Command="{Binding Back}" />
                 <MenuItem Header="AllWords" Command="{Binding AllWordsCommand}" />
             </MenuItem>
         </Menu>
         <Frame 
-            Source="{Binding MenuUri}"
+            Name="MenuFrame"
             Grid.Row="1"
 			NavigationUIVisibility="Hidden"
             />

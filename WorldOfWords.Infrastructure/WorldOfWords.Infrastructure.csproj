@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arguments\WordArgs.cs" />
+    <Compile Include="MyContextInitializer.cs" />
     <Compile Include="Services\IWordService.cs" />
     <Compile Include="Services\WordService.cs" />
     <Compile Include="WorldOfWordsDbContext.cs" />

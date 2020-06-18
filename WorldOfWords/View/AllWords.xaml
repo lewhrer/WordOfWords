@@ -9,7 +9,21 @@
       Title="AllWords">
 
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="193,134,0,0" TextWrapping="Wrap" FontSize="100" Text="TextBlock" VerticalAlignment="Top"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Words}"
+                 SelectedItem="{Binding SelectedWord}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=TranslateName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>
