@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using WorldOfWords.Model;
+using System.Windows;
 
 namespace WorldOfWords.Infrastructure
 {
@@ -12,13 +13,13 @@ namespace WorldOfWords.Infrastructure
     {
         public DbSet<Word> Words { get; set; }
 
-        //static WorldOfWordsDbContext()
-        //{
-        //    Database.SetInitializer(new MyContextInitializer());
-        //}
+        static WorldOfWordsDbContext()
+        {
+            Database.SetInitializer(new MyContextInitializer());
+        }
 
-        public WorldOfWordsDbContext()
-        : base("DbConnection")
-        { }
+        public WorldOfWordsDbContext() : base("DbConnection")
+        {
+        }
     }
 }

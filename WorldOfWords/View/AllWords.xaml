@@ -12,12 +12,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <ListBox Grid.Row="1" ItemsSource="{Binding Words}"
                  SelectedItem="{Binding SelectedWord}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    
                     <StackPanel Margin="5">
                         <TextBlock FontSize="18" Text="{Binding Path=Name}" />
                         <TextBlock Text="{Binding Path=TranslateName}" />
@@ -25,5 +25,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button 
+            Grid.Row="2" 
+            Content="More" 
+            Command="{Binding MoreCommand}"
+            />
     </Grid>
 </Page>

@@ -68,6 +68,7 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\AllWordsViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\WordInfoViewModel.cs" />
     <Compile Include="View\AllWords.xaml.cs">
       <DependentUpon>AllWords.xaml</DependentUpon>
     </Compile>
@@ -78,11 +79,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\WordInfo.xaml.cs">
+      <DependentUpon>WordInfo.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\AllWords.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WordInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

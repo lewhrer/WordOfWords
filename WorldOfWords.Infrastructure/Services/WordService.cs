@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WorldOfWords.Infrastructure.Arguments;
 using WorldOfWords.Model;
 using System.Data.Entity;
+using System.Windows;
 
 namespace WorldOfWords.Infrastructure.Services
 {
@@ -23,10 +24,10 @@ namespace WorldOfWords.Infrastructure.Services
             var word = new Word()
             {
                 Id = Guid.NewGuid(),
-                Examples = args.Examples,
+                //Examples = args.Examples,
                 Name = args.Name,
                 Picture = args.Picture,
-                Statuses = args.Statuses,
+                //Statuses = args.Statuses,
                 TranslateName = args.TranslateName,
             };
 
@@ -44,10 +45,10 @@ namespace WorldOfWords.Infrastructure.Services
         public void Edit(WordArgs args)
         {
             var word = GetWord(args.Id);
-            word.Examples = args.Examples;
+            //word.Examples = args.Examples;
             word.Name = args.Name;
             word.Picture = args.Picture;
-            word.Statuses = args.Statuses;
+            //word.Statuses = args.Statuses;
             word.TranslateName = args.TranslateName;
 
             _context.SaveChanges();
@@ -55,14 +56,16 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetAcquaintedWords()
         {
-            return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 25
-                && x.Statuses.Sum() / x.Statuses.Count <= 50).ToList();
+            return _context.Words.ToList();
+            //return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 25
+            //    && x.Statuses.Sum() / x.Statuses.Count <= 50).ToList();
         }
 
         public List<Word> GetAlmostStudiedWords()
         {
-            return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 50 
-                && x.Statuses.Sum() / x.Statuses.Count <= 75).ToList();
+            return _context.Words.ToList();
+            //return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 50 
+            //    && x.Statuses.Sum() / x.Statuses.Count <= 75).ToList();
         }
 
         public List<Word> GetAllWords()
@@ -72,12 +75,14 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetNotStudiedWords()
         {
-            return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count < 25).ToList();
+            return _context.Words.ToList();
+            //return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count < 25).ToList();
         }
 
         public List<Word> GetStudiedWords()
         {
-            return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 75).ToList();
+            return _context.Words.ToList();
+            //return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 75).ToList();
         }
 
         public Word GetWord(string id)
