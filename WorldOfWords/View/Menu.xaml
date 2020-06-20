@@ -14,6 +14,7 @@
         <Menu>
             <MenuItem Header="Menu">
                 <MenuItem Header="Back" Command="{Binding Back}" />
+                <MenuItem Header="Create" Command="{Binding CreateCommand}" />
                 <MenuItem Header="AllWords" Command="{Binding AllWordsCommand}" />
             </MenuItem>
         </Menu>

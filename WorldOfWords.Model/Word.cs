@@ -9,7 +9,8 @@ namespace WorldOfWords.Model
         public string Name { get; set; }
         public string TranslateName { get; set; }
         public byte[] Picture { get; set; }
-        //public ICollection<string> Examples { get; set; }
-        //public ICollection<double> Statuses { get; set; }
+        public string Example { get; set; }
+        public virtual DateTime? LastUpdate { get; set; }
+        public double Level { get; set; }
     }
 }

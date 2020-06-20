@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using WorldOfWords.Infrastructure.Arguments;
 using WorldOfWords.Model;
 
@@ -19,5 +20,7 @@ namespace WorldOfWords.Infrastructure.Services
         List<Word> GetAcquaintedWords();
         void Edit(WordArgs args);
         void Delete(string id);
+        byte[] FindImage();
+        BitmapImage GetSourceImage(byte[] array);
     }
 }

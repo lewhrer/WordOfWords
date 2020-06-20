@@ -35,6 +35,19 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        private RelayCommand createCommand;
+        public RelayCommand CreateCommand
+        {
+            get
+            {
+                return createCommand ??
+                  (createCommand = new RelayCommand(obj =>
+                  {
+                      _menuFrame.Navigate(new Create(_menuFrame));
+                  }));
+            }
+        }
+
         private RelayCommand back;
         public RelayCommand Back
         {

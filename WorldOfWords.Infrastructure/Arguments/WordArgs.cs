@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorldOfWords.Model;
 
 namespace WorldOfWords.Infrastructure.Arguments
 {
@@ -12,7 +13,8 @@ namespace WorldOfWords.Infrastructure.Arguments
         public string Name { get; set; }
         public string TranslateName { get; set; }
         public byte[] Picture { get; set; }
-        public ICollection<string> Examples { get; set; }
-        public ICollection<double> Statuses { get; set; }
+        public string Example { get; set; }
+        public double Level { get; set; }
+        public DateTime? LastUpdate { get; set; }
     }
 }

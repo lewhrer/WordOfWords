@@ -21,5 +21,11 @@ namespace WorldOfWords.Infrastructure
         public WorldOfWordsDbContext() : base("DbConnection")
         {
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Word>().Property(x => x.LastUpdate).IsOptional();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
