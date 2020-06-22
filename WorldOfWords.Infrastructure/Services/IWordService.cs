@@ -22,5 +22,6 @@ namespace WorldOfWords.Infrastructure.Services
         void Delete(string id);
         byte[] FindImage();
         BitmapImage GetSourceImage(byte[] array);
+        void SetKnow(string id, double percent);
     }
 }

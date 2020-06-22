@@ -26,7 +26,7 @@ namespace WorldOfWords.View
         public Create(Frame menuFrame)
         {
             InitializeComponent();
-            DataContext = new CreateViewModel(menuFrame, new WordService(new WorldOfWordsDbContext()), picture, TbxName, TbxTranslate, TbxExamples);
+            DataContext = new CreateViewModel(menuFrame, new WordService(new WorldOfWordsDbContext()), picture);
         }
     }
 }

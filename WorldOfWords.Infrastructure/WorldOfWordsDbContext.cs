@@ -22,10 +22,10 @@ namespace WorldOfWords.Infrastructure
         {
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Word>().Property(x => x.LastUpdate).IsOptional();
-            base.OnModelCreating(modelBuilder);
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Word>().Property(x => x.LastUpdate).IsOptional();
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

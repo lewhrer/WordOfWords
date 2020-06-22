@@ -17,16 +17,22 @@ namespace WorldOfWords.ViewModel
     {
         Frame _menuFrame;
         Word word;
+        Image picture;
 
         public IWordService _wordService;
         public ObservableCollection<Word> Words { get; set; }
 
-        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<Word> words, int indexWord)
+        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<Word> words, int indexWord, Image picture)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
             Words = new ObservableCollection<Word>(words);
             Word = Words[indexWord];
+            this.picture = picture;
+            if(Word.Picture != null)
+            {
+                picture.Source = _wordService.GetSourceImage(Word.Picture);
+            }
         }
 
         public Word Word

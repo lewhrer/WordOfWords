@@ -30,7 +30,7 @@ namespace WorldOfWords.ViewModel
         private string translate;
         private string example;
 
-        public CreateViewModel(Frame menuFrame, IWordService wordService, Image picture, TextBox name, TextBox translate, TextBox example)
+        public CreateViewModel(Frame menuFrame, IWordService wordService, Image picture)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;

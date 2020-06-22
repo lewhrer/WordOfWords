@@ -27,7 +27,7 @@ namespace WorldOfWords.View
         public WordInfo(Frame menuFrame, List<Word> words, int indexWord = 0)
         {
             InitializeComponent();
-            DataContext = new WordInfoViewModel(menuFrame, new WordService(new WorldOfWordsDbContext()), words, indexWord);
+            DataContext = new WordInfoViewModel(menuFrame, new WordService(new WorldOfWordsDbContext()), words, indexWord, ImgPicture);
         }
     }
 }

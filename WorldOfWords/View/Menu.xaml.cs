@@ -24,6 +24,7 @@ namespace WorldOfWords.View
         {
             InitializeComponent();
             DataContext = new MenuViewModel(MenuFrame);
+            MenuFrame.Navigate(new AllWords(MenuFrame));
         }
     }
 }

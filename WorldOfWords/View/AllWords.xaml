@@ -25,10 +25,57 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button 
-            Grid.Row="2" 
-            Content="More" 
-            Command="{Binding MoreCommand}"
-            />
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button 
+                Grid.Column="0"
+                Content="Show" 
+                Command="{Binding MoreCommand}"
+                />
+            <Button 
+                Grid.Column="1"
+                Content="0 %" 
+                Command="{Binding Know0Command}"
+                />
+            <Button 
+                Grid.Column="2"
+                Content="25 %" 
+                Command="{Binding Know25Command}"
+                />
+            <Button 
+                Grid.Column="3"
+                Content="50 %" 
+                Command="{Binding Know50Command}"
+                />
+            <Button 
+                Grid.Column="4"
+                Content="75 %" 
+                Command="{Binding Know75Command}"
+                />
+            <Button 
+                Grid.Column="5"
+                Content="100 %" 
+                Command="{Binding Know100Command}"
+                />
+            <Button 
+                Grid.Column="6"
+                Content="Edit" 
+                Command="{Binding EditCommand}"
+                />
+            <Button 
+                Grid.Column="7"
+                Content="Detele" 
+                Command="{Binding DeleteCommand}"
+                />
+        </Grid>
     </Grid>
 </Page>

@@ -11,7 +11,7 @@
     <Grid DataContext="{Binding Word}">
         <TextBlock 
             HorizontalAlignment="Left" 
-            Margin="275,91,0,0" 
+            Margin="61,54,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding Name}" 
             VerticalAlignment="Top"
@@ -20,12 +20,19 @@
 
         <TextBlock 
             HorizontalAlignment="Left" 
-            Margin="279,262,0,0" 
+            Margin="440,314,0,0" 
             TextWrapping="Wrap" 
             Text="{Binding TranslateName}" 
             VerticalAlignment="Top"
             FontSize="50"
             />
+        
+        <Image Name="ImgPicture" HorizontalAlignment="Left" Height="160" Margin="452,42,0,0" VerticalAlignment="Top" Width="270"
+               Source="../Resources/temp.jpg"
+               />
 
+        <TextBox Name="TbxExample" HorizontalAlignment="Left" Height="160" Margin="22,253,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318"
+                 Text="{Binding Example}"
+                 />
     </Grid>
 </Page>

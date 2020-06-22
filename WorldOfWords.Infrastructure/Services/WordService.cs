@@ -59,8 +59,6 @@ namespace WorldOfWords.Infrastructure.Services
             _context.SaveChanges();
         }
 
-
-
         public List<Word> GetAcquaintedWords()
         {
             return _context.Words.ToList();
@@ -148,6 +146,13 @@ namespace WorldOfWords.Infrastructure.Services
         public Word GetWord(string id)
         {
             return _context.Words.FirstOrDefault(x => x.Id.ToString() == id);
+        }
+
+        public void SetKnow(string id, double percent)
+        {
+            var word = GetWord(id);
+            word.Level = (word.Level + percent) / 2;
+            _context.SaveChanges();
         }
     }
 }

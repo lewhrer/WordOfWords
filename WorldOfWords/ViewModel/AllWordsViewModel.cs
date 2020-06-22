@@ -47,6 +47,91 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        private RelayCommand know0Command;
+        public RelayCommand Know0Command
+        {
+            get
+            {
+                return know0Command ??
+                  (know0Command = new RelayCommand(obj =>
+                  {
+                      if (selectedWord != null)
+                      {
+                          _wordService.SetKnow(SelectedWord.Id.ToString(), 0);
+                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                      }
+                  }));
+            }
+        }
+
+        private RelayCommand know25Command;
+        public RelayCommand Know25Command
+        {
+            get
+            {
+                return know25Command ??
+                  (know25Command = new RelayCommand(obj =>
+                  {
+                      if (selectedWord != null)
+                      {
+                          _wordService.SetKnow(SelectedWord.Id.ToString(), 25);
+                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                      }
+                  }));
+            }
+        }
+
+        private RelayCommand know50Command;
+        public RelayCommand Know50Command
+        {
+            get
+            {
+                return know50Command ??
+                  (know50Command = new RelayCommand(obj =>
+                  {
+                      if (selectedWord != null)
+                      {
+                          _wordService.SetKnow(SelectedWord.Id.ToString(), 50);
+                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                      }
+                  }));
+            }
+        }
+
+        private RelayCommand know75Command;
+        public RelayCommand Know75Command
+        {
+            get
+            {
+                return know75Command ??
+                  (know75Command = new RelayCommand(obj =>
+                  {
+                      if (selectedWord != null)
+                      {
+                          _wordService.SetKnow(SelectedWord.Id.ToString(), 75);
+                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                      }
+                  }));
+            }
+        }
+
+        private RelayCommand know100Command;
+        public RelayCommand Know100Command
+        {
+            get
+            {
+                return know100Command ??
+                  (know100Command = new RelayCommand(obj =>
+                  {
+                      if (selectedWord != null)
+                      {
+                          _wordService.SetKnow(SelectedWord.Id.ToString(), 100);
+                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                      }
+                  }));
+            }
+        }
+
         public Word SelectedWord
         {
             get { return selectedWord; }
