@@ -47,6 +47,23 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        private RelayCommand deleteCommand;
+        public RelayCommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ??
+                  (deleteCommand = new RelayCommand(obj =>
+                  {
+                      if (selectedWord != null)
+                      {
+                          _wordService.Delete(SelectedWord.Id.ToString());
+                          Words.RemoveAt(Words.IndexOf(selectedWord));
+                      }
+                  }));
+            }
+        }
+
         private RelayCommand know0Command;
         public RelayCommand Know0Command
         {
