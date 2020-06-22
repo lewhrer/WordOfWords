@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -64,6 +65,22 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        private RelayCommand editCommand;
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return editCommand ??
+                  (editCommand = new RelayCommand(obj =>
+                  {
+                      if (selectedWord != null)
+                      {
+                          _menuFrame.Navigate(new Edit(_menuFrame, SelectedWord.Id.ToString()));
+                      }
+                  }));
+            }
+        }
+
         private RelayCommand know0Command;
         public RelayCommand Know0Command
         {
@@ -75,7 +92,11 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 0);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          SelectedWord = word;
                       }
                   }));
             }
@@ -92,7 +113,11 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 25);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          SelectedWord = word;
                       }
                   }));
             }
@@ -109,7 +134,11 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 50);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          SelectedWord = word;
                       }
                   }));
             }
@@ -126,7 +155,11 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 75);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          SelectedWord = word;
                       }
                   }));
             }
@@ -143,7 +176,11 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 100);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          SelectedWord = word;
                       }
                   }));
             }

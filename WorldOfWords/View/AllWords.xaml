@@ -21,6 +21,7 @@
                     <StackPanel Margin="5">
                         <TextBlock FontSize="18" Text="{Binding Path=Name}" />
                         <TextBlock Text="{Binding Path=TranslateName}" />
+                        <TextBlock Text="{Binding Path=Level}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

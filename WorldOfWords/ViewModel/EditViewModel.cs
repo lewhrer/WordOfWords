@@ -1,9 +1,6 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,12 +10,11 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using WorldOfWords.Infrastructure.Arguments;
 using WorldOfWords.Infrastructure.Services;
-using WorldOfWords.Model;
 using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
-    public class CreateViewModel : INotifyPropertyChanged
+    public class EditViewModel : INotifyPropertyChanged
     {
         Frame _menuFrame;
         Image picture;
@@ -26,15 +22,26 @@ namespace WorldOfWords.ViewModel
 
         public IWordService _wordService;
 
+        private readonly string id;
         private string name;
         private string translate;
         private string example;
 
-        public CreateViewModel(Frame menuFrame, IWordService wordService, Image picture)
+        public EditViewModel(Frame menuFrame, IWordService wordService, Image picture, string id)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
             this.picture = picture;
+            this.id = id;
+            var word = _wordService.GetWord(id);
+            Name = word.Name;
+            Translate = word.TranslateName;
+            Example = word.Example;
+            if(word.Picture != null)
+            {
+                pictureInBytes = word.Picture;
+                this.picture.Source = _wordService.GetSourceImage(word.Picture);
+            }
         }
 
         private RelayCommand addCommand;
@@ -62,9 +69,9 @@ namespace WorldOfWords.ViewModel
                       pictureInBytes = null;
                       try
                       {
-                          picture.Source = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/temp.jpg")); 
+                          picture.Source = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/temp.jpg"));
                       }
-                      catch(Exception e)
+                      catch (Exception e)
                       {
                           MessageBox.Show(e.Message);
                       }
@@ -82,6 +89,7 @@ namespace WorldOfWords.ViewModel
                   {
                       var args = new WordArgs()
                       {
+                          Id = id,
                           Example = Example,
                           Name = Name,
                           Picture = pictureInBytes,
@@ -90,11 +98,10 @@ namespace WorldOfWords.ViewModel
                           Level = 0,
                       };
 
-                      _wordService.Create(args);
-
-                      MessageBox.Show("Sacsesfull created!");
-
-                      _menuFrame.Navigate(new Create(_menuFrame));
+                      _wordService.Edit(args);
+                      
+                      MessageBox.Show("Sacsesfull edited!");
+                      _menuFrame.Navigate(new AllWords(_menuFrame));
                   }));
             }
         }
