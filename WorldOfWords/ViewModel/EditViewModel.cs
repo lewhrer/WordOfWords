@@ -26,6 +26,7 @@ namespace WorldOfWords.ViewModel
         private string name;
         private string translate;
         private string example;
+        private double level;
 
         public EditViewModel(Frame menuFrame, IWordService wordService, Image picture, string id)
         {
@@ -33,10 +34,13 @@ namespace WorldOfWords.ViewModel
             _wordService = wordService;
             this.picture = picture;
             this.id = id;
+
             var word = _wordService.GetWord(id);
             Name = word.Name;
             Translate = word.TranslateName;
             Example = word.Example;
+            level = word.Level;
+
             if(word.Picture != null)
             {
                 pictureInBytes = word.Picture;
@@ -95,7 +99,7 @@ namespace WorldOfWords.ViewModel
                           Picture = pictureInBytes,
                           LastUpdate = DateTime.Now,
                           TranslateName = Translate,
-                          Level = 0,
+                          Level = level,
                       };
 
                       _wordService.Edit(args);

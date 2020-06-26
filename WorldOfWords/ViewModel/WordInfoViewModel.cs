@@ -66,6 +66,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (indexSelectedWord + 1 != Words.Count)
                       {
+                          SelectedWord = null;
                           SelectedWord = Words[++indexSelectedWord];
                       }
                   }));
@@ -95,6 +96,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (indexSelectedWord != 0)
                       {
+                          SelectedWord = null;
                           SelectedWord = Words[--indexSelectedWord];
                       }
                   }));
@@ -134,10 +136,12 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
+                              ++indexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
                           {
+                              SelectedWord = null;
                               SelectedWord = Words[index];
                           }
                       }
@@ -162,10 +166,12 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
+                              ++indexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
                           {
+                              SelectedWord = null;
                               SelectedWord = Words[index];
                           }
                       }
@@ -190,10 +196,12 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
+                              ++indexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
                           {
+                              SelectedWord = null;
                               SelectedWord = Words[index];
                           }
                       }
@@ -218,10 +226,12 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
+                              ++indexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
                           {
+                              SelectedWord = null;
                               SelectedWord = Words[index];
                           }
                       }
@@ -246,10 +256,12 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
+                              ++indexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
                           {
+                              SelectedWord = null;
                               SelectedWord = Words[index];
                           }
                       }
