@@ -19,6 +19,7 @@ namespace WorldOfWords.ViewModel
         Frame _menuFrame;
         Word selectedWord;
         Image picture;
+        int indexSelectedWord;
 
         public IWordService _wordService;
         public ObservableCollection<Word> Words { get; set; }
@@ -28,12 +29,14 @@ namespace WorldOfWords.ViewModel
             _menuFrame = menuFrame;
             _wordService = wordService;
             Words = new ObservableCollection<Word>(words);
+            indexSelectedWord = indexWord;
             SelectedWord = Words[indexWord];
             this.picture = picture;
             if(SelectedWord.Picture != null)
             {
                 picture.Source = _wordService.GetSourceImage(SelectedWord.Picture);
             }
+            MessageBox.Show(words[indexWord].Level.ToString());
         }
 
         private RelayCommand deleteCommand;
@@ -53,6 +56,51 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        private RelayCommand nextCommand;
+        public RelayCommand NextCommand
+        {
+            get
+            {
+                return nextCommand ??
+                  (nextCommand = new RelayCommand(obj =>
+                  {
+                      if (indexSelectedWord + 1 != Words.Count)
+                      {
+                          SelectedWord = Words[++indexSelectedWord];
+                      }
+                  }));
+            }
+        }
+
+        private RelayCommand goBackCommand;
+        public RelayCommand GoBackCommand
+        {
+            get
+            {
+                return goBackCommand ??
+                  (goBackCommand = new RelayCommand(obj =>
+                  {
+                      _menuFrame.GoBack();
+                  }));
+            }
+        }
+
+        private RelayCommand previouslyCommand;
+        public RelayCommand PreviouslyCommand
+        {
+            get
+            {
+                return previouslyCommand ??
+                  (previouslyCommand = new RelayCommand(obj =>
+                  {
+                      if (indexSelectedWord != 0)
+                      {
+                          SelectedWord = Words[--indexSelectedWord];
+                      }
+                  }));
+            }
+        }
+
         private RelayCommand editCommand;
         public RelayCommand EditCommand
         {
@@ -63,7 +111,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (SelectedWord != null)
                       {
-                          _menuFrame.Navigate(new Edit(_menuFrame, SelectedWord.Id.ToString()));
+                          _menuFrame.Navigate(new Edit(_menuFrame, _wordService, SelectedWord.Id.ToString()));
                       }
                   }));
             }
@@ -77,10 +125,21 @@ namespace WorldOfWords.ViewModel
                 return know0Command ??
                   (know0Command = new RelayCommand(obj =>
                   {
-                      if (SelectedWord != null)
+                      if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 0);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          if (index + 1 != Words.Count)
+                          {
+                              SelectedWord = Words[++index];
+                          }
+                          else
+                          {
+                              SelectedWord = Words[index];
+                          }
                       }
                   }));
             }
@@ -94,10 +153,21 @@ namespace WorldOfWords.ViewModel
                 return know25Command ??
                   (know25Command = new RelayCommand(obj =>
                   {
-                      if (SelectedWord != null)
+                      if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 25);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          if (index + 1 != Words.Count)
+                          {
+                              SelectedWord = Words[++index];
+                          }
+                          else
+                          {
+                              SelectedWord = Words[index];
+                          }
                       }
                   }));
             }
@@ -111,10 +181,21 @@ namespace WorldOfWords.ViewModel
                 return know50Command ??
                   (know50Command = new RelayCommand(obj =>
                   {
-                      if (SelectedWord != null)
+                      if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 50);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          if (index + 1 != Words.Count)
+                          {
+                              SelectedWord = Words[++index];
+                          }
+                          else
+                          {
+                              SelectedWord = Words[index];
+                          }
                       }
                   }));
             }
@@ -128,10 +209,21 @@ namespace WorldOfWords.ViewModel
                 return know75Command ??
                   (know75Command = new RelayCommand(obj =>
                   {
-                      if (SelectedWord != null)
+                      if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 75);
-                          Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          if (index + 1 != Words.Count)
+                          {
+                              SelectedWord = Words[++index];
+                          }
+                          else
+                          {
+                              SelectedWord = Words[index];
+                          }
                       }
                   }));
             }
@@ -149,8 +241,17 @@ namespace WorldOfWords.ViewModel
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 100);
                           var word = _wordService.GetWord(SelectedWord.Id.ToString());
-                          Words[Words.IndexOf(SelectedWord)] = word;
-                          SelectedWord = word;
+                          int index = Words.IndexOf(SelectedWord);
+                          Words.RemoveAt(index);
+                          Words.Insert(index, word);
+                          if (index + 1 != Words.Count)
+                          {
+                              SelectedWord = Words[++index];
+                          }
+                          else
+                          {
+                              SelectedWord = Words[index];
+                          }
                       }
                   }));
             }

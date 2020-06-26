@@ -44,7 +44,28 @@
             <TextBox Name="TbxExample" HorizontalAlignment="Left" Height="160" Margin="21,229,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318"
                      Text="{Binding Example}"
                      />
+
         </Grid>
+        <Button 
+            Height="50"
+            Width="30"
+            Content="-->" 
+            Command="{Binding NextCommand}" Margin="762,178,8,222"
+            />
+
+        <Button 
+            Height="50"
+            Width="30"
+            Content="-" 
+            Command="{Binding PreviouslyCommand}" Margin="8,160,762,240"
+            />
+
+        <Button 
+            Height="20"
+            Width="50"
+            Content="Go back" 
+            Command="{Binding GoBackCommand}" Margin="736,10,14,420"
+            />
 
         <Grid Height="30" Margin="-1,418,1,2">
             <Grid.ColumnDefinitions>

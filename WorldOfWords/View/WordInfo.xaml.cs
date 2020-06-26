@@ -24,10 +24,10 @@ namespace WorldOfWords.View
     /// </summary>
     public partial class WordInfo : Page
     {
-        public WordInfo(Frame menuFrame, List<Word> words, int indexWord = 0)
+        public WordInfo(Frame menuFrame, IWordService service, List<Word> words, int indexWord = 0)
         {
             InitializeComponent();
-            DataContext = new WordInfoViewModel(menuFrame, new WordService(new WorldOfWordsDbContext()), words, indexWord, ImgPicture);
+            DataContext = new WordInfoViewModel(menuFrame, service, words, indexWord, ImgPicture);
         }
     }
 }

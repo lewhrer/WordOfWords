@@ -13,9 +13,14 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="Menu">
-                <MenuItem Header="Back" Command="{Binding Back}" />
                 <MenuItem Header="Create" Command="{Binding CreateCommand}" />
+                <MenuItem Header="Train" Command="{Binding TrainCommand}" />
                 <MenuItem Header="AllWords" Command="{Binding AllWordsCommand}" />
+                <MenuItem Header="0 %" Command="{Binding Know0Command}" />
+                <MenuItem Header="25 %" Command="{Binding Know25WordsCommand}" />
+                <MenuItem Header="50 %" Command="{Binding Know50WordsCommand}" />
+                <MenuItem Header="75 %" Command="{Binding Know75WordsCommand}" />
+                <MenuItem Header="Know words" Command="{Binding KnowWordsCommand}" />
             </MenuItem>
         </Menu>
         <Frame 

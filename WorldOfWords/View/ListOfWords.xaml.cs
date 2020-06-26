@@ -14,16 +14,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WorldOfWords.Infrastructure;
 using WorldOfWords.Infrastructure.Services;
+using WorldOfWords.Model;
 using WorldOfWords.ViewModel;
 
 namespace WorldOfWords.View
 {
-    public partial class AllWords : Page
+    public partial class ListOfWords : Page
     {
-        public AllWords(Frame menuFrame)
+        public ListOfWords(Frame menuFrame, IWordService service, List<Word> words)
         {
             InitializeComponent();
-            DataContext = new AllWordsViewModel(menuFrame, new WordService(new WorldOfWordsDbContext()));
+            DataContext = new ListOfWordsViewModel(menuFrame, service, words);
         }
     }
 }

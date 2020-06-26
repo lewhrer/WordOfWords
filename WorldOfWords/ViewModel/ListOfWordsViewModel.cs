@@ -16,7 +16,7 @@ using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
-    public class AllWordsViewModel : INotifyPropertyChanged
+    public class ListOfWordsViewModel : INotifyPropertyChanged
     {
         Frame _menuFrame;
         Word selectedWord;
@@ -24,11 +24,11 @@ namespace WorldOfWords.ViewModel
         public IWordService _wordService;
         public ObservableCollection<Word> Words { get; set; }
 
-        public AllWordsViewModel(Frame menuFrame, IWordService wordService)
+        public ListOfWordsViewModel(Frame menuFrame, IWordService wordService, List<Word> words)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
-            Words = new ObservableCollection<Word>(_wordService.GetAllWords());
+            Words = new ObservableCollection<Word>(words);
         }
 
         private RelayCommand moreCommand;
@@ -42,7 +42,7 @@ namespace WorldOfWords.ViewModel
                       if(selectedWord != null)
                       {
                         int index = Words.IndexOf(selectedWord);
-                        _menuFrame.Navigate(new WordInfo(_menuFrame, Words.ToList(), index));
+                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, Words.ToList(), index));
                       }
                   }));
             }
@@ -75,7 +75,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (selectedWord != null)
                       {
-                          _menuFrame.Navigate(new Edit(_menuFrame, SelectedWord.Id.ToString()));
+                          _menuFrame.Navigate(new Edit(_menuFrame, _wordService, SelectedWord.Id.ToString()));
                       }
                   }));
             }

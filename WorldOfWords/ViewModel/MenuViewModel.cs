@@ -16,10 +16,12 @@ namespace WorldOfWords.ViewModel
     public class MenuViewModel : INotifyPropertyChanged
     {
         Frame _menuFrame;
+        public IWordService _wordService;
 
-        public MenuViewModel(Frame menuFrame)
+        public MenuViewModel(Frame menuFrame, IWordService wordService)
         {
             _menuFrame = menuFrame;
+            _wordService = wordService;
         }
 
         private RelayCommand allWordsCommand;
@@ -30,7 +32,85 @@ namespace WorldOfWords.ViewModel
                 return allWordsCommand ??
                   (allWordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new AllWords(_menuFrame));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAllWords()));
+                  }));
+            }
+        }
+
+        private RelayCommand trainCommand;
+        public RelayCommand TrainCommand
+        {
+            get
+            {
+                return trainCommand ??
+                  (trainCommand = new RelayCommand(obj =>
+                  {
+                      _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords()));
+                  }));
+            }
+        }
+
+        private RelayCommand know0Command;
+        public RelayCommand Know0Command
+        {
+            get
+            {
+                return know0Command ??
+                  (know0Command = new RelayCommand(obj =>
+                  {
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetNotStudiedWords()));
+                  }));
+            }
+        }
+
+        private RelayCommand know25WordsCommand;
+        public RelayCommand Know25WordsCommand
+        {
+            get
+            {
+                return know25WordsCommand ??
+                  (know25WordsCommand = new RelayCommand(obj =>
+                  {
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAlmostAcquaintedWords()));
+                  }));
+            }
+        }
+
+        private RelayCommand know50WordsCommand;
+        public RelayCommand Know50WordsCommand
+        {
+            get
+            {
+                return know50WordsCommand ??
+                  (know50WordsCommand = new RelayCommand(obj =>
+                  {
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAcquaintedWords()));
+                  }));
+            }
+        }
+
+        private RelayCommand know75WordsCommand;
+        public RelayCommand Know75WordsCommand
+        {
+            get
+            {
+                return know75WordsCommand ??
+                  (know75WordsCommand = new RelayCommand(obj =>
+                  {
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAlmostStudiedWords()));
+                  }));
+            }
+        }
+
+        private RelayCommand knowWordsCommand;
+        public RelayCommand KnowWordsCommand
+        {
+            get
+            {
+                return knowWordsCommand ??
+                  (knowWordsCommand = new RelayCommand(obj =>
+                  {
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetStudiedWords()));
                   }));
             }
         }
@@ -43,20 +123,7 @@ namespace WorldOfWords.ViewModel
                 return createCommand ??
                   (createCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new Create(_menuFrame));
-                  }));
-            }
-        }
-
-        private RelayCommand back;
-        public RelayCommand Back
-        {
-            get
-            {
-                return back ??
-                  (back = new RelayCommand(obj =>
-                  {
-                      _menuFrame.NavigationService.Source = null;
+                      _menuFrame.Navigate(new Create(_menuFrame, _wordService));
                   }));
             }
         }

@@ -13,10 +13,10 @@ namespace WorldOfWords.Infrastructure
     {
         public DbSet<Word> Words { get; set; }
 
-        static WorldOfWordsDbContext()
-        {
-            Database.SetInitializer(new MyContextInitializer());
-        }
+        //static WorldOfWordsDbContext()
+        //{
+        //    Database.SetInitializer(new MyContextInitializer());
+        //}
 
         public WorldOfWordsDbContext() : base("DbConnection")
         {

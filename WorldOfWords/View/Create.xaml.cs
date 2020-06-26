@@ -23,10 +23,10 @@ namespace WorldOfWords.View
     /// </summary>
     public partial class Create : Page
     {
-        public Create(Frame menuFrame)
+        public Create(Frame menuFrame, IWordService service)
         {
             InitializeComponent();
-            DataContext = new CreateViewModel(menuFrame, new WordService(new WorldOfWordsDbContext()), picture);
+            DataContext = new CreateViewModel(menuFrame, service, picture);
         }
     }
 }

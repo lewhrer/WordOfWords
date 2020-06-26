@@ -17,6 +17,7 @@ namespace WorldOfWords.Infrastructure.Services
         List<Word> GetStudiedWords();
         List<Word> GetNotStudiedWords();
         List<Word> GetAlmostStudiedWords();
+        List<Word> GetAlmostAcquaintedWords();
         List<Word> GetAcquaintedWords();
         void Edit(WordArgs args);
         void Delete(string id);

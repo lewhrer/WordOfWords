@@ -101,7 +101,7 @@ namespace WorldOfWords.ViewModel
                       _wordService.Edit(args);
                       
                       MessageBox.Show("Sacsesfull edited!");
-                      _menuFrame.Navigate(new AllWords(_menuFrame));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAllWords()));
                   }));
             }
         }

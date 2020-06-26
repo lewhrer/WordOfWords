@@ -66,13 +66,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="ViewModel\AllWordsViewModel.cs" />
+    <Compile Include="ViewModel\ListOfWordsViewModel.cs" />
     <Compile Include="ViewModel\CreateViewModel.cs" />
     <Compile Include="ViewModel\EditViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\WordInfoViewModel.cs" />
-    <Compile Include="View\AllWords.xaml.cs">
-      <DependentUpon>AllWords.xaml</DependentUpon>
+    <Compile Include="View\ListOfWords.xaml.cs">
+      <DependentUpon>ListOfWords.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
@@ -90,7 +90,7 @@
     <Compile Include="View\WordInfo.xaml.cs">
       <DependentUpon>WordInfo.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\AllWords.xaml">
+    <Page Include="View\ListOfWords.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

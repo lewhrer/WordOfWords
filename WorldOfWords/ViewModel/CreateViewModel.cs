@@ -94,7 +94,7 @@ namespace WorldOfWords.ViewModel
 
                       MessageBox.Show("Sacsesfull created!");
 
-                      _menuFrame.Navigate(new Create(_menuFrame));
+                      _menuFrame.Navigate(new Create(_menuFrame, _wordService));
                   }));
             }
         }

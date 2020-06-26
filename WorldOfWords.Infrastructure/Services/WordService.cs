@@ -61,16 +61,17 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetAcquaintedWords()
         {
-            return _context.Words.ToList();
-            //return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 25
-            //    && x.Statuses.Sum() / x.Statuses.Count <= 50).ToList();
+            return _context.Words.Where(x => x.Level >= 50 && x.Level < 75).ToList();
         }
 
         public List<Word> GetAlmostStudiedWords()
         {
-            return _context.Words.ToList();
-            //return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 50 
-            //    && x.Statuses.Sum() / x.Statuses.Count <= 75).ToList();
+            return _context.Words.Where(x => x.Level >= 75 && x.Level < 90).ToList();
+        }
+
+        public List<Word> GetAlmostAcquaintedWords()
+        {
+            return _context.Words.Where(x => x.Level >= 25 && x.Level < 50).ToList();
         }
 
         public List<Word> GetAllWords()
@@ -107,8 +108,7 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetNotStudiedWords()
         {
-            return _context.Words.ToList();
-            //return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count < 25).ToList();
+            return _context.Words.Where(x => x.Level < 25).ToList();
         }
 
         public BitmapImage GetSourceImage(byte[] array)
@@ -139,8 +139,7 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetStudiedWords()
         {
-            return _context.Words.ToList();
-            //return _context.Words.Where(x => x.Statuses.Sum() / x.Statuses.Count > 75).ToList();
+            return _context.Words.Where(x => x.Level >= 90).ToList();
         }
 
         public Word GetWord(string id)
@@ -151,7 +150,7 @@ namespace WorldOfWords.Infrastructure.Services
         public void SetKnow(string id, double percent)
         {
             var word = GetWord(id);
-            word.Level = (word.Level + percent) / 2;
+            word.Level = Math.Round((word.Level + percent) / 2, 2);
             _context.SaveChanges();
         }
     }

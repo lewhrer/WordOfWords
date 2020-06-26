@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WorldOfWords.Infrastructure;
+using WorldOfWords.Infrastructure.Services;
+using WorldOfWords.Model;
 using WorldOfWords.ViewModel;
 
 namespace WorldOfWords.View
@@ -23,8 +26,12 @@ namespace WorldOfWords.View
         public Menu()
         {
             InitializeComponent();
-            DataContext = new MenuViewModel(MenuFrame);
-            MenuFrame.Navigate(new AllWords(MenuFrame));
+            var service = new WordService(new WorldOfWordsDbContext());
+            DataContext = new MenuViewModel(MenuFrame, service);
+            using (var context = new WorldOfWordsDbContext())
+            {
+                MenuFrame.Navigate(new ListOfWords(MenuFrame, service, context.Words.ToList()));
+            }
         }
     }
 }
