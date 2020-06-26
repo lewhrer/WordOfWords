@@ -16,19 +16,32 @@ using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
-    public class ListOfWordsViewModel : INotifyPropertyChanged
+    public class ListOfWordsViewModel : INotifyPropertyChanged, IUpdater
     {
         Frame _menuFrame;
         Word selectedWord;
+        string nameMethod;
+        string namePage;
 
         public IWordService _wordService;
         public ObservableCollection<Word> Words { get; set; }
 
-        public ListOfWordsViewModel(Frame menuFrame, IWordService wordService, List<Word> words)
+        public ListOfWordsViewModel(Frame menuFrame, IWordService wordService, string nameMethod, string namePage)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
-            Words = new ObservableCollection<Word>(words);
+            this.nameMethod = nameMethod;
+            NamePage = namePage;
+            switch (nameMethod)
+            {
+                case "All": Words = new ObservableCollection<Word>(_wordService.GetAllWords()); break;
+                case "0": Words = new ObservableCollection<Word>(_wordService.GetNotStudiedWords()); break;
+                case "25": Words = new ObservableCollection<Word>(_wordService.GetAlmostAcquaintedWords()); break;
+                case "50": Words = new ObservableCollection<Word>(_wordService.GetAcquaintedWords()); break;
+                case "75": Words = new ObservableCollection<Word>(_wordService.GetAlmostStudiedWords()); break;
+                case "100": Words = new ObservableCollection<Word>(_wordService.GetStudiedWords()); break;
+                default: MessageBox.Show("bad name of method"); break;
+            }
         }
 
         private RelayCommand moreCommand;
@@ -42,7 +55,7 @@ namespace WorldOfWords.ViewModel
                       if(selectedWord != null)
                       {
                         int index = Words.IndexOf(selectedWord);
-                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, Words.ToList(), index));
+                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, Words.ToList(), this, index));
                       }
                   }));
             }
@@ -75,7 +88,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (selectedWord != null)
                       {
-                          _menuFrame.Navigate(new Edit(_menuFrame, _wordService, SelectedWord.Id.ToString()));
+                          _menuFrame.Navigate(new Edit(_menuFrame, _wordService, SelectedWord.Id.ToString(), this));
                       }
                   }));
             }
@@ -196,11 +209,52 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        public string NamePage
+        {
+            get { return namePage; }
+            set
+            {
+                namePage = value;
+                OnPropertyChanged("NamePage");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public void Update()
+        {
+            Words.Clear();
+            List<Word> words = new List<Word>();
+            switch (nameMethod)
+            {
+                case "All": words = _wordService.GetAllWords(); break;
+                case "0": words = _wordService.GetNotStudiedWords(); break;
+                case "25": words = _wordService.GetAlmostAcquaintedWords(); break;
+                case "50": words = _wordService.GetAcquaintedWords(); break;
+                case "75": words = _wordService.GetAlmostStudiedWords(); break;
+                case "100": words = _wordService.GetStudiedWords(); break;
+                default: MessageBox.Show("bad name of method"); break;
+            }
+
+            foreach (var item in words)
+            {
+                Words.Add(item);
+            }
+
+            try
+            {
+                var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                int index = Words.IndexOf(SelectedWord);
+                Words.RemoveAt(index);
+                Words.Insert(index, word);
+                SelectedWord = word;
+            }
+            catch (Exception) { }
         }
     }
 }

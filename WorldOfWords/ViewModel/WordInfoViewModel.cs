@@ -14,21 +14,23 @@ using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
-    public class WordInfoViewModel : INotifyPropertyChanged
+    public class WordInfoViewModel : INotifyPropertyChanged, IUpdater
     {
         Frame _menuFrame;
         Word selectedWord;
         Image picture;
         int indexSelectedWord;
 
+        IUpdater updater;
         public IWordService _wordService;
         public ObservableCollection<Word> Words { get; set; }
 
-        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<Word> words, int indexWord, Image picture)
+        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<Word> words, IUpdater updater, int indexWord, Image picture)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
             Words = new ObservableCollection<Word>(words);
+            this.updater = updater;
             indexSelectedWord = indexWord;
             SelectedWord = Words[indexWord];
             this.picture = picture;
@@ -36,7 +38,6 @@ namespace WorldOfWords.ViewModel
             {
                 picture.Source = _wordService.GetSourceImage(SelectedWord.Picture);
             }
-            MessageBox.Show(words[indexWord].Level.ToString());
         }
 
         private RelayCommand deleteCommand;
@@ -82,6 +83,7 @@ namespace WorldOfWords.ViewModel
                   (goBackCommand = new RelayCommand(obj =>
                   {
                       _menuFrame.GoBack();
+                      updater.Update();
                   }));
             }
         }
@@ -113,7 +115,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (SelectedWord != null)
                       {
-                          _menuFrame.Navigate(new Edit(_menuFrame, _wordService, SelectedWord.Id.ToString()));
+                          _menuFrame.Navigate(new Edit(_menuFrame, _wordService, SelectedWord.Id.ToString(), this));
                       }
                   }));
             }
@@ -284,6 +286,16 @@ namespace WorldOfWords.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public void Update()
+        {
+            var word = _wordService.GetWord(SelectedWord.Id.ToString());
+            int index = Words.IndexOf(SelectedWord);
+            Words.RemoveAt(index);
+            Words.Insert(index, word);
+            SelectedWord = null;
+            SelectedWord = Words[index];
         }
     }
 }

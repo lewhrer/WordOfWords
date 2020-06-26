@@ -28,10 +28,7 @@ namespace WorldOfWords.View
             InitializeComponent();
             var service = new WordService(new WorldOfWordsDbContext());
             DataContext = new MenuViewModel(MenuFrame, service);
-            using (var context = new WorldOfWordsDbContext())
-            {
-                MenuFrame.Navigate(new ListOfWords(MenuFrame, service, context.Words.ToList()));
-            }
+            MenuFrame.Navigate(new ListOfWords(MenuFrame, service, "All", "all words"));
         }
     }
 }

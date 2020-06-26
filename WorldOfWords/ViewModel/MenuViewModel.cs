@@ -32,7 +32,7 @@ namespace WorldOfWords.ViewModel
                 return allWordsCommand ??
                   (allWordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAllWords()));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "all words"));
                   }));
             }
         }
@@ -45,7 +45,23 @@ namespace WorldOfWords.ViewModel
                 return trainCommand ??
                   (trainCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords()));
+                      try
+                      {
+                            var viewModel = ((ListOfWords)_menuFrame.Content).ViewModel;
+                            _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords(), viewModel));
+                      }
+                      catch(Exception)
+                      {
+                          try
+                          {
+                              var viewModel = ((WordInfo)_menuFrame.Content).ViewModel;
+                              _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords(), viewModel));
+                          }
+                          catch(Exception)
+                          {
+                                _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "All words"));
+                          }
+                      }
                   }));
             }
         }
@@ -58,7 +74,7 @@ namespace WorldOfWords.ViewModel
                 return know0Command ??
                   (know0Command = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetNotStudiedWords()));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "0", "0 words"));
                   }));
             }
         }
@@ -71,7 +87,7 @@ namespace WorldOfWords.ViewModel
                 return know25WordsCommand ??
                   (know25WordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAlmostAcquaintedWords()));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "25", "25 words"));
                   }));
             }
         }
@@ -84,7 +100,7 @@ namespace WorldOfWords.ViewModel
                 return know50WordsCommand ??
                   (know50WordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAcquaintedWords()));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "50", "50 words"));
                   }));
             }
         }
@@ -97,7 +113,7 @@ namespace WorldOfWords.ViewModel
                 return know75WordsCommand ??
                   (know75WordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAlmostStudiedWords()));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "75", "75 words"));
                   }));
             }
         }
@@ -110,7 +126,7 @@ namespace WorldOfWords.ViewModel
                 return knowWordsCommand ??
                   (knowWordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetStudiedWords()));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "100", "100 words"));
                   }));
             }
         }

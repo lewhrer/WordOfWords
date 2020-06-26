@@ -21,10 +21,13 @@ namespace WorldOfWords.View
 {
     public partial class ListOfWords : Page
     {
-        public ListOfWords(Frame menuFrame, IWordService service, List<Word> words)
+        public ListOfWordsViewModel ViewModel { get; set; }
+        
+        public ListOfWords(Frame menuFrame, IWordService service, string nameMethod, string namePage)
         {
             InitializeComponent();
-            DataContext = new ListOfWordsViewModel(menuFrame, service, words);
+            ViewModel = new ListOfWordsViewModel(menuFrame, service, nameMethod, namePage);
+            DataContext = ViewModel;
         }
     }
 }

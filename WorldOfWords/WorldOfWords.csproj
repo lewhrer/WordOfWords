@@ -65,6 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IUpdater.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\ListOfWordsViewModel.cs" />
     <Compile Include="ViewModel\CreateViewModel.cs" />

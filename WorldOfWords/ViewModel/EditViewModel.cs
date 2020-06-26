@@ -21,6 +21,7 @@ namespace WorldOfWords.ViewModel
         byte[] pictureInBytes;
 
         public IWordService _wordService;
+        IUpdater updater;
 
         private readonly string id;
         private string name;
@@ -28,12 +29,13 @@ namespace WorldOfWords.ViewModel
         private string example;
         private double level;
 
-        public EditViewModel(Frame menuFrame, IWordService wordService, Image picture, string id)
+        public EditViewModel(Frame menuFrame, IWordService wordService, Image picture, string id, IUpdater updater)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
             this.picture = picture;
             this.id = id;
+            this.updater = updater;
 
             var word = _wordService.GetWord(id);
             Name = word.Name;
@@ -105,7 +107,23 @@ namespace WorldOfWords.ViewModel
                       _wordService.Edit(args);
                       
                       MessageBox.Show("Sacsesfull edited!");
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAllWords()));
+                      updater.Update();
+                      _menuFrame.GoBack();
+                      //_menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAllWords()));
+                  }));
+            }
+        }
+
+        private RelayCommand goBackCommand;
+        public RelayCommand GoBackCommand
+        {
+            get
+            {
+                return goBackCommand ??
+                  (goBackCommand = new RelayCommand(obj =>
+                  {
+                      updater.Update();
+                      _menuFrame.GoBack();
                   }));
             }
         }

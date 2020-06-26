@@ -23,10 +23,10 @@ namespace WorldOfWords.View
     /// </summary>
     public partial class Edit : Page
     {
-        public Edit(Frame menuFrame, IWordService service, string id)
+        public Edit(Frame menuFrame, IWordService service, string id, IUpdater updater)
         {
             InitializeComponent();
-            DataContext = new EditViewModel(menuFrame, service, picture, id);
+            DataContext = new EditViewModel(menuFrame, service, picture, id, updater);
         }
     }
 }
