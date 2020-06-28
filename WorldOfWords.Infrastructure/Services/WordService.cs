@@ -34,6 +34,8 @@ namespace WorldOfWords.Infrastructure.Services
                 Picture = args.Picture,
                 Level = args.Level,
                 TranslateName = args.TranslateName,
+                LastUpdate = args.LastUpdate,
+                Priority = args.Priority
             };
 
             _context.Words.Add(word);
@@ -55,6 +57,7 @@ namespace WorldOfWords.Infrastructure.Services
             word.Picture = args.Picture;
             word.Level = args.Level;
             word.TranslateName = args.TranslateName;
+            word.Priority = args.Priority;
 
             _context.SaveChanges();
         }
@@ -142,6 +145,36 @@ namespace WorldOfWords.Infrastructure.Services
             return _context.Words.Where(x => x.Level >= 90).ToList();
         }
 
+        public List<Word> GetTrainAcquaintedWords()
+        {
+            return _context.Words.Where(x => x.Level >= 50 && x.Level < 75).ToList();
+        }
+
+        public List<Word> GetTrainAlmostStudiedWords()
+        {
+            return _context.Words.Where(x => x.Level >= 75 && x.Level < 90).ToList();
+        }
+
+        public List<Word> GetTrainAlmostAcquaintedWords()
+        {
+            return _context.Words.Where(x => x.Level >= 25 && x.Level < 50).ToList();
+        }
+
+        public List<Word> GetTrainAllWords()
+        {
+            return _context.Words.ToList();
+        }
+
+        public List<Word> GetTrainNotStudiedWords()
+        {
+            return _context.Words.Where(x => x.Level < 25).ToList();
+        }
+
+        public List<Word> GetTrainStudiedWords()
+        {
+            return _context.Words.Where(x => x.Level >= 90).ToList();
+        }
+
         public Word GetWord(string id)
         {
             return _context.Words.FirstOrDefault(x => x.Id.ToString() == id);
@@ -151,6 +184,7 @@ namespace WorldOfWords.Infrastructure.Services
         {
             var word = GetWord(id);
             word.Level = Math.Round((word.Level + percent) / 2, 2);
+            word.LastUpdate = DateTime.Now;
             _context.SaveChanges();
         }
     }

@@ -67,6 +67,24 @@
             Command="{Binding GoBackCommand}" Margin="736,10,14,420"
             />
 
+        <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="334,13,0,0" 
+                TextWrapping="Wrap" 
+                Text="{Binding NamePage}" 
+                VerticalAlignment="Top"
+                FontSize="25"
+                />
+
+        <TextBlock 
+                HorizontalAlignment="Left" 
+                Margin="552,4,0,0" 
+                TextWrapping="Wrap" 
+                Text="{Binding IndexSelectedWord}" 
+                VerticalAlignment="Top"
+                FontSize="25"
+                />
+
         <Grid Height="30" Margin="-1,418,1,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

@@ -29,12 +29,20 @@ namespace WorldOfWords.ViewModel
         private string name;
         private string translate;
         private string example;
+        private ComboBoxItem priority;
+        public ObservableCollection<ComboBoxItem> Priorities { get; set; }
 
         public CreateViewModel(Frame menuFrame, IWordService wordService, Image picture)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
             this.picture = picture;
+            Priorities = new ObservableCollection<ComboBoxItem>()
+            {
+                new ComboBoxItem(){ Content = "0" },
+                new ComboBoxItem(){ Content = "1" },
+                new ComboBoxItem(){ Content = "2" },
+            };
         }
 
         private RelayCommand addCommand;
@@ -88,6 +96,7 @@ namespace WorldOfWords.ViewModel
                           LastUpdate = DateTime.Now,
                           TranslateName = Translate,
                           Level = 0,
+                          Priority = int.Parse(Priority.Content.ToString()),
                       };
 
                       _wordService.Create(args);
@@ -126,6 +135,16 @@ namespace WorldOfWords.ViewModel
             {
                 example = value;
                 OnPropertyChanged("Example");
+            }
+        }
+
+        public ComboBoxItem Priority
+        {
+            get { return priority; }
+            set
+            {
+                priority = value;
+                OnPropertyChanged("Priority");
             }
         }
 

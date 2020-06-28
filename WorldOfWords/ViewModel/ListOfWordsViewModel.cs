@@ -55,7 +55,7 @@ namespace WorldOfWords.ViewModel
                       if(selectedWord != null)
                       {
                         int index = Words.IndexOf(selectedWord);
-                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, Words.ToList(), this, index));
+                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, Words.ToList(), this, $"{nameMethod} words", index));
                       }
                   }));
             }

@@ -26,10 +26,10 @@ namespace WorldOfWords.View
     {
         public WordInfoViewModel ViewModel { get; set; }
 
-        public WordInfo(Frame menuFrame, IWordService service, List<Word> words, IUpdater updater, int indexWord = 0)
+        public WordInfo(Frame menuFrame, IWordService service, List<Word> words, IUpdater updater, string namePage, int indexWord = 0)
         {
             InitializeComponent();
-            ViewModel = new WordInfoViewModel(menuFrame, service, words, updater, indexWord, ImgPicture);
+            ViewModel = new WordInfoViewModel(menuFrame, service, words, updater, namePage, indexWord, ImgPicture);
             DataContext = ViewModel;
         }
     }

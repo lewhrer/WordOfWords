@@ -20,18 +20,21 @@ namespace WorldOfWords.ViewModel
         Word selectedWord;
         Image picture;
         int indexSelectedWord;
+        int numberOfWord;
+        string namePage;
 
         IUpdater updater;
         public IWordService _wordService;
         public ObservableCollection<Word> Words { get; set; }
 
-        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<Word> words, IUpdater updater, int indexWord, Image picture)
+        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<Word> words, IUpdater updater, string namePage, int indexWord, Image picture)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
             Words = new ObservableCollection<Word>(words);
             this.updater = updater;
-            indexSelectedWord = indexWord;
+            NamePage = namePage;
+            IndexSelectedWord = indexWord;
             SelectedWord = Words[indexWord];
             this.picture = picture;
             if(SelectedWord.Picture != null)
@@ -65,10 +68,10 @@ namespace WorldOfWords.ViewModel
                 return nextCommand ??
                   (nextCommand = new RelayCommand(obj =>
                   {
-                      if (indexSelectedWord + 1 != Words.Count)
+                      if (IndexSelectedWord + 1 != Words.Count)
                       {
                           SelectedWord = null;
-                          SelectedWord = Words[++indexSelectedWord];
+                          SelectedWord = Words[++IndexSelectedWord];
                       }
                   }));
             }
@@ -96,10 +99,10 @@ namespace WorldOfWords.ViewModel
                 return previouslyCommand ??
                   (previouslyCommand = new RelayCommand(obj =>
                   {
-                      if (indexSelectedWord != 0)
+                      if (IndexSelectedWord != 0)
                       {
                           SelectedWord = null;
-                          SelectedWord = Words[--indexSelectedWord];
+                          SelectedWord = Words[--IndexSelectedWord];
                       }
                   }));
             }
@@ -138,7 +141,7 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
-                              ++indexSelectedWord;
+                              ++IndexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
@@ -168,7 +171,7 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
-                              ++indexSelectedWord;
+                              ++IndexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
@@ -198,7 +201,7 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
-                              ++indexSelectedWord;
+                              ++IndexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
@@ -228,7 +231,7 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
-                              ++indexSelectedWord;
+                              ++IndexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
@@ -258,7 +261,7 @@ namespace WorldOfWords.ViewModel
                           Words.Insert(index, word);
                           if (index + 1 != Words.Count)
                           {
-                              ++indexSelectedWord;
+                              ++IndexSelectedWord;
                               SelectedWord = Words[++index];
                           }
                           else
@@ -278,6 +281,36 @@ namespace WorldOfWords.ViewModel
             {
                 selectedWord = value;
                 OnPropertyChanged("SelectedWord");
+            }
+        }
+
+        public string NamePage
+        {
+            get { return namePage; }
+            set
+            {
+                namePage = value;
+                OnPropertyChanged("NamePage");
+            }
+        }
+
+        public int IndexSelectedWord
+        {
+            get { return indexSelectedWord; }
+            set
+            {
+                indexSelectedWord = value;
+                OnPropertyChanged("IndexSelectedWord");
+            }
+        }
+
+        public int NumberOfWord
+        {
+            get { return numberOfWord; }
+            set
+            {
+                numberOfWord = value;
+                OnPropertyChanged("NumberOfWord");
             }
         }
 

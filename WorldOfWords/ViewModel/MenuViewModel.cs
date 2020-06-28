@@ -48,14 +48,14 @@ namespace WorldOfWords.ViewModel
                       try
                       {
                             var viewModel = ((ListOfWords)_menuFrame.Content).ViewModel;
-                            _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords(), viewModel));
+                            _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords(), viewModel, "train all word"));
                       }
                       catch(Exception)
                       {
                           try
                           {
                               var viewModel = ((WordInfo)_menuFrame.Content).ViewModel;
-                              _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords(), viewModel));
+                              _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords(), viewModel, "train al word"));
                           }
                           catch(Exception)
                           {

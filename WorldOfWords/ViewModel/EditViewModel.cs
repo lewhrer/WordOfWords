@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,6 +29,8 @@ namespace WorldOfWords.ViewModel
         private string translate;
         private string example;
         private double level;
+        private ComboBoxItem priority;
+        public ObservableCollection<ComboBoxItem> Priorities { get; set; }
 
         public EditViewModel(Frame menuFrame, IWordService wordService, Image picture, string id, IUpdater updater)
         {
@@ -42,6 +45,14 @@ namespace WorldOfWords.ViewModel
             Translate = word.TranslateName;
             Example = word.Example;
             level = word.Level;
+            Priorities = new ObservableCollection<ComboBoxItem>()
+            {
+                new ComboBoxItem(){ Content = "0" },
+                new ComboBoxItem(){ Content = "1" },
+                new ComboBoxItem(){ Content = "2" },
+            };
+
+            Priority = Priorities[Convert.ToInt32(word.Priority)];
 
             if(word.Picture != null)
             {
@@ -102,6 +113,7 @@ namespace WorldOfWords.ViewModel
                           LastUpdate = DateTime.Now,
                           TranslateName = Translate,
                           Level = level,
+                          Priority = int.Parse(Priority.Content.ToString()),
                       };
 
                       _wordService.Edit(args);
@@ -155,6 +167,16 @@ namespace WorldOfWords.ViewModel
             {
                 example = value;
                 OnPropertyChanged("Example");
+            }
+        }
+
+        public ComboBoxItem Priority
+        {
+            get { return priority; }
+            set
+            {
+                priority = value;
+                OnPropertyChanged("Priority");
             }
         }
 
