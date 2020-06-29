@@ -10,7 +10,7 @@ namespace WorldOfWords.Model
         public string TranslateName { get; set; }
         public byte[] Picture { get; set; }
         public string Example { get; set; }
-        public virtual DateTime? LastUpdate { get; set; }
+        public virtual DateTime LastUpdate { get; set; }
         public double Level { get; set; }
         public int Priority { get; set; }
     }

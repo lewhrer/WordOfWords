@@ -64,22 +64,24 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetAcquaintedWords()
         {
-            return _context.Words.Where(x => x.Level >= 50 && x.Level < 75).ToList();
+            return _context.Words.Where(x => x.Level >= 50 && x.Level < 75).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetAlmostStudiedWords()
         {
-            return _context.Words.Where(x => x.Level >= 75 && x.Level < 90).ToList();
+            return _context.Words.Where(x => x.Level >= 75 && x.Level < 90).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetAlmostAcquaintedWords()
         {
-            return _context.Words.Where(x => x.Level >= 25 && x.Level < 50).ToList();
+            return _context.Words.Where(x => x.Level >= 25 && x.Level < 50).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetAllWords()
         {
-            return _context.Words.ToList();
+            var dateNow = DateTime.Now;
+            
+            return _context.Words.OrderByDescending(x => x.Priority).ThenByDescending(x => DbFunctions.DiffDays(x.LastUpdate, dateNow)).ToList();
         }
 
         public byte[] FindImage()
@@ -111,7 +113,7 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetNotStudiedWords()
         {
-            return _context.Words.Where(x => x.Level < 25).ToList();
+            return _context.Words.Where(x => x.Level < 25).OrderByDescending(x => x.Priority).ToList();
         }
 
         public BitmapImage GetSourceImage(byte[] array)
@@ -142,37 +144,49 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetStudiedWords()
         {
-            return _context.Words.Where(x => x.Level >= 90).ToList();
+            return _context.Words.Where(x => x.Level >= 90).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetTrainAcquaintedWords()
         {
-            return _context.Words.Where(x => x.Level >= 50 && x.Level < 75).ToList();
+            var dateNow = DateTime.Now;
+            return _context.Words.Where(x => x.Level >= 50 && x.Level < 75 && DbFunctions.DiffDays(x.LastUpdate, dateNow) >= 7).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetTrainAlmostStudiedWords()
         {
-            return _context.Words.Where(x => x.Level >= 75 && x.Level < 90).ToList();
+            var dateNow = DateTime.Now;
+            return _context.Words.Where(x => x.Level >= 75 && x.Level < 90 && DbFunctions.DiffDays(x.LastUpdate, dateNow) >= 14).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetTrainAlmostAcquaintedWords()
         {
-            return _context.Words.Where(x => x.Level >= 25 && x.Level < 50).ToList();
+            var dateNow = DateTime.Now;
+            return _context.Words.Where(x => x.Level >= 25 && x.Level < 50 && DbFunctions.DiffDays(x.LastUpdate, dateNow) >= 3).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetTrainAllWords()
         {
-            return _context.Words.ToList();
+            var dateNow = DateTime.Now;
+            return _context.Words.OrderByDescending(x => x.Priority).ThenByDescending(x => DbFunctions.DiffDays(x.LastUpdate, dateNow)).ToList();
         }
 
         public List<Word> GetTrainNotStudiedWords()
         {
-            return _context.Words.Where(x => x.Level < 25).ToList();
+            var dateNow = DateTime.Now;
+            return _context.Words.Where(x => x.Level < 25 && DbFunctions.DiffHours(x.LastUpdate, dateNow) >= 18).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetTrainStudiedWords()
         {
-            return _context.Words.Where(x => x.Level >= 90).ToList();
+            var dateNow = DateTime.Now;
+            return _context.Words.Where(x => x.Level >= 90 && DbFunctions.DiffDays(x.LastUpdate, dateNow) >= 30).OrderByDescending(x => x.Priority).ToList();
+        }
+
+        public List<Word> GetTrainNewWords()
+        {
+            var dateNow = DateTime.Now;
+            return _context.Words.Where(x => x.Level < 25 && DbFunctions.DiffHours(x.LastUpdate, dateNow) < 18).OrderByDescending(x => x.Priority).ToList();
         }
 
         public Word GetWord(string id)

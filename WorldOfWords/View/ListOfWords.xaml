@@ -23,6 +23,8 @@
                         <TextBlock FontSize="18" Text="{Binding Path=Name}" />
                         <TextBlock Text="{Binding Path=TranslateName}" />
                         <TextBlock Text="{Binding Path=Level}" />
+                        <TextBlock Text="{Binding Path=Priority}" />
+                        <TextBlock Text="{Binding Path=LastUpdate}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

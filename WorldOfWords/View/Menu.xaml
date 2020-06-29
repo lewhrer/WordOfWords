@@ -14,13 +14,20 @@
         <Menu>
             <MenuItem Header="Menu">
                 <MenuItem Header="Create" Command="{Binding CreateCommand}" />
-                <MenuItem Header="Train" Command="{Binding TrainCommand}" />
                 <MenuItem Header="AllWords" Command="{Binding AllWordsCommand}" />
                 <MenuItem Header="0 %" Command="{Binding Know0Command}" />
                 <MenuItem Header="25 %" Command="{Binding Know25WordsCommand}" />
                 <MenuItem Header="50 %" Command="{Binding Know50WordsCommand}" />
                 <MenuItem Header="75 %" Command="{Binding Know75WordsCommand}" />
                 <MenuItem Header="Know words" Command="{Binding KnowWordsCommand}" />
+            </MenuItem>
+            <MenuItem Header="Train">
+                <MenuItem Header="0 train" Command="{Binding Train0Command}" />
+                <MenuItem Header="25 train" Command="{Binding Train25Command}" />
+                <MenuItem Header="50 train" Command="{Binding Train50Command}" />
+                <MenuItem Header="75 train" Command="{Binding Train75Command}" />
+                <MenuItem Header="Know train" Command="{Binding KnowTrainCommand}" />
+                <MenuItem Header="All train" Command="{Binding TrainAllCommand}" />
             </MenuItem>
         </Menu>
         <Frame 

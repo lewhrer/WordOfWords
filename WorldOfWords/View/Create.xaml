@@ -35,9 +35,6 @@
                   SelectedItem="{Binding Priority}"
                   ItemsSource="{Binding Priorities}"
                   Height="30" 
-                  IsEditable="True"
-			      IsReadOnly="True"
-			      Text="Select priority" 
                   Width="150"
                   VerticalAlignment="Top">
         </ComboBox>

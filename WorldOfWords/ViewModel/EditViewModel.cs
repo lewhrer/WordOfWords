@@ -28,7 +28,8 @@ namespace WorldOfWords.ViewModel
         private string name;
         private string translate;
         private string example;
-        private double level;
+        private readonly double level;
+        private readonly DateTime lastUpdate;
         private ComboBoxItem priority;
         public ObservableCollection<ComboBoxItem> Priorities { get; set; }
 
@@ -45,6 +46,7 @@ namespace WorldOfWords.ViewModel
             Translate = word.TranslateName;
             Example = word.Example;
             level = word.Level;
+            lastUpdate = word.LastUpdate;
             Priorities = new ObservableCollection<ComboBoxItem>()
             {
                 new ComboBoxItem(){ Content = "0" },
@@ -110,7 +112,7 @@ namespace WorldOfWords.ViewModel
                           Example = Example,
                           Name = Name,
                           Picture = pictureInBytes,
-                          LastUpdate = DateTime.Now,
+                          LastUpdate = lastUpdate,
                           TranslateName = Translate,
                           Level = level,
                           Priority = int.Parse(Priority.Content.ToString()),

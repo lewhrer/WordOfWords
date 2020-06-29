@@ -19,6 +19,13 @@ namespace WorldOfWords.Infrastructure.Services
         List<Word> GetAlmostStudiedWords();
         List<Word> GetAlmostAcquaintedWords();
         List<Word> GetAcquaintedWords();
+        List<Word> GetTrainAllWords();
+        List<Word> GetTrainStudiedWords();
+        List<Word> GetTrainNotStudiedWords();
+        List<Word> GetTrainAlmostStudiedWords();
+        List<Word> GetTrainAlmostAcquaintedWords();
+        List<Word> GetTrainAcquaintedWords();
+        List<Word> GetTrainNewWords();
         void Edit(WordArgs args);
         void Delete(string id);
         byte[] FindImage();

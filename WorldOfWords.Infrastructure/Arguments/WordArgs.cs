@@ -16,6 +16,6 @@ namespace WorldOfWords.Infrastructure.Arguments
         public string Example { get; set; }
         public double Level { get; set; }
         public int Priority { get; set; }
-        public DateTime? LastUpdate { get; set; }
+        public DateTime LastUpdate { get; set; }
     }
 }

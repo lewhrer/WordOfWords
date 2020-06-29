@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using WorldOfWords.View;
 using WorldOfWords.Infrastructure.Services;
+using WorldOfWords.Model;
 
 namespace WorldOfWords.ViewModel
 {
@@ -37,34 +38,88 @@ namespace WorldOfWords.ViewModel
             }
         }
 
-        private RelayCommand trainCommand;
-        public RelayCommand TrainCommand
+        #region trainCommand
+
+        private RelayCommand trainAllCommand;
+        public RelayCommand TrainAllCommand
         {
             get
             {
-                return trainCommand ??
-                  (trainCommand = new RelayCommand(obj =>
+                return trainAllCommand ??
+                  (trainAllCommand = new RelayCommand(obj =>
                   {
-                      try
-                      {
-                            var viewModel = ((ListOfWords)_menuFrame.Content).ViewModel;
-                            _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords(), viewModel, "train all word"));
-                      }
-                      catch(Exception)
-                      {
-                          try
-                          {
-                              var viewModel = ((WordInfo)_menuFrame.Content).ViewModel;
-                              _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, _wordService.GetAllWords(), viewModel, "train al word"));
-                          }
-                          catch(Exception)
-                          {
-                                _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "All words"));
-                          }
-                      }
+                      TrainCommand(_wordService.GetTrainAllWords(), "train all word", "All", "All words");
                   }));
             }
         }
+
+        private RelayCommand train0Command;
+        public RelayCommand Train0Command
+        {
+            get
+            {
+                return train0Command ??
+                  (train0Command = new RelayCommand(obj =>
+                  {
+                      TrainCommand(_wordService.GetTrainNotStudiedWords(), "train 0 word", "0", "0 words");
+                  }));
+            }
+        }
+
+        private RelayCommand train25Command;
+        public RelayCommand Train25Command
+        {
+            get
+            {
+                return train25Command ??
+                  (train25Command = new RelayCommand(obj =>
+                  {
+                      TrainCommand(_wordService.GetTrainAlmostAcquaintedWords(), "train 25 word", "25", "25 words");
+                  }));
+            }
+        }
+
+        private RelayCommand train50Command;
+        public RelayCommand Train50Command
+        {
+            get
+            {
+                return train50Command ??
+                  (train50Command = new RelayCommand(obj =>
+                  {
+                      TrainCommand(_wordService.GetTrainAcquaintedWords(), "train 50 word", "50", "50 words");
+                  }));
+            }
+        }
+
+        private RelayCommand train75Command;
+        public RelayCommand Train75Command
+        {
+            get
+            {
+                return train75Command ??
+                  (train75Command = new RelayCommand(obj =>
+                  {
+                        TrainCommand(_wordService.GetTrainAlmostStudiedWords(), "train 75 word", "75", "75 words");
+                  }));
+            }
+        }
+
+        private RelayCommand knowTrainCommand;
+        public RelayCommand KnowTrainCommand
+        {
+            get
+            {
+                return knowTrainCommand ??
+                  (knowTrainCommand = new RelayCommand(obj =>
+                  {
+                      TrainCommand(_wordService.GetTrainStudiedWords(), "train know word", "100", "know words");
+                  }));
+            }
+        }
+        #endregion
+
+        #region knowWordsCommand
 
         private RelayCommand know0Command;
         public RelayCommand Know0Command
@@ -131,6 +186,8 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        #endregion
+
         private RelayCommand createCommand;
         public RelayCommand CreateCommand
         {
@@ -149,6 +206,42 @@ namespace WorldOfWords.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private void TrainCommand(List<Word> words, string trainPaage, string listPageId, string listPageName)
+        {
+            try
+            {
+                if (words.Any())
+                {
+                    var viewModel = ((ListOfWords)_menuFrame.Content).ViewModel;
+
+                    _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, words, viewModel, trainPaage));
+                }
+                else
+                {
+                    MessageBox.Show("Array is empty");
+                }
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    if (words.Any())
+                    {
+                        var viewModel = ((WordInfo)_menuFrame.Content).ViewModel;
+                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, words, viewModel, trainPaage));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Array is empty");
+                    }
+                }
+                catch (Exception)
+                {
+                    _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, listPageId, listPageName));
+                }
+            }
         }
     }
 }

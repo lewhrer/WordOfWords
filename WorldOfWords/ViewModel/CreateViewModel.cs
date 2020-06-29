@@ -43,6 +43,7 @@ namespace WorldOfWords.ViewModel
                 new ComboBoxItem(){ Content = "1" },
                 new ComboBoxItem(){ Content = "2" },
             };
+            Priority = Priorities[0];
         }
 
         private RelayCommand addCommand;
@@ -93,7 +94,7 @@ namespace WorldOfWords.ViewModel
                           Example = Example,
                           Name = Name,
                           Picture = pictureInBytes,
-                          LastUpdate = DateTime.Now,
+                          LastUpdate = new DateTime(2000, 1, 1),
                           TranslateName = Translate,
                           Level = 0,
                           Priority = int.Parse(Priority.Content.ToString()),
