@@ -42,10 +42,26 @@ namespace WorldOfWords.Infrastructure.Services
             _context.SaveChanges();
         }
 
+        public void AddRange(Word[] words)
+        {
+            foreach (var item in words)
+            {
+                _context.Words.Add(item);
+            }
+
+            _context.SaveChanges();
+        }
+
         public void Delete(string id)
         {
             var word = GetWord(id);
             _context.Words.Remove(word);
+            _context.SaveChanges();
+        }
+
+        public void DeleteEverything()
+        {
+            _context.Words.RemoveRange(GetAllWords());
             _context.SaveChanges();
         }
 

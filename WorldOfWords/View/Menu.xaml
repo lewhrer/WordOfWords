@@ -31,6 +31,11 @@
                 <MenuItem Header="Know train" Command="{Binding KnowTrainCommand}" />
                 <MenuItem Header="All train" Command="{Binding TrainAllCommand}" />
             </MenuItem>
+            <MenuItem Header="Save">
+                <MenuItem Header="Save" Command="{Binding SaveCommand}" />
+                <MenuItem Header="Desave" Command="{Binding DesaveCommand}" />
+                <MenuItem Header="Alldelete" Command="{Binding DeleteAllCommand}" />
+            </MenuItem>
         </Menu>
         <Frame 
             Name="MenuFrame"

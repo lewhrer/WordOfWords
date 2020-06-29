@@ -11,6 +11,8 @@ using System.Windows.Controls;
 using WorldOfWords.View;
 using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.Model;
+using System.Runtime.Serialization.Json;
+using System.IO;
 
 namespace WorldOfWords.ViewModel
 {
@@ -34,6 +36,45 @@ namespace WorldOfWords.ViewModel
                   (allWordsCommand = new RelayCommand(obj =>
                   {
                       _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "all words"));
+                  }));
+            }
+        }
+
+        private RelayCommand saveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ??
+                  (saveCommand = new RelayCommand(obj =>
+                  {
+                      Serialisation();
+                  }));
+            }
+        }
+
+        private RelayCommand desaveCommand;
+        public RelayCommand DesaveCommand
+        {
+            get
+            {
+                return desaveCommand ??
+                  (desaveCommand = new RelayCommand(obj =>
+                  {
+                      Deserialisation();
+                  }));
+            }
+        }
+
+        private RelayCommand deleteAllCommand;
+        public RelayCommand DeleteAllCommand
+        {
+            get
+            {
+                return deleteAllCommand ??
+                  (deleteAllCommand = new RelayCommand(obj =>
+                  {
+                      _wordService.DeleteEverything();
                   }));
             }
         }
@@ -206,6 +247,33 @@ namespace WorldOfWords.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private void Serialisation()
+        {
+            var words = _wordService.GetAllWords().ToArray();
+
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
+
+            using (FileStream fs = new FileStream("words.json", FileMode.OpenOrCreate))
+            {
+                jsonFormatter.WriteObject(fs, words);
+            }
+
+            Console.ReadLine();
+        }
+
+        private void Deserialisation()
+        {
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
+
+            using (FileStream fs = new FileStream("words.json", FileMode.OpenOrCreate))
+            {
+                Word[] words = (Word[])jsonFormatter.ReadObject(fs);
+
+                _wordService.DeleteEverything();
+                _wordService.AddRange(words);
+            }
         }
 
         private void TrainCommand(List<Word> words, string trainPaage, string listPageId, string listPageName)

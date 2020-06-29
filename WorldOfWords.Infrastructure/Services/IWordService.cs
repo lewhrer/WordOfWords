@@ -11,6 +11,7 @@ namespace WorldOfWords.Infrastructure.Services
 {
     public interface IWordService
     {
+        void AddRange(Word[] words);
         void Create(WordArgs args);
         Word GetWord(string id);
         List<Word> GetAllWords();
@@ -28,6 +29,7 @@ namespace WorldOfWords.Infrastructure.Services
         List<Word> GetTrainNewWords();
         void Edit(WordArgs args);
         void Delete(string id);
+        void DeleteEverything();
         byte[] FindImage();
         BitmapImage GetSourceImage(byte[] array);
         void SetKnow(string id, double percent);
