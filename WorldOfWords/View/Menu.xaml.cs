@@ -15,13 +15,14 @@ using WorldOfWords.Infrastructure;
 using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.Model;
 using WorldOfWords.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace WorldOfWords.View
 {
     /// <summary>
     /// Interaction logic for Menu.xaml
     /// </summary>
-    public partial class Menu : Window
+    public partial class Menu : MetroWindow
     {
         public Menu()
         {

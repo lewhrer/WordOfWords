@@ -223,7 +223,7 @@ namespace WorldOfWords.ViewModel
                     MessageBox.Show("Array is empty");
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 try
                 {
