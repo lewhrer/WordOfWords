@@ -85,6 +85,9 @@
                 FontSize="25"
                 />
 
+        <TextBlock Grid.Row="0" Text="{Binding TotalCount}" FontSize="20" Margin="0,0,713,421"/>
+
+
         <Grid Height="30" Margin="-1,418,1,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

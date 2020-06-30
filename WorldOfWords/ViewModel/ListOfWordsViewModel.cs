@@ -22,6 +22,7 @@ namespace WorldOfWords.ViewModel
         Word selectedWord;
         string nameMethod;
         string namePage;
+        int totalCount;
 
         public IWordService _wordService;
         public ObservableCollection<Word> Words { get; set; }
@@ -42,6 +43,7 @@ namespace WorldOfWords.ViewModel
                 case "100": Words = new ObservableCollection<Word>(_wordService.GetStudiedWords()); break;
                 default: MessageBox.Show("bad name of method"); break;
             }
+            TotalCount = Words.Count;
         }
 
         private RelayCommand moreCommand;
@@ -73,6 +75,7 @@ namespace WorldOfWords.ViewModel
                       {
                           _wordService.Delete(SelectedWord.Id.ToString());
                           Words.RemoveAt(Words.IndexOf(selectedWord));
+                          TotalCount--;
                       }
                   }));
             }
@@ -219,6 +222,16 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        public int TotalCount
+        {
+            get { return totalCount; }
+            set
+            {
+                totalCount = value;
+                OnPropertyChanged("TotalCount");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
@@ -241,6 +254,8 @@ namespace WorldOfWords.ViewModel
                 default: MessageBox.Show("bad name of method"); break;
             }
 
+            TotalCount = words.Count;
+                
             foreach (var item in words)
             {
                 Words.Add(item);

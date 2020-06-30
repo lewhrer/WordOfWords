@@ -22,6 +22,7 @@ namespace WorldOfWords.ViewModel
         int indexSelectedWord;
         int numberOfWord;
         string namePage;
+        int totalCount;
 
         IUpdater updater;
         public IWordService _wordService;
@@ -36,6 +37,7 @@ namespace WorldOfWords.ViewModel
             NamePage = namePage;
             IndexSelectedWord = indexWord;
             SelectedWord = Words[indexWord];
+            TotalCount = Words.Count;
             this.picture = picture;
             if(SelectedWord.Picture != null)
             {
@@ -55,6 +57,7 @@ namespace WorldOfWords.ViewModel
                       {
                           _wordService.Delete(SelectedWord.Id.ToString());
                           Words.RemoveAt(Words.IndexOf(SelectedWord));
+                          TotalCount--;
                       }
                   }));
             }
@@ -314,6 +317,16 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        public int TotalCount
+        {
+            get { return totalCount; }
+            set
+            {
+                totalCount = value;
+                OnPropertyChanged("TotalCount");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
@@ -329,6 +342,7 @@ namespace WorldOfWords.ViewModel
             Words.Insert(index, word);
             SelectedWord = null;
             SelectedWord = Words[index];
+            TotalCount = Words.Count;
         }
     }
 }

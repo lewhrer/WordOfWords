@@ -15,6 +15,7 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding NamePage}" FontSize="30" Margin="314,-2,37,2"/>
+        <TextBlock Grid.Row="0" Text="{Binding TotalCount}" FontSize="20" Margin="571,-2,-220,2"/>
         <ListBox Grid.Row="1" ItemsSource="{Binding Words}"
                  SelectedItem="{Binding SelectedWord}">
             <ListBox.ItemTemplate>
