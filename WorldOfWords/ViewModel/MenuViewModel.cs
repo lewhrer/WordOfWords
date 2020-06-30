@@ -40,6 +40,19 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        private RelayCommand settingsCommand;
+        public RelayCommand SettingsCommand
+        {
+            get
+            {
+                return settingsCommand ??
+                  (settingsCommand = new RelayCommand(obj =>
+                  {
+                      _menuFrame.Navigate(new Settings(_menuFrame, _wordService));
+                  }));
+            }
+        }
+
         private RelayCommand saveCommand;
         public RelayCommand SaveCommand
         {

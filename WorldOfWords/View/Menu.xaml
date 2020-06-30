@@ -36,6 +36,8 @@
                 <MenuItem Header="Desave" Command="{Binding DesaveCommand}" />
                 <MenuItem Header="Alldelete" Command="{Binding DeleteAllCommand}" />
             </MenuItem>
+            <MenuItem Header="Setings" Command="{Binding SettingsCommand}" />
+
         </Menu>
         <Frame 
             Name="MenuFrame"
