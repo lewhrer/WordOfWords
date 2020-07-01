@@ -29,7 +29,7 @@ namespace WorldOfWords.View
         public WordInfo(Frame menuFrame, IWordService service, List<WordViewModel> words, IUpdater updater, string namePage, int indexWord = 0)
         {
             InitializeComponent();
-            ViewModel = new WordInfoViewModel(menuFrame, service, words, updater, namePage, indexWord, ImgPicture);
+            ViewModel = new WordInfoViewModel(menuFrame, service, words, updater, namePage, indexWord);
             DataContext = ViewModel;
         }
     }

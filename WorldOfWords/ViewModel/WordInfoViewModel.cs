@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.Model;
 using WorldOfWords.View;
@@ -18,7 +19,6 @@ namespace WorldOfWords.ViewModel
     {
         Frame _menuFrame;
         WordViewModel selectedWord;
-        Image picture;
         int indexSelectedWord;
         int numberOfWord;
         string namePage;
@@ -28,21 +28,16 @@ namespace WorldOfWords.ViewModel
         public IWordService _wordService;
         public ObservableCollection<WordViewModel> Words { get; set; }
 
-        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<WordViewModel> words, IUpdater updater, string namePage, int indexWord, Image picture)
+        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<WordViewModel> words, IUpdater updater, string namePage, int indexWord)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
             Words = new ObservableCollection<WordViewModel>(words);
             this.updater = updater;
             NamePage = namePage;
-            IndexSelectedWord = indexWord;
+            IndexSelectedWord = indexWord + 1;
             SelectedWord = Words[indexWord];
             TotalCount = Words.Count;
-            this.picture = picture;
-            if(SelectedWord.Picture != null)
-            {
-                picture.Source = _wordService.GetSourceImage(SelectedWord.Picture);
-            }
         }
 
         private RelayCommand deleteCommand;
@@ -71,11 +66,24 @@ namespace WorldOfWords.ViewModel
                 return nextCommand ??
                   (nextCommand = new RelayCommand(obj =>
                   {
-                      if (IndexSelectedWord + 1 != Words.Count)
+                      if (IndexSelectedWord != Words.Count)
                       {
                           SelectedWord = null;
-                          SelectedWord = Words[++IndexSelectedWord];
+                          SelectedWord = Words[IndexSelectedWord++];
                       }
+                  }));
+            }
+        }
+
+        private RelayCommand showPictureCommand;
+        public RelayCommand ShowPictureCommand
+        {
+            get
+            {
+                return showPictureCommand ??
+                  (showPictureCommand = new RelayCommand(obj =>
+                  {
+                      SelectedWord.SourcePicture = SelectedWord.SourcePictureCorectly;
                   }));
             }
         }
@@ -102,10 +110,11 @@ namespace WorldOfWords.ViewModel
                 return previouslyCommand ??
                   (previouslyCommand = new RelayCommand(obj =>
                   {
-                      if (IndexSelectedWord != 0)
+                      if (IndexSelectedWord - 1 != 0)
                       {
                           SelectedWord = null;
-                          SelectedWord = Words[--IndexSelectedWord];
+                          IndexSelectedWord = IndexSelectedWord - 2;
+                          SelectedWord = Words[IndexSelectedWord++];
                       }
                   }));
             }

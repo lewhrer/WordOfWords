@@ -9,86 +9,166 @@
       Title="WordInfo">
 
     <Grid>
-        <Grid DataContext="{Binding SelectedWord}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" DataContext="{Binding SelectedWord}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border 
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Width="2"
+                Background="Black"
+                Margin="0,15"
+                />
+
+            <Border 
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalAlignment="Bottom"
+                Height="2"
+                Background="Black"
+                Margin="15,0"
+                />
+
+            <Border 
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                Height="2"
+                Background="Black"
+                Margin="15,0"
+                />
+
             <TextBlock 
-                HorizontalAlignment="Left" 
-                Margin="64,85,0,0" 
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
                 TextWrapping="Wrap" 
                 Text="{Binding Name}" 
-                VerticalAlignment="Top"
                 FontSize="50"
                 />
 
             <TextBlock 
-                HorizontalAlignment="Left" 
-                Margin="440,271,0,0" 
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
                 TextWrapping="Wrap" 
-                Text="{Binding TranslateName}" 
-                VerticalAlignment="Top"
-                FontSize="50"
+                Text="{Binding Translate}" 
+                FontSize="30"
+                />
+            <StackPanel 
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom"
+                Margin="10,10"
+                >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock 
+                        Text="Рівень: " 
+                        FontSize="20"
+                        />
+                    <TextBlock 
+                        Text="{Binding Level}" 
+                        FontSize="20"
+                        />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock 
+                        Text="Оновлено: " 
+                        FontSize="20"
+                        />
+                    <TextBlock 
+                        Text="{Binding LastUpdate}" 
+                        FontSize="20"
+                        />
+                </StackPanel>
+            </StackPanel>
+
+            <Grid
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="50,15,50,35"
+                >
+                <Border 
+                    Background="Black"
+                    Width="3"
+                    HorizontalAlignment="Left"
+                    />
+                <Border 
+                    Background="Black"
+                    Height="3"
+                    VerticalAlignment="Top"
+                    />
+                <Border 
+                    Background="Black"
+                    Width="3"
+                    HorizontalAlignment="Right"
+                    />
+                <Border 
+                    Background="Black"
+                    Height="3"
+                    VerticalAlignment="Bottom"
+                    />
+                <Image 
+                    Name="ImgPicture" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="3"
+                    Source="{Binding SourcePicture}"
+                       />
+            </Grid>
+
+            <Button 
+                Grid.Column="1"
+                Grid.Row="0"
+                Content="Показати"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="50,5"
+                Command="{Binding ShowPictureCommand}" 
                 />
 
-            <TextBlock 
-                HorizontalAlignment="Left" 
-                Margin="337,152,0,0" 
-                TextWrapping="Wrap" 
-                Text="{Binding Level}" 
+            <Button 
+                Grid.Column="0"
+                Grid.Row="1"
+                Content="Показати"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                FontSize="50"
+                Margin="50,5"
+                Command="{Binding ShowExampleCommand}" 
                 />
 
-            <Image Name="ImgPicture" HorizontalAlignment="Left" Height="160" Margin="452,42,0,0" VerticalAlignment="Top" Width="270"
-                   Source="../Resources/temp.jpg"
-                   />
-
-            <TextBox Name="TbxExample" HorizontalAlignment="Left" Height="160" Margin="21,229,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318"
-                     Text="{Binding Example}"
-                     />
+            <TextBox 
+                Name="TbxExample" 
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="50,35,50,15"
+                TextWrapping="Wrap"
+                FontSize="25"
+                IsReadOnly="True"
+                Text="{Binding Example}"
+                />
 
         </Grid>
-        <Button 
-            Height="50"
-            Width="30"
-            Content="-->" 
-            Command="{Binding NextCommand}" Margin="762,178,8,222"
-            />
-
-        <Button 
-            Height="50"
-            Width="30"
-            Content="-" 
-            Command="{Binding PreviouslyCommand}" Margin="8,160,762,240"
-            />
-
-        <Button 
-            Height="20"
-            Width="50"
-            Content="Go back" 
-            Command="{Binding GoBackCommand}" Margin="736,10,14,420"
-            />
-
-        <TextBlock 
-                HorizontalAlignment="Left" 
-                Margin="334,13,0,0" 
-                TextWrapping="Wrap" 
-                Text="{Binding NamePage}" 
-                VerticalAlignment="Top"
-                FontSize="25"
-                />
-
-        <TextBlock 
-                HorizontalAlignment="Left" 
-                Margin="552,4,0,0" 
-                TextWrapping="Wrap" 
-                Text="{Binding IndexSelectedWord}" 
-                VerticalAlignment="Top"
-                FontSize="25"
-                />
-
-        <TextBlock Grid.Row="0" Text="{Binding TotalCount}" FontSize="20" Margin="0,0,713,421"/>
-
-
-        <Grid Height="30" Margin="-1,418,1,2">
+        <Grid Name="ButtonsKnows"
+            Grid.Row="2"
+            VerticalAlignment="Center"  
+              >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -98,41 +178,123 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
             <Button 
                 Grid.Column="0"
-                Content="0 %" 
-                Command="{Binding Know0Command}"
+                Content="Попередній"
+                HorizontalAlignment="Left"
+                Margin="15,0"
+                Command="{Binding PreviouslyCommand}" 
                 />
             <Button 
                 Grid.Column="1"
-                Content="25 %" 
-                Command="{Binding Know25Command}"
+                Content="Не знаю" 
+                Command="{Binding Know0Command}"
+                Background="Red"
+                Margin="5,0"
                 />
             <Button 
                 Grid.Column="2"
-                Content="50 %" 
-                Command="{Binding Know50Command}"
+                Content="Не пригадую" 
+                Command="{Binding Know25Command}"
+                Background="Gray"
+                Margin="5,0"
                 />
             <Button 
                 Grid.Column="3"
-                Content="75 %" 
-                Command="{Binding Know75Command}"
+                Content="Пригадую" 
+                Command="{Binding Know50Command}"
+                Background="Orange"
+                Margin="5,0"
                 />
             <Button 
                 Grid.Column="4"
-                Content="100 %" 
-                Command="{Binding Know100Command}"
+                Content="Знаю" 
+                Command="{Binding Know75Command}"
+                Background="YellowGreen"
+                Margin="5,0"
                 />
             <Button 
                 Grid.Column="5"
-                Content="Edit" 
-                Command="{Binding EditCommand}"
+                Content="Відмінно знаю" 
+                Command="{Binding Know100Command}"
+                Background="Green"
+                Margin="5,0"
                 />
             <Button 
+                Name="btnNext"
                 Grid.Column="6"
-                Content="Detele" 
-                Command="{Binding DeleteCommand}"
+                Content="Наступний" 
+                HorizontalAlignment="Right"
+                Margin="15,0"
+                Command="{Binding NextCommand}"
                 />
+
         </Grid>
+
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Orientation="Horizontal"
+            >
+            <Button 
+                Margin="10,0"
+                Content="Назад" 
+                Command="{Binding GoBackCommand}" 
+                />
+
+            <Button 
+                Grid.Column="0"
+                Grid.Row="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Редагувати" 
+                Command="{Binding EditCommand}"
+                Margin="5,0"
+                Background="DarkSlateGray"
+                />
+            <Button 
+                Grid.Column="2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="Видалити" 
+                Command="{Binding DeleteCommand}"
+                Margin="5,0"
+                Background="DarkSlateGray"
+                />
+        </StackPanel>
+
+        <TextBlock 
+            Grid.Row="0"
+            HorizontalAlignment="Center" 
+            Text="{Binding NamePage}" 
+            VerticalAlignment="Center"
+            FontSize="25"
+            />
+        <StackPanel 
+            Orientation="Horizontal"
+            Grid.Row="0"
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Center"
+            Margin="15,0"
+            >
+            <TextBlock 
+                Text="Індекс: " 
+                FontSize="20"
+                />
+            <TextBlock 
+                Text="{Binding IndexSelectedWord}" 
+                FontSize="20"
+                />
+            <TextBlock 
+                Text="/" 
+                FontSize="20"
+                />
+            <TextBlock
+                Text="{Binding TotalCount}" 
+                FontSize="20" />
+        </StackPanel>
     </Grid>
 </Page>
