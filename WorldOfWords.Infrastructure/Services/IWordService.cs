@@ -32,6 +32,6 @@ namespace WorldOfWords.Infrastructure.Services
         void DeleteEverything();
         byte[] FindImage();
         BitmapImage GetSourceImage(byte[] array);
-        void SetKnow(string id, double percent);
+        void SetKnow(string id, int percent);
     }
 }

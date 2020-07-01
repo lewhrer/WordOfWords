@@ -35,7 +35,7 @@ namespace WorldOfWords.ViewModel
                 return allWordsCommand ??
                   (allWordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "all words"));
+                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "Всі слова"));
                   }));
             }
         }
@@ -297,7 +297,7 @@ namespace WorldOfWords.ViewModel
                 {
                     var viewModel = ((ListOfWords)_menuFrame.Content).ViewModel;
 
-                    _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, words, viewModel, trainPaage));
+                    _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, words.Select(x => new WordViewModel(x)).ToList(), viewModel, trainPaage));
                 }
                 else
                 {
@@ -311,7 +311,7 @@ namespace WorldOfWords.ViewModel
                     if (words.Any())
                     {
                         var viewModel = ((WordInfo)_menuFrame.Content).ViewModel;
-                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, words, viewModel, trainPaage));
+                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, words.Select(x => new WordViewModel(x)).ToList(), viewModel, trainPaage));
                     }
                     else
                     {

@@ -19,13 +19,13 @@ namespace WorldOfWords.ViewModel
     public class ListOfWordsViewModel : INotifyPropertyChanged, IUpdater
     {
         Frame _menuFrame;
-        Word selectedWord;
+        WordViewModel selectedWord;
         string nameMethod;
         string namePage;
         int totalCount;
 
         public IWordService _wordService;
-        public ObservableCollection<Word> Words { get; set; }
+        public ObservableCollection<WordViewModel> Words { get; set; }
 
         public ListOfWordsViewModel(Frame menuFrame, IWordService wordService, string nameMethod, string namePage)
         {
@@ -35,12 +35,12 @@ namespace WorldOfWords.ViewModel
             NamePage = namePage;
             switch (nameMethod)
             {
-                case "All": Words = new ObservableCollection<Word>(_wordService.GetAllWords()); break;
-                case "0": Words = new ObservableCollection<Word>(_wordService.GetNotStudiedWords()); break;
-                case "25": Words = new ObservableCollection<Word>(_wordService.GetAlmostAcquaintedWords()); break;
-                case "50": Words = new ObservableCollection<Word>(_wordService.GetAcquaintedWords()); break;
-                case "75": Words = new ObservableCollection<Word>(_wordService.GetAlmostStudiedWords()); break;
-                case "100": Words = new ObservableCollection<Word>(_wordService.GetStudiedWords()); break;
+                case "All": Words = new ObservableCollection<WordViewModel>(_wordService.GetAllWords().Select(x => new WordViewModel(x))); break;
+                case "0": Words = new ObservableCollection<WordViewModel>(_wordService.GetNotStudiedWords().Select(x => new WordViewModel(x))); break;
+                case "25": Words = new ObservableCollection<WordViewModel>(_wordService.GetAlmostAcquaintedWords().Select(x => new WordViewModel(x))); break;
+                case "50": Words = new ObservableCollection<WordViewModel>(_wordService.GetAcquaintedWords().Select(x => new WordViewModel(x))); break;
+                case "75": Words = new ObservableCollection<WordViewModel>(_wordService.GetAlmostStudiedWords().Select(x => new WordViewModel(x))); break;
+                case "100": Words = new ObservableCollection<WordViewModel>(_wordService.GetStudiedWords().Select(x => new WordViewModel(x))); break;
                 default: MessageBox.Show("bad name of method"); break;
             }
             TotalCount = Words.Count;
@@ -58,6 +58,10 @@ namespace WorldOfWords.ViewModel
                       {
                         int index = Words.IndexOf(selectedWord);
                         _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, Words.ToList(), this, $"{nameMethod} words", index));
+                      }
+                      else
+                      {
+                          MessageBox.Show("Спочатку виберіть слово.");
                       }
                   }));
             }
@@ -77,6 +81,10 @@ namespace WorldOfWords.ViewModel
                           Words.RemoveAt(Words.IndexOf(selectedWord));
                           TotalCount--;
                       }
+                      else
+                      {
+                          MessageBox.Show("Спочатку виберіть слово.");
+                      }
                   }));
             }
         }
@@ -93,6 +101,10 @@ namespace WorldOfWords.ViewModel
                       {
                           _menuFrame.Navigate(new Edit(_menuFrame, _wordService, SelectedWord.Id.ToString(), this));
                       }
+                      else
+                      {
+                          MessageBox.Show("Спочатку виберіть слово.");
+                      }
                   }));
             }
         }
@@ -108,11 +120,15 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 0);
-                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
                           SelectedWord = word;
+                      }
+                      else
+                      {
+                          MessageBox.Show("Спочатку виберіть слово.");
                       }
                   }));
             }
@@ -129,11 +145,15 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 25);
-                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
                           SelectedWord = word;
+                      }
+                      else
+                      {
+                          MessageBox.Show("Спочатку виберіть слово.");
                       }
                   }));
             }
@@ -150,11 +170,15 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 50);
-                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
                           SelectedWord = word;
+                      }
+                      else
+                      {
+                          MessageBox.Show("Спочатку виберіть слово.");
                       }
                   }));
             }
@@ -171,11 +195,15 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 75);
-                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
                           SelectedWord = word;
+                      }
+                      else
+                      {
+                          MessageBox.Show("Спочатку виберіть слово.");
                       }
                   }));
             }
@@ -192,17 +220,21 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           _wordService.SetKnow(SelectedWord.Id.ToString(), 100);
-                          var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
                           SelectedWord = word;
                       }
+                      else
+                      {
+                          MessageBox.Show("Спочатку виберіть слово.");
+                      }
                   }));
             }
         }
 
-        public Word SelectedWord
+        public WordViewModel SelectedWord
         {
             get { return selectedWord; }
             set
@@ -242,15 +274,15 @@ namespace WorldOfWords.ViewModel
         public void Update()
         {
             Words.Clear();
-            List<Word> words = new List<Word>();
+            List<WordViewModel> words = new List<WordViewModel>();
             switch (nameMethod)
             {
-                case "All": words = _wordService.GetAllWords(); break;
-                case "0": words = _wordService.GetNotStudiedWords(); break;
-                case "25": words = _wordService.GetAlmostAcquaintedWords(); break;
-                case "50": words = _wordService.GetAcquaintedWords(); break;
-                case "75": words = _wordService.GetAlmostStudiedWords(); break;
-                case "100": words = _wordService.GetStudiedWords(); break;
+                case "All": words = _wordService.GetAllWords().Select(x => new WordViewModel(x)).ToList(); break;
+                case "0": words = _wordService.GetNotStudiedWords().Select(x => new WordViewModel(x)).ToList(); break;
+                case "25": words = _wordService.GetAlmostAcquaintedWords().Select(x => new WordViewModel(x)).ToList(); break;
+                case "50": words = _wordService.GetAcquaintedWords().Select(x => new WordViewModel(x)).ToList(); break;
+                case "75": words = _wordService.GetAlmostStudiedWords().Select(x => new WordViewModel(x)).ToList(); break;
+                case "100": words = _wordService.GetStudiedWords().Select(x => new WordViewModel(x)).ToList(); break;
                 default: MessageBox.Show("bad name of method"); break;
             }
 
@@ -263,7 +295,7 @@ namespace WorldOfWords.ViewModel
 
             try
             {
-                var word = _wordService.GetWord(SelectedWord.Id.ToString());
+                var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
                 int index = Words.IndexOf(SelectedWord);
                 Words.RemoveAt(index);
                 Words.Insert(index, word);

@@ -92,6 +92,7 @@
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\WordInfoViewModel.cs" />
+    <Compile Include="ViewModel\WordViewModel.cs" />
     <Compile Include="View\ListOfWords.xaml.cs">
       <DependentUpon>ListOfWords.xaml</DependentUpon>
     </Compile>

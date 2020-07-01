@@ -33,7 +33,7 @@ namespace WorldOfWords.Infrastructure.Services
                 Name = args.Name,
                 Picture = args.Picture,
                 Level = args.Level,
-                TranslateName = args.TranslateName,
+                Translate = args.Translate,
                 LastUpdate = args.LastUpdate,
                 Priority = args.Priority
             };
@@ -72,7 +72,7 @@ namespace WorldOfWords.Infrastructure.Services
             word.Name = args.Name;
             word.Picture = args.Picture;
             word.Level = args.Level;
-            word.TranslateName = args.TranslateName;
+            word.Translate = args.Translate;
             word.Priority = args.Priority;
 
             _context.SaveChanges();
@@ -210,10 +210,10 @@ namespace WorldOfWords.Infrastructure.Services
             return _context.Words.FirstOrDefault(x => x.Id.ToString() == id);
         }
 
-        public void SetKnow(string id, double percent)
+        public void SetKnow(string id, int percent)
         {
             var word = GetWord(id);
-            word.Level = Math.Round((word.Level + percent) / 2, 2);
+            word.Level = (word.Level + percent) / 2;
             word.LastUpdate = DateTime.Now;
             _context.SaveChanges();
         }

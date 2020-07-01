@@ -11,7 +11,7 @@ namespace WorldOfWords.Model
         [DataMember]
         public string Name { get; set; }
         [DataMember]
-        public string TranslateName { get; set; }
+        public string Translate { get; set; }
         [DataMember]
         public byte[] Picture { get; set; }
         [DataMember]
@@ -19,7 +19,7 @@ namespace WorldOfWords.Model
         [DataMember]
         public virtual DateTime LastUpdate { get; set; }
         [DataMember]
-        public double Level { get; set; }
+        public int Level { get; set; }
         [DataMember]
         public int Priority { get; set; }
     }

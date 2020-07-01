@@ -95,7 +95,7 @@ namespace WorldOfWords.ViewModel
                           Name = Name,
                           Picture = pictureInBytes,
                           LastUpdate = new DateTime(2000, 1, 1),
-                          TranslateName = Translate,
+                          Translate = Translate,
                           Level = 0,
                           Priority = int.Parse(Priority.Content.ToString()),
                       };

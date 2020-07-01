@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:local="clr-namespace:WorldOfWords.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -10,7 +11,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
@@ -18,28 +19,68 @@
             Grid.Row="0" 
             Text="{Binding NamePage}" 
             FontSize="30" 
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Center"
+                   Margin="15,0,0,0"
             />
-        <StackPanel Name="TotalCount"
-            Grid.Row="0"
-            Orientation="Horizontal"
+        <Grid
             HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-                    Margin="0,0,10,0"
+                Margin="10,0,10,5"
+            Grid.Row="0"
             >
-            <TextBlock 
-                Text="Загальна кількість: "
-                FontSize="20" 
-                />
-            <TextBlock 
-                Text="{Binding TotalCount}" 
-                FontSize="20" 
-                />
+        
+            <StackPanel Name="TotalCount"
+                Orientation="Horizontal"
+                VerticalAlignment="Top"
+                Margin="0,0,5,0"
+                Grid.Row="0"
+                        HorizontalAlignment="Right"
+                >
+                <TextBlock 
+                    Text="Загальна кількість: "
+                    FontSize="20" 
+                    />
+                <TextBlock 
+                    Text="{Binding TotalCount}" 
+                    FontSize="20" 
+                    />
             
-        </StackPanel>
+            </StackPanel>
+            <Grid
+                VerticalAlignment="Bottom"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button 
+                    Grid.Column="0"
+                    Content="Переглянути" 
+                    Command="{Binding MoreCommand}"
+                    Margin="2.5,0"
+                    Background="DarkSlateGray"
+                    />
+                <Button 
+                    Grid.Column="1"
+                    Content="Редагувати" 
+                    Command="{Binding EditCommand}"
+                    Margin="2.5,0"
+                    Background="DarkSlateGray"
+                    />
+                <Button 
+                    Grid.Column="2"
+                    Content="Видалити" 
+                    Command="{Binding DeleteCommand}"
+                    Margin="2.5,0"
+                    Background="DarkSlateGray"
+                    />
+                
+            </Grid>
+        </Grid>
         <ListBox Grid.Row="1" ItemsSource="{Binding Words}"
-                 SelectedItem="{Binding SelectedWord}">
+                 SelectedItem="{Binding SelectedWord}"
+                 >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -54,7 +95,7 @@
                             />
                         <Grid Grid.Row="1" Margin="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="5" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
@@ -72,7 +113,7 @@
                                 Grid.Column="1"
                                 Width="1"
                                 Background="Black"
-                                Margin="0,-5,0,-5"
+                                Margin="0,3,0,3"
                                 />
                             <TextBlock 
                                 Grid.Column="2" 
@@ -88,7 +129,7 @@
                                 Grid.Row="1"
                                 FontSize="20"
                                 Width="auto"
-                                Text="{Binding Path=TranslateName}" 
+                                Text="{Binding Path=Translate}" 
                                 TextWrapping="Wrap" 
                                 VerticalAlignment="Center"
                                 />
@@ -204,48 +245,44 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button 
-                Grid.Column="0"
-                Content="Show" 
-                Command="{Binding MoreCommand}"
-                />
+           
             <Button 
                 Grid.Column="1"
-                Content="0 %" 
+                Content="Не знаю" 
                 Command="{Binding Know0Command}"
+                Background="Red"
+                Margin="5,0"
                 />
             <Button 
                 Grid.Column="2"
-                Content="25 %" 
+                Content="Не пригадую" 
                 Command="{Binding Know25Command}"
+                Background="Gray"
+                Margin="5,0"
                 />
             <Button 
                 Grid.Column="3"
-                Content="50 %" 
+                Content="Пригадую" 
                 Command="{Binding Know50Command}"
+                Background="Orange"
+                Margin="5,0"
                 />
             <Button 
                 Grid.Column="4"
-                Content="75 %" 
+                Content="Знаю" 
                 Command="{Binding Know75Command}"
+                Background="YellowGreen"
+                Margin="5,0"
                 />
             <Button 
                 Grid.Column="5"
-                Content="100 %" 
+                Content="Відмінно знаю" 
                 Command="{Binding Know100Command}"
+                Background="Green"
+                Margin="5,0"
                 />
-            <Button 
-                Grid.Column="6"
-                Content="Edit" 
-                Command="{Binding EditCommand}"
-                />
-            <Button 
-                Grid.Column="7"
-                Content="Detele" 
-                Command="{Binding DeleteCommand}"
-                />
+        
         </Grid>
     </Grid>
 </Page>

@@ -11,10 +11,10 @@ namespace WorldOfWords.Infrastructure.Arguments
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string TranslateName { get; set; }
+        public string Translate { get; set; }
         public byte[] Picture { get; set; }
         public string Example { get; set; }
-        public double Level { get; set; }
+        public int Level { get; set; }
         public int Priority { get; set; }
         public DateTime LastUpdate { get; set; }
     }
