@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:local="clr-namespace:WorldOfWords.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -15,7 +16,7 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" DataContext="{Binding SelectedWord}">
+        <Grid Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -51,31 +52,40 @@
                 Margin="15,0"
                 />
 
-            <TextBlock 
+            <Grid
                 Grid.Row="0"
                 Grid.Column="0"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"
-                TextWrapping="Wrap" 
-                Text="{Binding Name}" 
-                FontSize="50"
-                />
+                DataContext="{Binding SelectedWord}"
+                >
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    Text="{Binding Name}" 
+                    FontSize="50"
+                    />
+            </Grid>
 
-            <TextBlock 
+            <Grid
+                DataContext="{Binding SelectedWord}"
                 Grid.Row="1"
                 Grid.Column="1"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"
-                TextWrapping="Wrap" 
-                Text="{Binding Translate}" 
-                FontSize="30"
-                />
+                >
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    Text="{Binding Translate}" 
+                    FontSize="30"
+                    />
+            </Grid>
             <StackPanel 
                 Grid.Row="1"
                 Grid.Column="1"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Bottom"
                 Margin="10,10"
+                DataContext="{Binding SelectedWord}"
                 >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock 
@@ -100,6 +110,7 @@
             </StackPanel>
 
             <Grid
+                
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="50,15,50,35"
@@ -124,13 +135,25 @@
                     Height="3"
                     VerticalAlignment="Bottom"
                     />
-                <Image 
-                    Name="ImgPicture" 
+                <Grid
+                    DataContext="{Binding SelectedWord}"
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     Margin="3"
-                    Source="{Binding SourcePicture}"
-                       />
+                    >
+                    <Image 
+                        Name="ImgPicture" 
+                        Source="{Binding SourcePicture}"
+                        />
+
+                </Grid>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <i:InvokeCommandAction
+                                Command="{Binding MouseDownOnPictureCommand}"
+                             />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </Grid>
 
             <Button 
@@ -153,17 +176,26 @@
                 Command="{Binding ShowExampleCommand}" 
                 />
 
-            <TextBox 
-                Name="TbxExample" 
+            <Grid
                 Grid.Column="0"
                 Grid.Row="1"
                 Margin="50,35,50,15"
-                TextWrapping="Wrap"
-                FontSize="25"
-                IsReadOnly="True"
-                Text="{Binding Example}"
-                />
-
+                DataContext="{Binding SelectedWord}"
+                >
+                <TextBox 
+                    Name="TbxExample" 
+                    TextWrapping="Wrap"
+                    FontSize="25"
+                    IsReadOnly="True"
+                    Text="{Binding Example}"
+                    />
+                <Image 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="3"
+                    Source="{Binding SourcePictureExample}"
+                       />
+            </Grid>
         </Grid>
         <Grid Name="ButtonsKnows"
             Grid.Row="2"
@@ -296,5 +328,10 @@
                 Text="{Binding TotalCount}" 
                 FontSize="20" />
         </StackPanel>
+        <Frame 
+            Name="PhotoFrame"
+            Grid.RowSpan="3"
+			NavigationUIVisibility="Hidden"
+            />
     </Grid>
 </Page>

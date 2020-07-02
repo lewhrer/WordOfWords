@@ -18,6 +18,7 @@ namespace WorldOfWords.ViewModel
     public class WordInfoViewModel : INotifyPropertyChanged, IUpdater
     {
         Frame _menuFrame;
+        Frame photoFrame;
         WordViewModel selectedWord;
         int indexSelectedWord;
         int numberOfWord;
@@ -28,7 +29,7 @@ namespace WorldOfWords.ViewModel
         public IWordService _wordService;
         public ObservableCollection<WordViewModel> Words { get; set; }
 
-        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<WordViewModel> words, IUpdater updater, string namePage, int indexWord)
+        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<WordViewModel> words, IUpdater updater, string namePage, Frame photoFrame, int indexWord)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
@@ -38,6 +39,7 @@ namespace WorldOfWords.ViewModel
             IndexSelectedWord = indexWord + 1;
             SelectedWord = Words[indexWord];
             TotalCount = Words.Count;
+            this.photoFrame = photoFrame;
         }
 
         private RelayCommand deleteCommand;
@@ -84,6 +86,39 @@ namespace WorldOfWords.ViewModel
                   (showPictureCommand = new RelayCommand(obj =>
                   {
                       SelectedWord.SourcePicture = SelectedWord.SourcePictureCorectly;
+                  }));
+            }
+        }
+
+        private RelayCommand mouseDownOnPictureCommand;
+        public RelayCommand MouseDownOnPictureCommand
+        {
+            get
+            {
+                return mouseDownOnPictureCommand ??
+                  (mouseDownOnPictureCommand = new RelayCommand(obj =>
+                  {
+                      if(SelectedWord.IsPhoto)
+                      {
+                            if(SelectedWord.SourcePicture == SelectedWord.SourcePictureCorectly)
+                            {
+                                photoFrame.Navigate(new PhotoViewer(photoFrame, SelectedWord.SourcePicture));
+                            }
+                      }
+                  }));
+            }
+        }
+
+        private RelayCommand showExampleCommand;
+        public RelayCommand ShowExampleCommand
+        {
+            get
+            {
+                return showExampleCommand ??
+                  (showExampleCommand = new RelayCommand(obj =>
+                  {
+                      SelectedWord.SourcePictureExample = null;
+                      SelectedWord.Example = SelectedWord.ExampleCorectly;
                   }));
             }
         }

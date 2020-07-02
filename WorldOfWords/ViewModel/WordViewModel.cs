@@ -20,10 +20,13 @@ namespace WorldOfWords.ViewModel
         public string Name { get; set; }
         public string Translate { get; set; }
         public string LastUpdate { get; set; }
-        public string Example { get; set; }
+        public string example;
+        public string ExampleCorectly { get; set; }
         public byte[] Picture { get; set; }
         public BitmapImage sourcePicture;
         public BitmapImage SourcePictureCorectly { get; set; }
+        public BitmapImage sourcePictureExample { get; set; }
+        public bool IsPhoto { get; set; } = false;
         public int Level { get; set; }
         public int Priority { get; set; }
 
@@ -36,9 +39,15 @@ namespace WorldOfWords.ViewModel
             Level = word.Level;
             Priority = word.Priority;
             Picture = word.Picture;
-            Example = word.Example;
+            ExampleCorectly = word.Example;
+            if(word.Example != null)
+            {
+                SourcePictureExample = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/HideImage.png"));
+            }
+
             if(word.Picture != null)
             {
+                IsPhoto = true;
                 SourcePictureCorectly = GetSourceImage(word.Picture);
                 SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/HideImage.png"));
             }
@@ -59,6 +68,25 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        public BitmapImage SourcePictureExample
+        {
+            get { return sourcePictureExample; }
+            set
+            {
+                sourcePictureExample = value;
+                OnPropertyChanged("SourcePictureExample");
+            }
+        }
+
+        public string Example
+        {
+            get { return example; }
+            set
+            {
+                example = value;
+                OnPropertyChanged("Example");
+            }
+        }
 
         public BitmapImage GetSourceImage(byte[] array)
         {
