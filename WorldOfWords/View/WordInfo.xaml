@@ -328,10 +328,5 @@
                 Text="{Binding TotalCount}" 
                 FontSize="20" />
         </StackPanel>
-        <Frame 
-            Name="PhotoFrame"
-            Grid.RowSpan="3"
-			NavigationUIVisibility="Hidden"
-            />
     </Grid>
 </Page>

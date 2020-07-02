@@ -250,7 +250,23 @@ namespace WorldOfWords.ViewModel
                 return createCommand ??
                   (createCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new Create(_menuFrame, _wordService));
+                      try
+                      {
+                              var viewModel = ((ListOfWords)_menuFrame.Content).ViewModel;
+                          _menuFrame.Navigate(new Create(_menuFrame, _wordService, viewModel));
+                      }
+                      catch (Exception)
+                      {
+                          try
+                          {
+                                  var viewModel = ((WordInfo)_menuFrame.Content).ViewModel;
+                              _menuFrame.Navigate(new Create(_menuFrame, _wordService, viewModel));
+                          }
+                          catch (Exception)
+                          {
+                              _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "Всі слова"));
+                          }
+                      }
                   }));
             }
         }

@@ -21,29 +21,19 @@ namespace WorldOfWords.ViewModel
     public class CreateViewModel : INotifyPropertyChanged
     {
         Frame _menuFrame;
-        Image picture;
-        byte[] pictureInBytes;
-
+        public WordViewModel NewWord { get; set; }
         public IWordService _wordService;
+        IUpdater updater;
 
-        private string name;
-        private string translate;
-        private string example;
-        private ComboBoxItem priority;
-        public ObservableCollection<ComboBoxItem> Priorities { get; set; }
-
-        public CreateViewModel(Frame menuFrame, IWordService wordService, Image picture)
+        public CreateViewModel(Frame menuFrame, IWordService wordService, IUpdater updater)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
-            this.picture = picture;
-            Priorities = new ObservableCollection<ComboBoxItem>()
+            NewWord = new WordViewModel()
             {
-                new ComboBoxItem(){ Content = "0" },
-                new ComboBoxItem(){ Content = "1" },
-                new ComboBoxItem(){ Content = "2" },
+                SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/Image.png"))
             };
-            Priority = Priorities[0];
+            this.updater = updater;
         }
 
         private RelayCommand addCommand;
@@ -54,8 +44,8 @@ namespace WorldOfWords.ViewModel
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      pictureInBytes = _wordService.FindImage();
-                      picture.Source = _wordService.GetSourceImage(pictureInBytes);
+                      NewWord.Picture = _wordService.FindImage();
+                      NewWord.SourcePicture = _wordService.GetSourceImage(NewWord.Picture);
                   }));
             }
         }
@@ -68,10 +58,10 @@ namespace WorldOfWords.ViewModel
                 return deleteCommand ??
                   (deleteCommand = new RelayCommand(obj =>
                   {
-                      pictureInBytes = null;
+                      NewWord.Picture = null;
                       try
                       {
-                          picture.Source = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/temp.jpg")); 
+                          NewWord.SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/Image.png")); 
                       }
                       catch(Exception e)
                       {
@@ -91,61 +81,35 @@ namespace WorldOfWords.ViewModel
                   {
                       var args = new WordArgs()
                       {
-                          Example = Example,
-                          Name = Name,
-                          Picture = pictureInBytes,
+                          Example = NewWord.Example,
+                          Name = NewWord.Name,
+                          Picture = NewWord.Picture,
                           LastUpdate = new DateTime(2000, 1, 1),
-                          Translate = Translate,
+                          Translate = NewWord.Translate,
                           Level = 0,
-                          Priority = int.Parse(Priority.Content.ToString()),
+                          Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
                       };
 
                       _wordService.Create(args);
 
                       MessageBox.Show("Sacsesfull created!");
 
-                      _menuFrame.Navigate(new Create(_menuFrame, _wordService));
+                      _menuFrame.Navigate(new Create(_menuFrame, _wordService, updater));
                   }));
             }
         }
 
-        public string Name
+        private RelayCommand goBackCommand;
+        public RelayCommand GoBackCommand
         {
-            get { return name; }
-            set
+            get
             {
-                name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-
-        public string Translate
-        {
-            get { return translate; }
-            set
-            {
-                translate = value;
-                OnPropertyChanged("Translate");
-            }
-        }
-
-        public string Example
-        {
-            get { return example; }
-            set
-            {
-                example = value;
-                OnPropertyChanged("Example");
-            }
-        }
-
-        public ComboBoxItem Priority
-        {
-            get { return priority; }
-            set
-            {
-                priority = value;
-                OnPropertyChanged("Priority");
+                return goBackCommand ??
+                  (goBackCommand = new RelayCommand(obj =>
+                  {
+                      updater.Update();
+                      _menuFrame.GoBack();
+                  }));
             }
         }
 

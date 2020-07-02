@@ -4,46 +4,206 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WorldOfWords.View"
+      xmlns:Sys="clr-namespace:System;assembly=mscorlib"  
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Edit">
-
+    <Page.Resources>
+        <Sys:Double x:Key="SizeText">20</Sys:Double>
+    </Page.Resources>
     <Grid>
-        <TextBox Name="TbxName" HorizontalAlignment="Left" Height="35" Margin="252,57,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318"
-                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                 />
-        <TextBox Name="TbxTranslate" HorizontalAlignment="Left" Height="36" Margin="250,112,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318"
-                 Text="{Binding Translate, UpdateSourceTrigger=PropertyChanged}"
-                 />
-        <Image Name="picture" HorizontalAlignment="Left" Height="160" Margin="90,178,0,0" VerticalAlignment="Top" Width="270"
-               Source="../Resources/temp.jpg"
-               />
-        <TextBox Name="TbxExamples" HorizontalAlignment="Left" Height="160" Margin="422,176,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="318"
-                 Text="{Binding Example, UpdateSourceTrigger=PropertyChanged}"
-                 />
-        <Button Content="Save" HorizontalAlignment="Left" Margin="373,415,0,0" VerticalAlignment="Top" Width="75"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="1"
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Column="0"
+                Grid.Row="0"
+                Margin="50,0"
+                DataContext="{Binding NewWord}"
+                >
+                <TextBlock
+                    FontSize="{Binding Source={StaticResource SizeText}}"
+                    Text="Слово: "
+                    />
+                <TextBox 
+                    FontSize="{Binding Source={StaticResource SizeText}}"
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                    />
+            </StackPanel>
+            <StackPanel
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="50,0"
+                DataContext="{Binding NewWord}"
+                >
+                <TextBlock
+                     FontSize="{Binding Source={StaticResource SizeText}}"
+                     Text="Переклад: "
+                     />
+                <TextBox 
+                     FontSize="{Binding Source={StaticResource SizeText}}"
+                     Text="{Binding Translate, UpdateSourceTrigger=PropertyChanged}"
+                     />
+            </StackPanel>
+            <Grid
+                Grid.Column="0"
+                Grid.Row="1"
+                Margin="50,5"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                     FontSize="{Binding Source={StaticResource SizeText}}"
+                     Grid.Row="0"
+                     Text="Фото: "
+                     />
+
+                <Grid
+                    Grid.Row="1"
+                    Margin="0,5"
+                    >
+                    <Border 
+                        Background="Black"
+                        Width="3"
+                        HorizontalAlignment="Left"
+                        />
+                    <Border 
+                        Background="Black"
+                        Height="3"
+                        VerticalAlignment="Top"
+                        />
+                    <Border 
+                        Background="Black"
+                        Width="3"
+                        HorizontalAlignment="Right"
+                        />
+                    <Border 
+                        Background="Black"
+                        Height="3"
+                        VerticalAlignment="Bottom"
+                        />
+                    <Grid
+                        DataContext="{Binding NewWord}"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Margin="5"
+                        >
+                        <Image 
+                           Source="{Binding SourcePicture}"
+                           />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="50,5"
+                DataContext="{Binding NewWord}"
+                >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    FontSize="{Binding Source={StaticResource SizeText}}"
+                    Text="Приклади: "
+                    />
+                <TextBox
+                    AcceptsReturn="True"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto"
+                    FontSize="{Binding Source={StaticResource SizeText}}"
+                    Grid.Row="1"
+                    Margin="0,5"
+                    Text="{Binding Example, UpdateSourceTrigger=PropertyChanged}"
+                    />
+            </Grid>
+            <Grid
+                Grid.Column="0"
+                Grid.Row="2"
+                Margin="50,0"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Додати"
+                    Grid.Column="0"
+                    Width="100"
+                    Background="DarkGreen"
+                    Margin="10,5"
+                    HorizontalAlignment="Right"
+                    Command="{Binding AddCommand}"
+                    />
+                <Button Content="Видалити"
+                    Grid.Column="1"
+                    Width="100"
+                    Background="DarkRed"
+                    Margin="10,5"
+                    HorizontalAlignment="Left"
+                    Command="{Binding DeleteCommand}"
+                    />
+
+            </Grid>
+            <StackPanel
+                DataContext="{Binding NewWord}"
+                Grid.Column="1"
+                Grid.Row="2"
+                Margin="50,0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                >
+                <TextBlock
+                    FontSize="{Binding Source={StaticResource SizeText}}"
+                    Grid.Row="0"
+                    Text="Пріорітет: "
+                    VerticalAlignment="Center"
+                    />
+                <ComboBox  
+                    SelectedItem="{Binding WordPriority}"
+                    ItemsSource="{Binding Priorities}"
+                    Width="150"
+                    FontSize="{Binding Source={StaticResource SizeText}}"
+                    VerticalAlignment="Top">
+                </ComboBox>
+            </StackPanel>
+
+            <Button 
+                Content="Назад" 
+                Grid.Column="0"
+                Grid.Row="3"
+                HorizontalAlignment="Right"
+                Width="100"
+                Margin="5,5"
+                Command="{Binding GoBackCommand}"
+                />
+            <Button 
+                Content="Зберегти" 
+                Grid.Column="1"
+                Grid.Row="3"
+                HorizontalAlignment="Left"
+                Width="100"
+                Margin="5,5"
                 Command="{Binding SaveCommand}"
                 />
-        <Button Content="Add" HorizontalAlignment="Left" Margin="117,382,0,0" VerticalAlignment="Top" Width="75"
-                Command="{Binding AddCommand}"
-                />
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="206,384,0,0" VerticalAlignment="Top" Width="74"
-                Command="{Binding DeleteCommand}"
-                />
-
-        <Button 
-            Height="20"
-            Width="50"
-            Content="Go back" 
-            Command="{Binding GoBackCommand}" Margin="736,10,14,420"
-            />
-
-        <ComboBox  
-                  SelectedItem="{Binding Priority}"
-                  ItemsSource="{Binding Priorities}"
-                  Height="30" 
-                  Width="150"
-                  VerticalAlignment="Top">
-        </ComboBox>
+        </Grid>
     </Grid>
 </Page>

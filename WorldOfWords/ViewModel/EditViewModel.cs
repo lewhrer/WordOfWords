@@ -18,48 +18,32 @@ namespace WorldOfWords.ViewModel
     public class EditViewModel : INotifyPropertyChanged
     {
         Frame _menuFrame;
-        Image picture;
-        byte[] pictureInBytes;
 
         public IWordService _wordService;
         IUpdater updater;
+        public WordViewModel NewWord { get; set; }
 
-        private readonly string id;
-        private string name;
-        private string translate;
-        private string example;
-        private readonly int level;
-        private readonly DateTime lastUpdate;
-        private ComboBoxItem priority;
-        public ObservableCollection<ComboBoxItem> Priorities { get; set; }
-
-        public EditViewModel(Frame menuFrame, IWordService wordService, Image picture, string id, IUpdater updater)
+        public EditViewModel(Frame menuFrame, IWordService wordService, string id, IUpdater updater)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
-            this.picture = picture;
-            this.id = id;
-            this.updater = updater;
-
             var word = _wordService.GetWord(id);
-            Name = word.Name;
-            Translate = word.Translate;
-            Example = word.Example;
-            level = word.Level;
-            lastUpdate = word.LastUpdate;
-            Priorities = new ObservableCollection<ComboBoxItem>()
+            this.updater = updater;
+            NewWord = new WordViewModel(word.Priority)
             {
-                new ComboBoxItem(){ Content = "0" },
-                new ComboBoxItem(){ Content = "1" },
-                new ComboBoxItem(){ Content = "2" },
+                Id = word.Id,
+                Name = word.Name,
+                Translate = word.Translate,
+                Example = word.Example,
+                Level = word.Level,
+                LastUpdateDate = word.LastUpdate,
+                Picture = word.Picture,
+                SourcePicture = _wordService.GetSourceImage(word.Picture),
             };
 
-            Priority = Priorities[Convert.ToInt32(word.Priority)];
-
-            if(word.Picture != null)
+            if(NewWord.Picture == null)
             {
-                pictureInBytes = word.Picture;
-                this.picture.Source = _wordService.GetSourceImage(word.Picture);
+                NewWord.SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/Image.png"));
             }
         }
 
@@ -71,8 +55,8 @@ namespace WorldOfWords.ViewModel
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      pictureInBytes = _wordService.FindImage();
-                      picture.Source = _wordService.GetSourceImage(pictureInBytes);
+                      NewWord.Picture = _wordService.FindImage();
+                      NewWord.SourcePicture = _wordService.GetSourceImage(NewWord.Picture);
                   }));
             }
         }
@@ -85,10 +69,10 @@ namespace WorldOfWords.ViewModel
                 return deleteCommand ??
                   (deleteCommand = new RelayCommand(obj =>
                   {
-                      pictureInBytes = null;
+                      NewWord.Picture = null;
                       try
                       {
-                          picture.Source = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/temp.jpg"));
+                          NewWord.SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/Image.png"));
                       }
                       catch (Exception e)
                       {
@@ -108,14 +92,14 @@ namespace WorldOfWords.ViewModel
                   {
                       var args = new WordArgs()
                       {
-                          Id = id,
-                          Example = Example,
-                          Name = Name,
-                          Picture = pictureInBytes,
-                          LastUpdate = lastUpdate,
-                          Translate = Translate,
-                          Level = level,
-                          Priority = int.Parse(Priority.Content.ToString()),
+                          Id = NewWord.Id.ToString(),
+                          Example = NewWord.Example,
+                          Name = NewWord.Name,
+                          Picture = NewWord.Picture,
+                          LastUpdate = NewWord.LastUpdateDate,
+                          Translate = NewWord.Translate,
+                          Level = NewWord.Level,
+                          Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
                       };
 
                       _wordService.Edit(args);
@@ -123,7 +107,6 @@ namespace WorldOfWords.ViewModel
                       MessageBox.Show("Sacsesfull edited!");
                       updater.Update();
                       _menuFrame.GoBack();
-                      //_menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, _wordService.GetAllWords()));
                   }));
             }
         }
@@ -139,46 +122,6 @@ namespace WorldOfWords.ViewModel
                       updater.Update();
                       _menuFrame.GoBack();
                   }));
-            }
-        }
-
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-
-        public string Translate
-        {
-            get { return translate; }
-            set
-            {
-                translate = value;
-                OnPropertyChanged("Translate");
-            }
-        }
-
-        public string Example
-        {
-            get { return example; }
-            set
-            {
-                example = value;
-                OnPropertyChanged("Example");
-            }
-        }
-
-        public ComboBoxItem Priority
-        {
-            get { return priority; }
-            set
-            {
-                priority = value;
-                OnPropertyChanged("Priority");
             }
         }
 

@@ -26,7 +26,7 @@ namespace WorldOfWords.View
         public Edit(Frame menuFrame, IWordService service, string id, IUpdater updater)
         {
             InitializeComponent();
-            DataContext = new EditViewModel(menuFrame, service, picture, id, updater);
+            DataContext = new EditViewModel(menuFrame, service, id, updater);
         }
     }
 }
