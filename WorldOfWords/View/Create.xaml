@@ -205,7 +205,12 @@
                 Command="{Binding SaveCommand}"
                 />
         </Grid>
-
+        <TextBlock Name="TbkResult"
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="20"
+            />
 
     </Grid>
 </Page>

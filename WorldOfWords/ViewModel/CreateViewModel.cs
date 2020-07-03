@@ -1,19 +1,11 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using WorldOfWords.Infrastructure.Arguments;
 using WorldOfWords.Infrastructure.Services;
-using WorldOfWords.Model;
 using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
@@ -21,19 +13,21 @@ namespace WorldOfWords.ViewModel
     public class CreateViewModel : INotifyPropertyChanged
     {
         Frame _menuFrame;
-        public WordViewModel NewWord { get; set; }
-        public IWordService _wordService;
+        IWordService _wordService;
         IUpdater updater;
+        Create CreatePage { get; set; }
+        public WordViewModel NewWord { get; set; }
 
-        public CreateViewModel(Frame menuFrame, IWordService wordService, IUpdater updater)
+        public CreateViewModel(Frame menuFrame, IWordService wordService, IUpdater updater, Create createPage)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
             NewWord = new WordViewModel()
             {
-                SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/Image.png"))
+                SourcePicture = Resource.sourceNoImage,
             };
             this.updater = updater;
+            CreatePage = createPage;
         }
 
         private RelayCommand addCommand;
@@ -61,7 +55,7 @@ namespace WorldOfWords.ViewModel
                       NewWord.Picture = null;
                       try
                       {
-                          NewWord.SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/Image.png")); 
+                          NewWord.SourcePicture = Resource.sourceNoImage;
                       }
                       catch(Exception e)
                       {
@@ -79,6 +73,17 @@ namespace WorldOfWords.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
+                      if(string.IsNullOrEmpty(NewWord.Name))
+                      {
+                          CreatePage.ActionResult(new SolidColorBrush(Colors.Red), "Не введено назву слова!");
+                          return;
+                      }
+                      if(string.IsNullOrEmpty(NewWord.Translate))
+                      {
+                          CreatePage.ActionResult(new SolidColorBrush(Colors.Red), "Не введено переклад слова!");
+                          return;
+                      }
+
                       var args = new WordArgs()
                       {
                           Example = NewWord.Example,
@@ -91,10 +96,9 @@ namespace WorldOfWords.ViewModel
                       };
 
                       _wordService.Create(args);
-
-                      MessageBox.Show("Sacsesfull created!");
-
-                      _menuFrame.Navigate(new Create(_menuFrame, _wordService, updater));
+                      var create = new Create(_menuFrame, _wordService, updater);
+                      _menuFrame.Navigate(create);
+                      create.ActionResult(new SolidColorBrush(Colors.Green), "Слово створене успішно!");
                   }));
             }
         }
@@ -116,8 +120,7 @@ namespace WorldOfWords.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

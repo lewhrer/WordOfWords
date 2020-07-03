@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using WorldOfWords.Infrastructure.Arguments;
 using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.View;
@@ -18,12 +13,12 @@ namespace WorldOfWords.ViewModel
     public class EditViewModel : INotifyPropertyChanged
     {
         Frame _menuFrame;
-
-        public IWordService _wordService;
+        IWordService _wordService;
         IUpdater updater;
+        Edit EditPage { get; set; }
         public WordViewModel NewWord { get; set; }
 
-        public EditViewModel(Frame menuFrame, IWordService wordService, string id, IUpdater updater)
+        public EditViewModel(Frame menuFrame, IWordService wordService, string id, IUpdater updater, Edit editPage)
         {
             _menuFrame = menuFrame;
             _wordService = wordService;
@@ -43,8 +38,9 @@ namespace WorldOfWords.ViewModel
 
             if(NewWord.Picture == null)
             {
-                NewWord.SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/Image.png"));
+                NewWord.SourcePicture = Resource.sourceNoImage;
             }
+            EditPage = editPage;
         }
 
         private RelayCommand addCommand;
@@ -72,7 +68,7 @@ namespace WorldOfWords.ViewModel
                       NewWord.Picture = null;
                       try
                       {
-                          NewWord.SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/Image.png"));
+                          NewWord.SourcePicture = Resource.sourceNoImage;
                       }
                       catch (Exception e)
                       {
@@ -90,6 +86,17 @@ namespace WorldOfWords.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
+                      if (string.IsNullOrEmpty(NewWord.Name))
+                      {
+                          EditPage.ActionResult(new SolidColorBrush(Colors.Red), "Не введено назву слова!");
+                          return;
+                      }
+                      if (string.IsNullOrEmpty(NewWord.Translate))
+                      {
+                          EditPage.ActionResult(new SolidColorBrush(Colors.Red), "Не введено переклад слова!");
+                          return;
+                      }
+
                       var args = new WordArgs()
                       {
                           Id = NewWord.Id.ToString(),
@@ -103,8 +110,6 @@ namespace WorldOfWords.ViewModel
                       };
 
                       _wordService.Edit(args);
-                      
-                      MessageBox.Show("Sacsesfull edited!");
                       updater.Update();
                       _menuFrame.GoBack();
                   }));
@@ -128,8 +133,7 @@ namespace WorldOfWords.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

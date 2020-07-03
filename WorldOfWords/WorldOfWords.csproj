@@ -87,6 +87,7 @@
     </ApplicationDefinition>
     <Compile Include="IUpdater.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="Resource.cs" />
     <Compile Include="ViewModel\ListOfWordsViewModel.cs" />
     <Compile Include="ViewModel\CreateViewModel.cs" />
     <Compile Include="ViewModel\EditViewModel.cs" />

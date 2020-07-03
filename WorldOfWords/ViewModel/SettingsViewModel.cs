@@ -20,13 +20,13 @@ namespace WorldOfWords.ViewModel
             _wordService = wordService;
         }
 
-        private RelayCommand doubleCommand;
-        public RelayCommand DoubleCommand
+        private RelayCommand styleCommand;
+        public RelayCommand StyleCommand
         {
             get
             {
-                return doubleCommand ??
-                    (doubleCommand = new RelayCommand(obj =>
+                return styleCommand ??
+                    (styleCommand = new RelayCommand(obj =>
                     {
                         ResourceDictionary myResourceDictionary = new ResourceDictionary();
                         myResourceDictionary.Source = new Uri(obj.ToString());

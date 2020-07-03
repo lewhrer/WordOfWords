@@ -1,32 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WorldOfWords.Infrastructure;
 using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.ViewModel;
 
 namespace WorldOfWords.View
 {
-    /// <summary>
-    /// Interaction logic for Create.xaml
-    /// </summary>
     public partial class Create : Page
     {
         public Create(Frame menuFrame, IWordService service, IUpdater updater)
         {
             InitializeComponent();
-            DataContext = new CreateViewModel(menuFrame, service, updater);
+            DataContext = new CreateViewModel(menuFrame, service, updater, this);
+        }
+
+        public async void ActionResult(Brush color, string text)
+        {
+            TbkResult.Foreground = color;
+            TbkResult.Text = text;
+            TbkResult.Opacity = 1;
+            await Task.Delay(500);
+
+            for (double i = 1; i >= 0; i = i - 0.05)
+            {
+                await Task.Delay(100);
+                TbkResult.Opacity = i;
+            }
         }
     }
 }
