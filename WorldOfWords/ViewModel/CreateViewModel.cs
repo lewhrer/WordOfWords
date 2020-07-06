@@ -24,7 +24,7 @@ namespace WorldOfWords.ViewModel
             _wordService = wordService;
             NewWord = new WordViewModel()
             {
-                SourcePicture = Resource.sourceNoImage,
+                SourcePicture = Resource.getInstance().SourceNoImage,
             };
             this.updater = updater;
             CreatePage = createPage;
@@ -55,7 +55,7 @@ namespace WorldOfWords.ViewModel
                       NewWord.Picture = null;
                       try
                       {
-                          NewWord.SourcePicture = Resource.sourceNoImage;
+                          NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
                       }
                       catch(Exception e)
                       {

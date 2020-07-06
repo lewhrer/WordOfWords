@@ -56,6 +56,9 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="SoapFormatter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=64d05efcff27afd3, processorArchitecture=MSIL">
+      <HintPath>..\packages\SoapFormatter.1.0.11\lib\netstandard2.0\SoapFormatter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -121,6 +124,14 @@
     <Compile Include="View\WordInfo.xaml.cs">
       <DependentUpon>WordInfo.xaml</DependentUpon>
     </Compile>
+    <Page Include="Themes\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\LightTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ListOfWords.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

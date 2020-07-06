@@ -305,6 +305,8 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+
+
         private void TrainCommand(List<Word> words, string trainPaage, string listPageId, string listPageName)
         {
             try

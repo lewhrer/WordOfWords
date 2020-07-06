@@ -38,7 +38,7 @@ namespace WorldOfWords.ViewModel
 
             if(NewWord.Picture == null)
             {
-                NewWord.SourcePicture = Resource.sourceNoImage;
+                NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
             }
             EditPage = editPage;
         }
@@ -68,7 +68,7 @@ namespace WorldOfWords.ViewModel
                       NewWord.Picture = null;
                       try
                       {
-                          NewWord.SourcePicture = Resource.sourceNoImage;
+                          NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
                       }
                       catch (Exception e)
                       {
