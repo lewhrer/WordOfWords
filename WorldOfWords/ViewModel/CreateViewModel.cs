@@ -12,16 +12,12 @@ namespace WorldOfWords.ViewModel
 {
     public class CreateViewModel : INotifyPropertyChanged
     {
-        Frame _menuFrame;
-        IWordService _wordService;
         IUpdater updater;
         Create CreatePage { get; set; }
         public WordViewModel NewWord { get; set; }
 
-        public CreateViewModel(Frame menuFrame, IWordService wordService, IUpdater updater, Create createPage)
+        public CreateViewModel(IUpdater updater, Create createPage)
         {
-            _menuFrame = menuFrame;
-            _wordService = wordService;
             NewWord = new WordViewModel()
             {
                 SourcePicture = Resource.getInstance().SourceNoImage,
@@ -38,8 +34,8 @@ namespace WorldOfWords.ViewModel
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      NewWord.Picture = _wordService.FindImage();
-                      NewWord.SourcePicture = _wordService.GetSourceImage(NewWord.Picture);
+                      NewWord.Picture = Resource.getInstance().WordService.FindImage();
+                      NewWord.SourcePicture = Resource.getInstance().WordService.GetSourceImage(NewWord.Picture);
                   }));
             }
         }
@@ -95,9 +91,9 @@ namespace WorldOfWords.ViewModel
                           Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
                       };
 
-                      _wordService.Create(args);
-                      var create = new Create(_menuFrame, _wordService, updater);
-                      _menuFrame.Navigate(create);
+                      Resource.getInstance().WordService.Create(args);
+                      var create = new Create(updater);
+                      Resource.getInstance().MenuFrame.Navigate(create);
                       create.ActionResult(new SolidColorBrush(Colors.Green), "Слово створене успішно!");
                   }));
             }
@@ -112,7 +108,7 @@ namespace WorldOfWords.ViewModel
                   (goBackCommand = new RelayCommand(obj =>
                   {
                       updater.Update();
-                      _menuFrame.GoBack();
+                      Resource.getInstance().MenuFrame.GoBack();
                   }));
             }
         }

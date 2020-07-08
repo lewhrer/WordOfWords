@@ -12,17 +12,13 @@ namespace WorldOfWords.ViewModel
 {
     public class EditViewModel : INotifyPropertyChanged
     {
-        Frame _menuFrame;
-        IWordService _wordService;
         IUpdater updater;
         Edit EditPage { get; set; }
         public WordViewModel NewWord { get; set; }
 
-        public EditViewModel(Frame menuFrame, IWordService wordService, string id, IUpdater updater, Edit editPage)
+        public EditViewModel(string id, IUpdater updater, Edit editPage)
         {
-            _menuFrame = menuFrame;
-            _wordService = wordService;
-            var word = _wordService.GetWord(id);
+            var word = Resource.getInstance().WordService.GetWord(id);
             this.updater = updater;
             NewWord = new WordViewModel(word.Priority)
             {
@@ -33,7 +29,7 @@ namespace WorldOfWords.ViewModel
                 Level = word.Level,
                 LastUpdateDate = word.LastUpdate,
                 Picture = word.Picture,
-                SourcePicture = _wordService.GetSourceImage(word.Picture),
+                SourcePicture = Resource.getInstance().WordService.GetSourceImage(word.Picture),
             };
 
             if(NewWord.Picture == null)
@@ -51,8 +47,8 @@ namespace WorldOfWords.ViewModel
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      NewWord.Picture = _wordService.FindImage();
-                      NewWord.SourcePicture = _wordService.GetSourceImage(NewWord.Picture);
+                      NewWord.Picture = Resource.getInstance().WordService.FindImage();
+                      NewWord.SourcePicture = Resource.getInstance().WordService.GetSourceImage(NewWord.Picture);
                   }));
             }
         }
@@ -109,9 +105,9 @@ namespace WorldOfWords.ViewModel
                           Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
                       };
 
-                      _wordService.Edit(args);
+                      Resource.getInstance().WordService.Edit(args);
                       updater.Update();
-                      _menuFrame.GoBack();
+                      Resource.getInstance().MenuFrame.GoBack();
                   }));
             }
         }
@@ -125,7 +121,7 @@ namespace WorldOfWords.ViewModel
                   (goBackCommand = new RelayCommand(obj =>
                   {
                       updater.Update();
-                      _menuFrame.GoBack();
+                      Resource.getInstance().MenuFrame.GoBack();
                   }));
             }
         }

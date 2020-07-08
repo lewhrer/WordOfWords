@@ -18,13 +18,8 @@ namespace WorldOfWords.ViewModel
 {
     public class MenuViewModel : INotifyPropertyChanged
     {
-        Frame _menuFrame;
-        public IWordService _wordService;
-
-        public MenuViewModel(Frame menuFrame, IWordService wordService)
+        public MenuViewModel()
         {
-            _menuFrame = menuFrame;
-            _wordService = wordService;
         }
 
         private RelayCommand allWordsCommand;
@@ -35,7 +30,7 @@ namespace WorldOfWords.ViewModel
                 return allWordsCommand ??
                   (allWordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "Всі слова"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("All", "Всі слова"));
                   }));
             }
         }
@@ -48,46 +43,7 @@ namespace WorldOfWords.ViewModel
                 return settingsCommand ??
                   (settingsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new Settings(_menuFrame, _wordService));
-                  }));
-            }
-        }
-
-        private RelayCommand saveCommand;
-        public RelayCommand SaveCommand
-        {
-            get
-            {
-                return saveCommand ??
-                  (saveCommand = new RelayCommand(obj =>
-                  {
-                      Serialisation();
-                  }));
-            }
-        }
-
-        private RelayCommand desaveCommand;
-        public RelayCommand DesaveCommand
-        {
-            get
-            {
-                return desaveCommand ??
-                  (desaveCommand = new RelayCommand(obj =>
-                  {
-                      Deserialisation();
-                  }));
-            }
-        }
-
-        private RelayCommand deleteAllCommand;
-        public RelayCommand DeleteAllCommand
-        {
-            get
-            {
-                return deleteAllCommand ??
-                  (deleteAllCommand = new RelayCommand(obj =>
-                  {
-                      _wordService.DeleteEverything();
+                      Resource.getInstance().MenuFrame.Navigate(new Settings());
                   }));
             }
         }
@@ -102,7 +58,7 @@ namespace WorldOfWords.ViewModel
                 return trainAllCommand ??
                   (trainAllCommand = new RelayCommand(obj =>
                   {
-                      TrainCommand(_wordService.GetTrainAllWords(), "train all word", "All", "All words");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainAllWords(), "Тренування всіх слів", "All", "Всі слова");
                   }));
             }
         }
@@ -115,7 +71,7 @@ namespace WorldOfWords.ViewModel
                 return train0Command ??
                   (train0Command = new RelayCommand(obj =>
                   {
-                      TrainCommand(_wordService.GetTrainNotStudiedWords(), "train 0 word", "0", "0 words");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainNotStudiedWords(), "train 0 word", "0", "0 words");
                   }));
             }
         }
@@ -128,7 +84,7 @@ namespace WorldOfWords.ViewModel
                 return train25Command ??
                   (train25Command = new RelayCommand(obj =>
                   {
-                      TrainCommand(_wordService.GetTrainAlmostAcquaintedWords(), "train 25 word", "25", "25 words");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainAlmostAcquaintedWords(), "train 25 word", "25", "25 words");
                   }));
             }
         }
@@ -141,7 +97,7 @@ namespace WorldOfWords.ViewModel
                 return train50Command ??
                   (train50Command = new RelayCommand(obj =>
                   {
-                      TrainCommand(_wordService.GetTrainAcquaintedWords(), "train 50 word", "50", "50 words");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainAcquaintedWords(), "train 50 word", "50", "50 words");
                   }));
             }
         }
@@ -154,7 +110,7 @@ namespace WorldOfWords.ViewModel
                 return train75Command ??
                   (train75Command = new RelayCommand(obj =>
                   {
-                        TrainCommand(_wordService.GetTrainAlmostStudiedWords(), "train 75 word", "75", "75 words");
+                        TrainCommand(Resource.getInstance().WordService.GetTrainAlmostStudiedWords(), "train 75 word", "75", "75 words");
                   }));
             }
         }
@@ -167,7 +123,7 @@ namespace WorldOfWords.ViewModel
                 return knowTrainCommand ??
                   (knowTrainCommand = new RelayCommand(obj =>
                   {
-                      TrainCommand(_wordService.GetTrainStudiedWords(), "train know word", "100", "know words");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainStudiedWords(), "train know word", "100", "know words");
                   }));
             }
         }
@@ -183,7 +139,7 @@ namespace WorldOfWords.ViewModel
                 return know0Command ??
                   (know0Command = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "0", "0 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("0", "0 words"));
                   }));
             }
         }
@@ -196,7 +152,7 @@ namespace WorldOfWords.ViewModel
                 return know25WordsCommand ??
                   (know25WordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "25", "25 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("25", "25 words"));
                   }));
             }
         }
@@ -209,7 +165,7 @@ namespace WorldOfWords.ViewModel
                 return know50WordsCommand ??
                   (know50WordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "50", "50 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("50", "50 words"));
                   }));
             }
         }
@@ -222,7 +178,7 @@ namespace WorldOfWords.ViewModel
                 return know75WordsCommand ??
                   (know75WordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "75", "75 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("75", "75 words"));
                   }));
             }
         }
@@ -235,7 +191,7 @@ namespace WorldOfWords.ViewModel
                 return knowWordsCommand ??
                   (knowWordsCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "100", "100 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("100", "100 words"));
                   }));
             }
         }
@@ -252,19 +208,19 @@ namespace WorldOfWords.ViewModel
                   {
                       try
                       {
-                              var viewModel = ((ListOfWords)_menuFrame.Content).ViewModel;
-                          _menuFrame.Navigate(new Create(_menuFrame, _wordService, viewModel));
+                              var viewModel = ((ListOfWords)Resource.getInstance().MenuFrame.Content).ViewModel;
+                          Resource.getInstance().MenuFrame.Navigate(new Create(viewModel));
                       }
                       catch (Exception)
                       {
                           try
                           {
-                                  var viewModel = ((WordInfo)_menuFrame.Content).ViewModel;
-                              _menuFrame.Navigate(new Create(_menuFrame, _wordService, viewModel));
+                                  var viewModel = ((WordInfo)Resource.getInstance().MenuFrame.Content).ViewModel;
+                              Resource.getInstance().MenuFrame.Navigate(new Create(viewModel));
                           }
                           catch (Exception)
                           {
-                              _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, "All", "Всі слова"));
+                              Resource.getInstance().MenuFrame.Navigate(new ListOfWords("All", "Всі слова"));
                           }
                       }
                   }));
@@ -278,44 +234,15 @@ namespace WorldOfWords.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        private void Serialisation()
-        {
-            var words = _wordService.GetAllWords().ToArray();
-
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
-
-            using (FileStream fs = new FileStream("words.json", FileMode.OpenOrCreate))
-            {
-                jsonFormatter.WriteObject(fs, words);
-            }
-
-            Console.ReadLine();
-        }
-
-        private void Deserialisation()
-        {
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
-
-            using (FileStream fs = new FileStream("words.json", FileMode.OpenOrCreate))
-            {
-                Word[] words = (Word[])jsonFormatter.ReadObject(fs);
-
-                _wordService.DeleteEverything();
-                _wordService.AddRange(words);
-            }
-        }
-
-
-
         private void TrainCommand(List<Word> words, string trainPaage, string listPageId, string listPageName)
         {
             try
             {
                 if (words.Any())
                 {
-                    var viewModel = ((ListOfWords)_menuFrame.Content).ViewModel;
+                    var viewModel = ((ListOfWords)Resource.getInstance().MenuFrame.Content).ViewModel;
 
-                    _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, words.Select(x => new WordViewModel(x)).ToList(), viewModel, trainPaage));
+                    Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x)).ToList(), viewModel, trainPaage));
                 }
                 else
                 {
@@ -328,8 +255,8 @@ namespace WorldOfWords.ViewModel
                 {
                     if (words.Any())
                     {
-                        var viewModel = ((WordInfo)_menuFrame.Content).ViewModel;
-                        _menuFrame.Navigate(new WordInfo(_menuFrame, _wordService, words.Select(x => new WordViewModel(x)).ToList(), viewModel, trainPaage));
+                        var viewModel = ((WordInfo)Resource.getInstance().MenuFrame.Content).ViewModel;
+                        Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x)).ToList(), viewModel, trainPaage));
                     }
                     else
                     {
@@ -338,7 +265,7 @@ namespace WorldOfWords.ViewModel
                 }
                 catch (Exception)
                 {
-                    _menuFrame.Navigate(new ListOfWords(_menuFrame, _wordService, listPageId, listPageName));
+                    Resource.getInstance().MenuFrame.Navigate(new ListOfWords(listPageId, listPageName));
                 }
             }
         }

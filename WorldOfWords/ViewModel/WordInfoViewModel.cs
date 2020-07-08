@@ -17,7 +17,6 @@ namespace WorldOfWords.ViewModel
 {
     public class WordInfoViewModel : INotifyPropertyChanged, IUpdater
     {
-        Frame _menuFrame;
         WordViewModel selectedWord;
         int indexSelectedWord;
         int numberOfWord;
@@ -25,13 +24,10 @@ namespace WorldOfWords.ViewModel
         int totalCount;
 
         IUpdater updater;
-        public IWordService _wordService;
         public ObservableCollection<WordViewModel> Words { get; set; }
 
-        public WordInfoViewModel(Frame menuFrame, IWordService wordService, List<WordViewModel> words, IUpdater updater, string namePage, int indexWord)
+        public WordInfoViewModel(List<WordViewModel> words, IUpdater updater, string namePage, int indexWord)
         {
-            _menuFrame = menuFrame;
-            _wordService = wordService;
             Words = new ObservableCollection<WordViewModel>(words);
             this.updater = updater;
             NamePage = namePage;
@@ -50,7 +46,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (SelectedWord != null)
                       {
-                          _wordService.Delete(SelectedWord.Id.ToString());
+                          Resource.getInstance().WordService.Delete(SelectedWord.Id.ToString());
                           Words.RemoveAt(Words.IndexOf(SelectedWord));
                           TotalCount--;
                       }
@@ -100,7 +96,7 @@ namespace WorldOfWords.ViewModel
                       {
                             if(SelectedWord.SourcePicture == SelectedWord.SourcePictureCorectly)
                             {
-                                _menuFrame.Navigate(new PhotoViewer(_menuFrame, SelectedWord.SourcePicture));
+                              Resource.getInstance().MenuFrame.Navigate(new PhotoViewer(SelectedWord.SourcePicture));
                           }
                       }
                   }));
@@ -129,7 +125,7 @@ namespace WorldOfWords.ViewModel
                 return goBackCommand ??
                   (goBackCommand = new RelayCommand(obj =>
                   {
-                      _menuFrame.GoBack();
+                      Resource.getInstance().MenuFrame.GoBack();
                       updater.Update();
                   }));
             }
@@ -163,7 +159,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (SelectedWord != null)
                       {
-                          _menuFrame.Navigate(new Edit(_menuFrame, _wordService, SelectedWord.Id.ToString(), this));
+                          Resource.getInstance().MenuFrame.Navigate(new Edit(SelectedWord.Id.ToString(), this));
                       }
                   }));
             }
@@ -179,8 +175,8 @@ namespace WorldOfWords.ViewModel
                   {
                       if (selectedWord != null)
                       {
-                          _wordService.SetKnow(SelectedWord.Id.ToString(), 0);
-                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
+                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 0);
+                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
@@ -209,8 +205,8 @@ namespace WorldOfWords.ViewModel
                   {
                       if (selectedWord != null)
                       {
-                          _wordService.SetKnow(SelectedWord.Id.ToString(), 25);
-                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
+                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 25);
+                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
@@ -239,8 +235,8 @@ namespace WorldOfWords.ViewModel
                   {
                       if (selectedWord != null)
                       {
-                          _wordService.SetKnow(SelectedWord.Id.ToString(), 50);
-                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
+                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 50);
+                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
@@ -269,8 +265,8 @@ namespace WorldOfWords.ViewModel
                   {
                       if (selectedWord != null)
                       {
-                          _wordService.SetKnow(SelectedWord.Id.ToString(), 75);
-                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
+                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 75);
+                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
@@ -299,8 +295,8 @@ namespace WorldOfWords.ViewModel
                   {
                       if (SelectedWord != null)
                       {
-                          _wordService.SetKnow(SelectedWord.Id.ToString(), 100);
-                          var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
+                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 100);
+                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
                           int index = Words.IndexOf(SelectedWord);
                           Words.RemoveAt(index);
                           Words.Insert(index, word);
@@ -378,7 +374,7 @@ namespace WorldOfWords.ViewModel
 
         public void Update()
         {
-            var word = new WordViewModel(_wordService.GetWord(SelectedWord.Id.ToString()));
+            var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
             int index = Words.IndexOf(SelectedWord);
             Words.RemoveAt(index);
             Words.Insert(index, word);

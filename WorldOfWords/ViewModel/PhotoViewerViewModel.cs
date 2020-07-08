@@ -11,13 +11,11 @@ namespace WorldOfWords.ViewModel
 {
     public class PhotoViewerViewModel
     {
-        Frame photoFrame;
         public BitmapImage SourceImage { get; set; }
 
-        public PhotoViewerViewModel(Frame photoFrame, BitmapImage sourceImage)
+        public PhotoViewerViewModel(BitmapImage sourceImage)
         {
             SourceImage = sourceImage;
-            this.photoFrame = photoFrame;
         }
 
         private RelayCommand mouseDownOnBlackAreaCommand;
@@ -28,7 +26,7 @@ namespace WorldOfWords.ViewModel
                 return mouseDownOnBlackAreaCommand ??
                   (mouseDownOnBlackAreaCommand = new RelayCommand(obj =>
                   {
-                      photoFrame.GoBack();
+                      Resource.getInstance().MenuFrame.GoBack();
                   }));
             }
         }

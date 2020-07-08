@@ -21,10 +21,10 @@ namespace WorldOfWords.View
     /// </summary>
     public partial class PhotoViewer : Page
     {
-        public PhotoViewer(Frame photoFrame, BitmapImage sourceImage)
+        public PhotoViewer(BitmapImage sourceImage)
         {
             InitializeComponent();
-            DataContext = new PhotoViewerViewModel(photoFrame, sourceImage);
+            DataContext = new PhotoViewerViewModel(sourceImage);
         }
     }
 }

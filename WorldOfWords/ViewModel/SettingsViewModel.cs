@@ -8,18 +8,53 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WorldOfWords.Infrastructure.Services;
+using WorldOfWords.Model;
 
 namespace WorldOfWords.ViewModel
 {
     public class SettingsViewModel
     {
-        Frame _menuFrame;
-        public IWordService _wordService;
-
-        public SettingsViewModel(Frame menuFrame, IWordService wordService)
+        public SettingsViewModel()
         {
-            _menuFrame = menuFrame;
-            _wordService = wordService;
+        }
+
+        private RelayCommand saveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ??
+                  (saveCommand = new RelayCommand(obj =>
+                  {
+                      Serialisation();
+                  }));
+            }
+        }
+
+        private RelayCommand desaveCommand;
+        public RelayCommand DesaveCommand
+        {
+            get
+            {
+                return desaveCommand ??
+                  (desaveCommand = new RelayCommand(obj =>
+                  {
+                      Deserialisation();
+                  }));
+            }
+        }
+
+        private RelayCommand deleteAllCommand;
+        public RelayCommand DeleteAllCommand
+        {
+            get
+            {
+                return deleteAllCommand ??
+                  (deleteAllCommand = new RelayCommand(obj =>
+                  {
+                      Resource.getInstance().WordService.DeleteEverything();
+                  }));
+            }
         }
 
         private RelayCommand styleCommand;
@@ -62,6 +97,33 @@ namespace WorldOfWords.ViewModel
             if (fileInf.Exists)
             {
                 fileInf.Delete();
+            }
+        }
+
+        private void Serialisation()
+        {
+            var words = Resource.getInstance().WordService.GetAllWords().ToArray();
+
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
+
+            using (FileStream fs = new FileStream("words.json", FileMode.OpenOrCreate))
+            {
+                jsonFormatter.WriteObject(fs, words);
+            }
+
+            Console.ReadLine();
+        }
+
+        private void Deserialisation()
+        {
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
+
+            using (FileStream fs = new FileStream("words.json", FileMode.OpenOrCreate))
+            {
+                Word[] words = (Word[])jsonFormatter.ReadObject(fs);
+
+                Resource.getInstance().WordService.DeleteEverything();
+                Resource.getInstance().WordService.AddRange(words);
             }
         }
     }

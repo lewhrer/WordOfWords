@@ -56,10 +56,12 @@ namespace WorldOfWords
                 theme.Source = new Uri($"pack://application:,,,/WorldOfWords;component/Themes/DarkTheme.xaml");
                 Application.Current.Resources.MergedDictionaries.Add(theme);
             }
-            //else
-            //{
-            //    myResourceDictionary.Source = new Uri($"pack://application:,,,/WorldOfWords;component/Themes/LightTheme.xaml");
-            //}
+            else
+            {
+                ResourceDictionary theme = new ResourceDictionary();
+                theme.Source = new Uri($"pack://application:,,,/WorldOfWords;component/Themes/LightTheme.xaml");
+                Application.Current.Resources.MergedDictionaries.Add(theme);
+            }
         }
     }
 }

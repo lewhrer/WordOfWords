@@ -8,10 +8,10 @@ namespace WorldOfWords.View
 {
     public partial class Create : Page
     {
-        public Create(Frame menuFrame, IWordService service, IUpdater updater)
+        public Create(IUpdater updater)
         {
             InitializeComponent();
-            DataContext = new CreateViewModel(menuFrame, service, updater, this);
+            DataContext = new CreateViewModel(updater, this);
         }
 
         public async void ActionResult(Brush color, string text)

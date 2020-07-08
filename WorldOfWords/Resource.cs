@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Runtime.Serialization;
-
+using WorldOfWords.Infrastructure.Services;
+using System.Windows.Controls;
+using WorldOfWords.Infrastructure;
 
 namespace WorldOfWords
 {
@@ -25,6 +27,7 @@ namespace WorldOfWords
             PathNoImage = "pack://application:,,,/WorldOfWords;component/Resources/Image.png";
             ThemePath = "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml";
             Theme = "Dark";
+            WordService = new WordService(new WorldOfWordsDbContext());
         }
 
         public static Resource getInstance()
@@ -35,6 +38,10 @@ namespace WorldOfWords
         }
 
         public BitmapImage SourceNoImage { get { return new BitmapImage(new Uri(pathNoImage)); } }
+
+        public IWordService WordService { get; set; }
+
+        public Frame MenuFrame { get; set; }
 
         public string ThemePath
         {

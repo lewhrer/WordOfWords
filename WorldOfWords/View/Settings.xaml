@@ -9,578 +9,620 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Settings">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" MinHeight="300"/>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid
-            Grid.Row="0"
-            >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock 
+    <ScrollViewer>
+        <StackPanel>
+            <Grid Name="Theme"
                 Grid.Row="0"
-                Grid.ColumnSpan="2"
-                Text="Вибір Теми"
-                HorizontalAlignment="Center"
-                FontSize="20"
-                Margin="10"
-                />
-            <Grid
-                Background="#FFDADADA"
-                Grid.Column="0"
-                Grid.Row="1"
+                Height="auto" MinHeight="300"
                 >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock 
-                    HorizontalAlignment="Center"
                     Grid.Row="0"
-                    Margin="0,10"
-                    Foreground="Black"
+                    Grid.ColumnSpan="2"
+                    Text="Вибір Теми"
+                    HorizontalAlignment="Center"
                     FontSize="20"
-                    Text="Світла тема"
+                    Margin="10"
                     />
                 <Grid
+                    Background="#FFDADADA"
+                    Grid.Column="0"
                     Grid.Row="1"
                     >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button 
+                    <TextBlock 
+                        HorizontalAlignment="Center"
                         Grid.Row="0"
-                        Grid.Column="0"
-                        Margin="5,5"
-                        Background="Blue"
+                        Margin="0,10"
+                        Foreground="Black"
+                        FontSize="20"
+                        Text="Світла тема"
+                        />
+                    <Grid
+                        Grid.Row="1"
                         >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                Command="{Binding StyleCommand}"
-                                CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml"
-                                 />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Button 
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="5,5"
+                            Background="Blue"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                    Command="{Binding StyleCommand}"
+                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml"
+                                     />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            Background="Red"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Red.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="5,5"
+                            Background="Green"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            Margin="5,5"
+                            Background="Yellow"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Yellow.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="5,5"
+                            Background="Purple"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Purple.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            Background="Brown"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Brown.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="5,5"
+                            Background="Orange"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Orange.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            Margin="5,5"
+                            Background="Pink"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Pink.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="5,5"
+                            Background="Cyan"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Cyan.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            Background="Indigo"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Indigo.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Margin="5,5"
+                            Background="Olive"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Olive.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Margin="5,5"
+                            Background="Violet"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Violet.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="5,5"
+                            Background="Sienna"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Sienna.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            Background="Teal"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Teal.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="5,5"
+                            Background="Crimson"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Crimson.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            Margin="5,5"
+                            Background="Lime"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Lime.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                    </Grid>
+                </Grid>
+                <Grid
+                    Background="#FF1D1D1D"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock 
+                        HorizontalAlignment="Center"
                         Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="5,5"
-                        Background="Red"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Red.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Margin="5,5"
-                        Background="Green"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Green.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="0"
-                        Grid.Column="3"
-                        Margin="5,5"
-                        Background="Yellow"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Yellow.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
+                        Margin="0,10"
+                        Foreground="White"
+                        FontSize="20"
+                        Text="Темна тема"
+                        />
+                    <Grid
                         Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="5,5"
-                        Background="Purple"
                         >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Button 
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="5,5"
+                            Background="Blue"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
                                     Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Purple.xaml"
+                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml"
                                      />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="5,5"
-                        Background="Brown"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Brown.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Margin="5,5"
-                        Background="Orange"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Orange.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="1"
-                        Grid.Column="3"
-                        Margin="5,5"
-                        Background="Pink"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Pink.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Margin="5,5"
-                        Background="Cyan"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Cyan.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Margin="5,5"
-                        Background="Indigo"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Indigo.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Margin="5,5"
-                        Background="Olive"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Olive.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="2"
-                        Grid.Column="3"
-                        Margin="5,5"
-                        Background="Violet"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Violet.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Margin="5,5"
-                        Background="Sienna"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Sienna.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Margin="5,5"
-                        Background="Teal"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Teal.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        Margin="5,5"
-                        Background="Crimson"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Crimson.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="3"
-                        Grid.Column="3"
-                        Margin="5,5"
-                        Background="Lime"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Lime.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            Background="Red"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Red.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Margin="5,5"
+                            Background="Green"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            Margin="5,5"
+                            Background="Yellow"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Yellow.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="5,5"
+                            Background="Purple"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Purple.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            Background="Brown"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Brown.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="5,5"
+                            Background="Orange"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Orange.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            Margin="5,5"
+                            Background="Pink"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Pink.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="5,5"
+                            Background="Cyan"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Cyan.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            Background="Indigo"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Indigo.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Margin="5,5"
+                            Background="Olive"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Olive.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="2"
+                            Grid.Column="3"
+                            Margin="5,5"
+                            Background="Violet"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Violet.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="5,5"
+                            Background="Sienna"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Sienna.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="5,5"
+                            Background="Teal"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Teal.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            Margin="5,5"
+                            Background="Crimson"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Crimson.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                        <Button 
+                            Grid.Row="3"
+                            Grid.Column="3"
+                            Margin="5,5"
+                            Background="Lime"
+                            >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StyleCommand}"
+                                        CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Lime.xaml"
+                                         />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
-            <Grid
-                Background="#FF1D1D1D"
-                Grid.Column="1"
-                Grid.Row="1"
+            <Grid Name="SaveAndUnsave" 
+                Height="auto"
+                  
                 >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <TextBlock 
-                    HorizontalAlignment="Center"
+                    Grid.ColumnSpan="3" 
                     Grid.Row="0"
-                    Margin="0,10"
-                    Foreground="White"
+                    HorizontalAlignment="Center"
                     FontSize="20"
-                    Text="Темна тема"
+                    Text="Резервне копіювання"
                     />
-                <Grid
-                    Grid.Row="1"
-                    >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Button 
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Margin="5,5"
-                        Background="Blue"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                Command="{Binding StyleCommand}"
-                                CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml"
-                                 />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Margin="5,5"
-                        Background="Red"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Red.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Margin="5,5"
-                        Background="Green"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Green.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="0"
-                        Grid.Column="3"
-                        Margin="5,5"
-                        Background="Yellow"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Yellow.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="5,5"
-                        Background="Purple"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Purple.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="5,5"
-                        Background="Brown"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Brown.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Margin="5,5"
-                        Background="Orange"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Orange.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="1"
-                        Grid.Column="3"
-                        Margin="5,5"
-                        Background="Pink"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Pink.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Margin="5,5"
-                        Background="Cyan"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Cyan.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Margin="5,5"
-                        Background="Indigo"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Indigo.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Margin="5,5"
-                        Background="Olive"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Olive.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="2"
-                        Grid.Column="3"
-                        Margin="5,5"
-                        Background="Violet"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Violet.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Margin="5,5"
-                        Background="Sienna"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Sienna.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Margin="5,5"
-                        Background="Teal"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Teal.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        Margin="5,5"
-                        Background="Crimson"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Crimson.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button 
-                        Grid.Row="3"
-                        Grid.Column="3"
-                        Margin="5,5"
-                        Background="Lime"
-                        >
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction
-                                    Command="{Binding StyleCommand}"
-                                    CommandParameter="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Lime.xaml"
-                                     />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                </Grid>
+                <Button 
+                    Grid.Row="1" 
+                    Content="Save" 
+                    Grid.Column="0" 
+                    Background="Gray"
+                    Command="{Binding SaveCommand}"
+                    />
+                <Button 
+                    Grid.Row="1" 
+                    Content="Delete" 
+                    Grid.Column="1" 
+                    Background="Gray"
+                    Command="{Binding DesaveCommand}"
+                    />
+                <Button 
+                    Grid.Row="1" 
+                    Content="All Delete" 
+                    Grid.Column="2" 
+                    Background="Gray"
+                    Command="{Binding DeleteAllCommand}"
+                    />
             </Grid>
-        </Grid>
-    </Grid>
+        </StackPanel>
+    </ScrollViewer>
+
 </Page>

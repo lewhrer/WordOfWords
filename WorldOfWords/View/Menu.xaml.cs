@@ -21,17 +21,14 @@ using System.IO;
 
 namespace WorldOfWords.View
 {
-    /// <summary>
-    /// Interaction logic for Menu.xaml
-    /// </summary>
     public partial class Menu : MetroWindow
     {
         public Menu()
         {
             InitializeComponent();
-            var service = new WordService(new WorldOfWordsDbContext());
-            DataContext = new MenuViewModel(MenuFrame, service);
-            MenuFrame.Navigate(new ListOfWords(MenuFrame, service, "All", "all words"));
+            Resource.getInstance().MenuFrame = MenuFrame;
+            DataContext = new MenuViewModel();
+            MenuFrame.Navigate(new ListOfWords("All", "all words"));
         }
     }
 }
