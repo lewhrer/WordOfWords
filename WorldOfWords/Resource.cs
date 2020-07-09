@@ -21,6 +21,10 @@ namespace WorldOfWords
         private string themePath;
         [DataMember]
         private string theme;
+        [DataMember]
+        private Level level;
+        [DataMember]
+        private TrainDate trainDate;
 
         public Resource()
         {
@@ -28,6 +32,8 @@ namespace WorldOfWords
             ThemePath = "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml";
             Theme = "Dark";
             WordService = new WordService(new WorldOfWordsDbContext());
+            Level = new Level();
+            TrainDate = new TrainDate();
         }
 
         public static Resource getInstance()
@@ -42,6 +48,10 @@ namespace WorldOfWords
         public IWordService WordService { get; set; }
 
         public Frame MenuFrame { get; set; }
+
+        public Level Level { get; set; }
+
+        public TrainDate TrainDate { get; set; }
 
         public string ThemePath
         {

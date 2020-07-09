@@ -28,7 +28,7 @@ namespace WorldOfWords.View
             InitializeComponent();
             Resource.getInstance().MenuFrame = MenuFrame;
             DataContext = new MenuViewModel();
-            MenuFrame.Navigate(new ListOfWords("All", "all words"));
+            MenuFrame.Navigate(new ListOfWords("All", "Всі слова"));
         }
     }
 }

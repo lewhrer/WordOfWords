@@ -165,152 +165,54 @@ namespace WorldOfWords.ViewModel
             }
         }
 
-        private RelayCommand know0Command;
-        public RelayCommand Know0Command
+        private RelayCommand unknownWordsCommand;
+        public RelayCommand UnknownWordsCommand
         {
             get
             {
-                return know0Command ??
-                  (know0Command = new RelayCommand(obj =>
+                return unknownWordsCommand ??
+                  (unknownWordsCommand = new RelayCommand(obj =>
                   {
-                      if (selectedWord != null)
-                      {
-                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 0);
-                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
-                          int index = Words.IndexOf(SelectedWord);
-                          Words.RemoveAt(index);
-                          Words.Insert(index, word);
-                          if (index + 1 != Words.Count)
-                          {
-                              ++IndexSelectedWord;
-                              SelectedWord = Words[++index];
-                          }
-                          else
-                          {
-                              SelectedWord = null;
-                              SelectedWord = Words[index];
-                          }
-                      }
+                      KnowCommand(0);
                   }));
             }
         }
 
-        private RelayCommand know25Command;
-        public RelayCommand Know25Command
+        private RelayCommand notMemorizedWordsCommand;
+        public RelayCommand NotMemorizedWordsCommand
         {
             get
             {
-                return know25Command ??
-                  (know25Command = new RelayCommand(obj =>
+                return notMemorizedWordsCommand ??
+                  (notMemorizedWordsCommand = new RelayCommand(obj =>
                   {
-                      if (selectedWord != null)
-                      {
-                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 25);
-                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
-                          int index = Words.IndexOf(SelectedWord);
-                          Words.RemoveAt(index);
-                          Words.Insert(index, word);
-                          if (index + 1 != Words.Count)
-                          {
-                              ++IndexSelectedWord;
-                              SelectedWord = Words[++index];
-                          }
-                          else
-                          {
-                              SelectedWord = null;
-                              SelectedWord = Words[index];
-                          }
-                      }
+                      KnowCommand(33);
                   }));
             }
         }
 
-        private RelayCommand know50Command;
-        public RelayCommand Know50Command
+        private RelayCommand memorizedWordsCommand;
+        public RelayCommand MemorizedWordsCommand
         {
             get
             {
-                return know50Command ??
-                  (know50Command = new RelayCommand(obj =>
+                return memorizedWordsCommand ??
+                  (memorizedWordsCommand = new RelayCommand(obj =>
                   {
-                      if (selectedWord != null)
-                      {
-                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 50);
-                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
-                          int index = Words.IndexOf(SelectedWord);
-                          Words.RemoveAt(index);
-                          Words.Insert(index, word);
-                          if (index + 1 != Words.Count)
-                          {
-                              ++IndexSelectedWord;
-                              SelectedWord = Words[++index];
-                          }
-                          else
-                          {
-                              SelectedWord = null;
-                              SelectedWord = Words[index];
-                          }
-                      }
+                      KnowCommand(66);
                   }));
             }
         }
 
-        private RelayCommand know75Command;
-        public RelayCommand Know75Command
+        private RelayCommand learnedWordsCommand;
+        public RelayCommand LearnedWordsCommand
         {
             get
             {
-                return know75Command ??
-                  (know75Command = new RelayCommand(obj =>
+                return learnedWordsCommand ??
+                  (learnedWordsCommand = new RelayCommand(obj =>
                   {
-                      if (selectedWord != null)
-                      {
-                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 75);
-                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
-                          int index = Words.IndexOf(SelectedWord);
-                          Words.RemoveAt(index);
-                          Words.Insert(index, word);
-                          if (index + 1 != Words.Count)
-                          {
-                              ++IndexSelectedWord;
-                              SelectedWord = Words[++index];
-                          }
-                          else
-                          {
-                              SelectedWord = null;
-                              SelectedWord = Words[index];
-                          }
-                      }
-                  }));
-            }
-        }
-
-        private RelayCommand know100Command;
-        public RelayCommand Know100Command
-        {
-            get
-            {
-                return know100Command ??
-                  (know100Command = new RelayCommand(obj =>
-                  {
-                      if (SelectedWord != null)
-                      {
-                          Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), 100);
-                          var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
-                          int index = Words.IndexOf(SelectedWord);
-                          Words.RemoveAt(index);
-                          Words.Insert(index, word);
-                          if (index + 1 != Words.Count)
-                          {
-                              ++IndexSelectedWord;
-                              SelectedWord = Words[++index];
-                          }
-                          else
-                          {
-                              SelectedWord = null;
-                              SelectedWord = Words[index];
-                          }
-                      }
+                      KnowCommand(100);
                   }));
             }
         }
@@ -370,6 +272,28 @@ namespace WorldOfWords.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private void KnowCommand(int percent)
+        {
+            if (SelectedWord != null)
+            {
+                Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), percent);
+                var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
+                int index = Words.IndexOf(SelectedWord);
+                Words.RemoveAt(index);
+                Words.Insert(index, word);
+                if (index + 1 != Words.Count)
+                {
+                    ++IndexSelectedWord;
+                    SelectedWord = Words[++index];
+                }
+                else
+                {
+                    SelectedWord = null;
+                    SelectedWord = Words[index];
+                }
+            }
         }
 
         public void Update()

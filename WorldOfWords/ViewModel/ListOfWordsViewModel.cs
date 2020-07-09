@@ -32,11 +32,10 @@ namespace WorldOfWords.ViewModel
             switch (nameMethod)
             {
                 case "All": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetAllWords().Select(x => new WordViewModel(x))); break;
-                case "0": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetNotStudiedWords().Select(x => new WordViewModel(x))); break;
-                case "25": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetAlmostAcquaintedWords().Select(x => new WordViewModel(x))); break;
-                case "50": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetAcquaintedWords().Select(x => new WordViewModel(x))); break;
-                case "75": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetAlmostStudiedWords().Select(x => new WordViewModel(x))); break;
-                case "100": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetStudiedWords().Select(x => new WordViewModel(x))); break;
+                case "0": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetWords(0, Resource.getInstance().Level.First).Select(x => new WordViewModel(x))); break;
+                case "33": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.First, Resource.getInstance().Level.Second).Select(x => new WordViewModel(x))); break;
+                case "66": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Second, Resource.getInstance().Level.Third).Select(x => new WordViewModel(x))); break;
+                case "100": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Third, 100).Select(x => new WordViewModel(x))); break;
                 default: MessageBox.Show("bad name of method"); break;
             }
             TotalCount = Words.Count;
@@ -107,71 +106,57 @@ namespace WorldOfWords.ViewModel
 
         #region KnowCommand
 
-        private RelayCommand know0Command;
-        public RelayCommand Know0Command
+        private RelayCommand unknownWordsCommand;
+        public RelayCommand UnknownWordsCommand
         {
             get
             {
-                return know0Command ??
-                  (know0Command = new RelayCommand(obj =>
+                return unknownWordsCommand ??
+                  (unknownWordsCommand = new RelayCommand(obj =>
                   {
                       KnowCommand(0);
                   }));
             }
         }
 
-        private RelayCommand know25Command;
-        public RelayCommand Know25Command
+        private RelayCommand notMemorizedWordsCommand;
+        public RelayCommand NotMemorizedWordsCommand
         {
             get
             {
-                return know25Command ??
-                  (know25Command = new RelayCommand(obj =>
+                return notMemorizedWordsCommand ??
+                  (notMemorizedWordsCommand = new RelayCommand(obj =>
                   {
-                      KnowCommand(25);
+                      KnowCommand(33);
                   }));
             }
         }
 
-        private RelayCommand know50Command;
-        public RelayCommand Know50Command
+        private RelayCommand memorizedWordsCommand;
+        public RelayCommand MemorizedWordsCommand
         {
             get
             {
-                return know50Command ??
-                  (know50Command = new RelayCommand(obj =>
+                return memorizedWordsCommand ??
+                  (memorizedWordsCommand = new RelayCommand(obj =>
                   {
-                      KnowCommand(50);
+                      KnowCommand(66);
                   }));
             }
         }
 
-        private RelayCommand know75Command;
-        public RelayCommand Know75Command
+        private RelayCommand learnedWordsCommand;
+        public RelayCommand LearnedWordsCommand
         {
             get
             {
-                return know75Command ??
-                  (know75Command = new RelayCommand(obj =>
-                  {
-                      KnowCommand(75);
-                  }));
-            }
-        }
-
-        private RelayCommand know100Command;
-        public RelayCommand Know100Command
-        {
-            get
-            {
-                return know100Command ??
-                  (know100Command = new RelayCommand(obj =>
+                return learnedWordsCommand ??
+                  (learnedWordsCommand = new RelayCommand(obj =>
                   {
                       KnowCommand(100);
                   }));
             }
         }
-
         #endregion
 
         public WordViewModel SelectedWord
@@ -235,11 +220,10 @@ namespace WorldOfWords.ViewModel
             switch (nameMethod)
             {
                 case "All": words = Resource.getInstance().WordService.GetAllWords().Select(x => new WordViewModel(x)).ToList(); break;
-                case "0": words = Resource.getInstance().WordService.GetNotStudiedWords().Select(x => new WordViewModel(x)).ToList(); break;
-                case "25": words = Resource.getInstance().WordService.GetAlmostAcquaintedWords().Select(x => new WordViewModel(x)).ToList(); break;
-                case "50": words = Resource.getInstance().WordService.GetAcquaintedWords().Select(x => new WordViewModel(x)).ToList(); break;
-                case "75": words = Resource.getInstance().WordService.GetAlmostStudiedWords().Select(x => new WordViewModel(x)).ToList(); break;
-                case "100": words = Resource.getInstance().WordService.GetStudiedWords().Select(x => new WordViewModel(x)).ToList(); break;
+                case "0": words = Resource.getInstance().WordService.GetWords(0, Resource.getInstance().Level.First).Select(x => new WordViewModel(x)).ToList(); break;
+                case "33": words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.First, Resource.getInstance().Level.Second).Select(x => new WordViewModel(x)).ToList(); break;
+                case "75": words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Second, Resource.getInstance().Level.Third).Select(x => new WordViewModel(x)).ToList(); break;
+                case "100": words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Third, 100).Select(x => new WordViewModel(x)).ToList(); break;
                 default: MessageBox.Show("bad name of method"); break;
             }
 

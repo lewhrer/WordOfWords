@@ -622,6 +622,36 @@
                     Command="{Binding DeleteAllCommand}"
                     />
             </Grid>
+            <Grid Name="ChangeLevel" 
+                Height="auto"
+                  
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock 
+                    Grid.ColumnSpan="3" 
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    Text="Резервне копіювання"
+                    />
+                <TextBlock 
+                    Grid.Column="0" 
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    Text="0"
+                    />
+                <TextBox />
+
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 

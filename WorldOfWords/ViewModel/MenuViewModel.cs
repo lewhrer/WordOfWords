@@ -50,80 +50,73 @@ namespace WorldOfWords.ViewModel
 
         #region trainCommand
 
-        private RelayCommand trainAllCommand;
-        public RelayCommand TrainAllCommand
+        private RelayCommand trainAllWordsCommand;
+        public RelayCommand TrainAllWordsCommand
         {
             get
             {
-                return trainAllCommand ??
-                  (trainAllCommand = new RelayCommand(obj =>
+                return trainAllWordsCommand ??
+                  (trainAllWordsCommand = new RelayCommand(obj =>
                   {
                       TrainCommand(Resource.getInstance().WordService.GetTrainAllWords(), "Тренування всіх слів", "All", "Всі слова");
                   }));
             }
         }
 
-        private RelayCommand train0Command;
-        public RelayCommand Train0Command
+        private RelayCommand trainOfUnknownWords;
+        public RelayCommand TrainOfUnknownWords
         {
             get
             {
-                return train0Command ??
-                  (train0Command = new RelayCommand(obj =>
+                return trainOfUnknownWords ??
+                  (trainOfUnknownWords = new RelayCommand(obj =>
                   {
-                      TrainCommand(Resource.getInstance().WordService.GetTrainNotStudiedWords(), "train 0 word", "0", "0 words");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainWords(0, Resource.getInstance().Level.First, 
+                          Resource.getInstance().TrainDate.Unknown), "Тренування невідомих слів", "0", "Невідомі слова");
                   }));
             }
         }
 
-        private RelayCommand train25Command;
-        public RelayCommand Train25Command
+        private RelayCommand trainNotMemorizedWords;
+        public RelayCommand TrainNotMemorizedWords
         {
             get
             {
-                return train25Command ??
-                  (train25Command = new RelayCommand(obj =>
+                return trainNotMemorizedWords ??
+                  (trainNotMemorizedWords = new RelayCommand(obj =>
                   {
-                      TrainCommand(Resource.getInstance().WordService.GetTrainAlmostAcquaintedWords(), "train 25 word", "25", "25 words");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainWords(Resource.getInstance().Level.First, 
+                          Resource.getInstance().Level.Second, Resource.getInstance().TrainDate.NotMemorized), 
+                          "Тренування не запам'ятованих слів", "33", "Незапам'ятовані слова");
                   }));
             }
         }
 
-        private RelayCommand train50Command;
-        public RelayCommand Train50Command
+        private RelayCommand trainMemorizedWords;
+        public RelayCommand TrainMemorizedWords
         {
             get
             {
-                return train50Command ??
-                  (train50Command = new RelayCommand(obj =>
+                return trainMemorizedWords ??
+                  (trainMemorizedWords = new RelayCommand(obj =>
                   {
-                      TrainCommand(Resource.getInstance().WordService.GetTrainAcquaintedWords(), "train 50 word", "50", "50 words");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainWords(Resource.getInstance().Level.Second, 
+                          Resource.getInstance().Level.Third, Resource.getInstance().TrainDate.Memorized), 
+                          "Тренування зам'ятованих слів", "66", "Запам'ятовані слова");
                   }));
             }
         }
 
-        private RelayCommand train75Command;
-        public RelayCommand Train75Command
+        private RelayCommand trainLearnedWords;
+        public RelayCommand TrainLearnedWords
         {
             get
             {
-                return train75Command ??
-                  (train75Command = new RelayCommand(obj =>
+                return trainLearnedWords ??
+                  (trainLearnedWords = new RelayCommand(obj =>
                   {
-                        TrainCommand(Resource.getInstance().WordService.GetTrainAlmostStudiedWords(), "train 75 word", "75", "75 words");
-                  }));
-            }
-        }
-
-        private RelayCommand knowTrainCommand;
-        public RelayCommand KnowTrainCommand
-        {
-            get
-            {
-                return knowTrainCommand ??
-                  (knowTrainCommand = new RelayCommand(obj =>
-                  {
-                      TrainCommand(Resource.getInstance().WordService.GetTrainStudiedWords(), "train know word", "100", "know words");
+                        TrainCommand(Resource.getInstance().WordService.GetTrainWords(Resource.getInstance().Level.Third, 
+                            100, Resource.getInstance().TrainDate.Learned), "Тренування вивчених слів", "100", "Вивчені слова");
                   }));
             }
         }
@@ -131,67 +124,54 @@ namespace WorldOfWords.ViewModel
 
         #region knowWordsCommand
 
-        private RelayCommand know0Command;
-        public RelayCommand Know0Command
+        private RelayCommand unknownWordsCommand;
+        public RelayCommand UnknownWordsCommand
         {
             get
             {
-                return know0Command ??
-                  (know0Command = new RelayCommand(obj =>
+                return unknownWordsCommand ??
+                  (unknownWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("0", "0 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("0", "Невідомі слова"));
                   }));
             }
         }
 
-        private RelayCommand know25WordsCommand;
-        public RelayCommand Know25WordsCommand
+        private RelayCommand notMemorizedWordsCommand;
+        public RelayCommand NotMemorizedWordsCommand
         {
             get
             {
-                return know25WordsCommand ??
-                  (know25WordsCommand = new RelayCommand(obj =>
+                return notMemorizedWordsCommand ??
+                  (notMemorizedWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("25", "25 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("33", "Не запам'ятовані слова"));
                   }));
             }
         }
 
-        private RelayCommand know50WordsCommand;
-        public RelayCommand Know50WordsCommand
+        private RelayCommand memorizedWordsCommand;
+        public RelayCommand MemorizedWordsCommand
         {
             get
             {
-                return know50WordsCommand ??
-                  (know50WordsCommand = new RelayCommand(obj =>
+                return memorizedWordsCommand ??
+                  (memorizedWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("50", "50 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("66", "Запам'ятовані слова"));
                   }));
             }
         }
 
-        private RelayCommand know75WordsCommand;
-        public RelayCommand Know75WordsCommand
+        private RelayCommand learnedWordsCommand;
+        public RelayCommand LearnedWordsCommand
         {
             get
             {
-                return know75WordsCommand ??
-                  (know75WordsCommand = new RelayCommand(obj =>
+                return learnedWordsCommand ??
+                  (learnedWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("75", "75 words"));
-                  }));
-            }
-        }
-
-        private RelayCommand knowWordsCommand;
-        public RelayCommand KnowWordsCommand
-        {
-            get
-            {
-                return knowWordsCommand ??
-                  (knowWordsCommand = new RelayCommand(obj =>
-                  {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("100", "100 words"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("100", "Вивчені слова"));
                   }));
             }
         }
@@ -246,7 +226,7 @@ namespace WorldOfWords.ViewModel
                 }
                 else
                 {
-                    MessageBox.Show("Array is empty");
+                    MessageBox.Show("Список пустий");
                 }
             }
             catch (Exception)
@@ -260,7 +240,7 @@ namespace WorldOfWords.ViewModel
                     }
                     else
                     {
-                        MessageBox.Show("Array is empty");
+                        MessageBox.Show("Список пустий");
                     }
                 }
                 catch (Exception)
