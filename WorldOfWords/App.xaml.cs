@@ -35,7 +35,8 @@ namespace WorldOfWords
                     {
                         Resource.getInstance().ThemePath = resource.ThemePath;
                         Resource.getInstance().PathNoImage = resource.PathNoImage;
-
+                        Resource.getInstance().Level = resource.Level;
+                        Resource.getInstance().TrainDate = resource.TrainDate;
                     }
                 }
             }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,32 +14,37 @@ using WorldOfWords.Model;
 
 namespace WorldOfWords.ViewModel
 {
-    public class SettingsViewModel
+    public class SettingsViewModel : INotifyPropertyChanged
     {
+        public Level Level { get; set; }
+        public TrainDate TrainDate { get; set; }
+
         public SettingsViewModel()
         {
+            Level = Resource.getInstance().Level;
+            TrainDate = Resource.getInstance().TrainDate;
         }
 
-        private RelayCommand saveCommand;
-        public RelayCommand SaveCommand
+        private RelayCommand makeReserveCommand;
+        public RelayCommand MakeReserveCommand
         {
             get
             {
-                return saveCommand ??
-                  (saveCommand = new RelayCommand(obj =>
+                return makeReserveCommand ??
+                  (makeReserveCommand = new RelayCommand(obj =>
                   {
                       Serialisation();
                   }));
             }
         }
 
-        private RelayCommand desaveCommand;
-        public RelayCommand DesaveCommand
+        private RelayCommand uploadReserveCommand;
+        public RelayCommand UploadReserveCommand
         {
             get
             {
-                return desaveCommand ??
-                  (desaveCommand = new RelayCommand(obj =>
+                return uploadReserveCommand ??
+                  (uploadReserveCommand = new RelayCommand(obj =>
                   {
                       Deserialisation();
                   }));
@@ -57,6 +64,29 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        private RelayCommand saveCommand;
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                return saveCommand ??
+                  (saveCommand = new RelayCommand(obj =>
+                  {
+                      Resource.getInstance().Level = Level;
+                      Resource.getInstance().TrainDate = TrainDate;
+                      DeleteFile("Settings.json");
+
+                      DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Resource));
+
+                      using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
+                      {
+                          jsonFormatter.WriteObject(fs, Resource.getInstance());
+                      }
+                      MessageBox.Show("Дані збережено успішно!");
+                  }));
+            }
+        }
+
         private RelayCommand styleCommand;
         public RelayCommand StyleCommand
         {
@@ -65,15 +95,7 @@ namespace WorldOfWords.ViewModel
                 return styleCommand ??
                     (styleCommand = new RelayCommand(obj =>
                     {
-                        DeleteFile("Settings.json");
-             
                         Resource.getInstance().ThemePath = obj.ToString();
-                        DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Resource));
-
-                        using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
-                        {
-                            jsonFormatter.WriteObject(fs, Resource.getInstance());
-                        }
                         ResourceDictionary myResourceDictionary = new ResourceDictionary();
                         myResourceDictionary.Source = new Uri(obj.ToString());
                         Application.Current.Resources.MergedDictionaries.Add(myResourceDictionary);
@@ -125,6 +147,12 @@ namespace WorldOfWords.ViewModel
                 Resource.getInstance().WordService.DeleteEverything();
                 Resource.getInstance().WordService.AddRange(words);
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

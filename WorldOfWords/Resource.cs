@@ -49,9 +49,18 @@ namespace WorldOfWords
 
         public Frame MenuFrame { get; set; }
 
-        public Level Level { get; set; }
+        public Level Level
+        {
+            get { return level; }
+            set { level = value; }
+        }
 
-        public TrainDate TrainDate { get; set; }
+
+        public TrainDate TrainDate
+        {
+            get { return trainDate; }
+            set { trainDate = value; }
+        }
 
         public string ThemePath
         {

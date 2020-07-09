@@ -1,18 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace WorldOfWords
 {
-    [DataContract]
-    public class TrainDate
+    public class TrainDate : INotifyPropertyChanged
     {
-        [DataMember]
-        public int Unknown { get; set; }
-        [DataMember]
-        public int NotMemorized { get; set; }
-        [DataMember]
-        public int Memorized { get; set; }
-        [DataMember]
-        public int Learned { get; set; }
+        private int unknown;
+        private int notMemorized;
+        private int memorized;
+        private int learned;
 
         public TrainDate()
         {
@@ -20,6 +16,53 @@ namespace WorldOfWords
             NotMemorized = 2;
             Memorized = 4;
             Learned = 10;
+        }
+
+        public int Unknown
+        {
+            get { return unknown; }
+            set
+            {
+                unknown = value;
+                OnPropertyChanged("Unknown");
+            }
+        }
+
+        public int NotMemorized
+        {
+            get { return notMemorized; }
+            set
+            {
+                notMemorized = value;
+                OnPropertyChanged("NotMemorized");
+            }
+        }
+
+        public int Memorized
+        {
+            get { return memorized; }
+            set
+            {
+                memorized = value;
+                OnPropertyChanged("Memorized");
+            }
+        }
+
+        public int Learned
+        {
+            get { return learned; }
+            set
+            {
+                learned = value;
+                OnPropertyChanged("Learned");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
