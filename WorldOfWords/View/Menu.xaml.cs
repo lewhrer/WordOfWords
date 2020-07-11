@@ -28,7 +28,8 @@ namespace WorldOfWords.View
             InitializeComponent();
             Resource.getInstance().MenuFrame = MenuFrame;
             DataContext = new MenuViewModel();
-            MenuFrame.Navigate(new ListOfWords("All", Application.Current.Resources["AllWords"].ToString(), Application.Current.Resources["TrainingAllWords"].ToString()));
+            MenuFrame.Navigate(new ListOfWords("All", Application.Current.Resources["AllWords"].ToString(), 
+                Application.Current.Resources["TrainingAllWords"].ToString()));
         }
     }
 }

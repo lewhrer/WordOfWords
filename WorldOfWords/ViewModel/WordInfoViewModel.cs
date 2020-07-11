@@ -164,7 +164,8 @@ namespace WorldOfWords.ViewModel
                   (goBackCommand = new RelayCommand(obj =>
                   {
                       Resource.getInstance().MenuFrame.GoBack();
-                      updater.Update();
+                      if(updater != null)
+                          updater.Update();
                   }));
             }
         }

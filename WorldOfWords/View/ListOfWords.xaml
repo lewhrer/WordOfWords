@@ -63,21 +63,18 @@
                     Content="{Binding Source={StaticResource Browse}}" 
                     Command="{Binding MoreCommand}"
                     Margin="2.5,0"
-                    Background="DarkSlateGray"
                     />
                 <Button 
                     Grid.Column="1"
                     Content="{Binding Source={StaticResource Edit}}" 
                     Command="{Binding EditCommand}"
                     Margin="2.5,0"
-                    Background="DarkSlateGray"
                     />
                 <Button 
                     Grid.Column="2"
                     Content="{Binding Source={StaticResource Delete}}" 
                     Command="{Binding DeleteCommand}"
                     Margin="2.5,0"
-                    Background="DarkSlateGray"
                     />
 
             </Grid>
@@ -149,6 +146,7 @@
                                 Margin="-10,0,-10,0"
                                 >
                             </Grid>
+                            
                             <Border 
                                 Grid.Row="0"
                                 Background="Black"
@@ -217,7 +215,6 @@
                                     </StackPanel>
                                 </Grid>
                             </Grid>
-                        
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -319,7 +316,6 @@
                 Content="{Binding Source={StaticResource DontKnow}}" 
                 Command="{Binding UnknownWordsCommand}"
                 Background="Red"
-                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
@@ -327,7 +323,6 @@
                 Content="{Binding Source={StaticResource DontRemember}}" 
                 Command="{Binding NotMemorizedWordsCommand}"
                 Background="Orange"
-                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
@@ -335,7 +330,6 @@
                 Content="{Binding Source={StaticResource Remember}}" 
                 Command="{Binding MemorizedWordsCommand}"
                 Background="LimeGreen"
-                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
@@ -343,7 +337,6 @@
                 Content="{Binding Source={StaticResource Know}}" 
                 Command="{Binding LearnedWordsCommand}"
                 Background="Green"
-                Foreground="Black"
                 Margin="5,0"
                 />
         

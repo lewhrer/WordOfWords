@@ -74,7 +74,7 @@ namespace WorldOfWords.ViewModel
                       if(selectedWord != null)
                       {
                         int index = Words.IndexOf(selectedWord);
-                          Resource.getInstance().MenuFrame.Navigate(new WordInfo(Words.ToList(), this, nameTrainPage, index));
+                          Resource.getInstance().MenuFrame.Navigate(new WordInfo(Words.ToList(), nameTrainPage, this, index));
                       }
                       else
                       {

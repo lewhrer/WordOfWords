@@ -347,7 +347,6 @@
                 Content="{Binding Source={StaticResource Edit}}" 
                 Command="{Binding EditCommand}"
                 Margin="5,0"
-                Background="DarkSlateGray"
                 />
             <Button 
                 Grid.Column="2"
@@ -356,7 +355,6 @@
                 Content="{Binding Source={StaticResource Delete}}" 
                 Command="{Binding DeleteCommand}"
                 Margin="5,0"
-                Background="DarkSlateGray"
                 />
         </StackPanel>
 

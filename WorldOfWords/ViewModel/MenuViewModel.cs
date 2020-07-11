@@ -230,7 +230,7 @@ namespace WorldOfWords.ViewModel
                 {
                     var viewModel = ((ListOfWords)Resource.getInstance().MenuFrame.Content).ViewModel;
 
-                    Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(), viewModel, trainPage));
+                    Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(), trainPage, viewModel));
                 }
                 else
                 {
@@ -244,7 +244,7 @@ namespace WorldOfWords.ViewModel
                     if (words.Any())
                     {
                         var viewModel = ((WordInfo)Resource.getInstance().MenuFrame.Content).ViewModel;
-                        Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(), viewModel, trainPage));
+                        Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(), trainPage, viewModel));
                     }
                     else
                     {
@@ -253,7 +253,7 @@ namespace WorldOfWords.ViewModel
                 }
                 catch (Exception)
                 {
-                    Resource.getInstance().MenuFrame.Navigate(new ListOfWords(listPageId, listPageName, trainPage));
+                    Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(), trainPage));
                 }
             }
         }

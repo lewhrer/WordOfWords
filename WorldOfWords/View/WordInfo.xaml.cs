@@ -28,16 +28,11 @@ namespace WorldOfWords.View
     {
         public WordInfoViewModel ViewModel { get; set; }
 
-        public WordInfo(List<WordViewModel> words, IUpdater updater, string namePage, int indexWord = 0)
+        public WordInfo(List<WordViewModel> words, string namePage, IUpdater updater = null, int indexWord = 0)
         {
             InitializeComponent();
             ViewModel = new WordInfoViewModel(words, updater, namePage, indexWord);
             DataContext = ViewModel;
-        }
-
-        private void DownOnTranslate(object sender, RoutedEventArgs e)
-        {
-            (sender as TextBlock).Text = (sender as TextBlock).Tag.ToString();
         }
     }
 }
