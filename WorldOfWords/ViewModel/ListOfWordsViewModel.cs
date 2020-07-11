@@ -21,21 +21,43 @@ namespace WorldOfWords.ViewModel
         WordViewModel selectedWord;
         string nameMethod;
         string namePage;
+        string nameTrainPage;
         int totalCount;
 
         public ObservableCollection<WordViewModel> Words { get; set; }
 
-        public ListOfWordsViewModel(string nameMethod, string namePage)
+        public ListOfWordsViewModel(string nameMethod, string namePage, string nameTrainPage)
         {
             this.nameMethod = nameMethod;
+            this.nameTrainPage = nameTrainPage;
             NamePage = namePage;
             switch (nameMethod)
             {
-                case "All": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetAllWords().Select(x => new WordViewModel(x))); break;
-                case "0": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetWords(0, Resource.getInstance().Level.First).Select(x => new WordViewModel(x))); break;
-                case "33": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.First, Resource.getInstance().Level.Second).Select(x => new WordViewModel(x))); break;
-                case "66": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Second, Resource.getInstance().Level.Third).Select(x => new WordViewModel(x))); break;
-                case "100": Words = new ObservableCollection<WordViewModel>(Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Third, 100).Select(x => new WordViewModel(x))); break;
+                case "All":
+                    {
+                        var words = Resource.getInstance().WordService.GetAllWords();
+                        Words = new ObservableCollection<WordViewModel>(words.Select(x => new WordViewModel(x, words.IndexOf(x)))); break;
+                    }
+                case "0":
+                    {
+                        var words = Resource.getInstance().WordService.GetWords(0, Resource.getInstance().Level.First);
+                        Words = new ObservableCollection<WordViewModel>(words.Select(x => new WordViewModel(x, words.IndexOf(x)))); break;
+                    }
+                case "33":
+                    {
+                        var words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.First, Resource.getInstance().Level.Second);
+                        Words = new ObservableCollection<WordViewModel>(words.Select(x => new WordViewModel(x, words.IndexOf(x)))); break;
+                    }
+                case "66":
+                    {
+                        var words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Second, Resource.getInstance().Level.Third);
+                        Words = new ObservableCollection<WordViewModel>(words.Select(x => new WordViewModel(x, words.IndexOf(x)))); break;
+                    }
+                case "100":
+                    {
+                        var words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Third, 100);
+                        Words = new ObservableCollection<WordViewModel>(words.Select(x => new WordViewModel(x, words.IndexOf(x)))); break;
+                    }
                 default: MessageBox.Show("bad name of method"); break;
             }
             TotalCount = Words.Count;
@@ -52,7 +74,7 @@ namespace WorldOfWords.ViewModel
                       if(selectedWord != null)
                       {
                         int index = Words.IndexOf(selectedWord);
-                          Resource.getInstance().MenuFrame.Navigate(new WordInfo(Words.ToList(), this, $"{nameMethod} words", index));
+                          Resource.getInstance().MenuFrame.Navigate(new WordInfo(Words.ToList(), this, nameTrainPage, index));
                       }
                       else
                       {
@@ -201,8 +223,8 @@ namespace WorldOfWords.ViewModel
             if (selectedWord != null)
             {
                 Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), percent);
-                var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
                 int index = Words.IndexOf(SelectedWord);
+                var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()), index);
                 Words.RemoveAt(index);
                 Words.Insert(index, word);
                 SelectedWord = word;
@@ -216,28 +238,50 @@ namespace WorldOfWords.ViewModel
         public void Update()
         {
             Words.Clear();
-            List<WordViewModel> words = new List<WordViewModel>();
+            List<WordViewModel> newWords = new List<WordViewModel>();
             switch (nameMethod)
             {
-                case "All": words = Resource.getInstance().WordService.GetAllWords().Select(x => new WordViewModel(x)).ToList(); break;
-                case "0": words = Resource.getInstance().WordService.GetWords(0, Resource.getInstance().Level.First).Select(x => new WordViewModel(x)).ToList(); break;
-                case "33": words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.First, Resource.getInstance().Level.Second).Select(x => new WordViewModel(x)).ToList(); break;
-                case "75": words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Second, Resource.getInstance().Level.Third).Select(x => new WordViewModel(x)).ToList(); break;
-                case "100": words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Third, 100).Select(x => new WordViewModel(x)).ToList(); break;
+                case "All":
+                    {
+                        var words = Resource.getInstance().WordService.GetAllWords();
+                        newWords = words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(); break;
+                    }
+                case "0":
+                    {
+                        var words = Resource.getInstance().WordService.GetWords(0, Resource.getInstance().Level.First);
+                        newWords = words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(); break;
+                    }
+                case "33":
+                    {
+                        var words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.First, Resource.getInstance().Level.Second);
+                        newWords = words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(); break;
+                    }
+                case "66":
+                    {
+                        var words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Second, Resource.getInstance().Level.Third);
+                        newWords = words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(); break;
+                    }
+                case "100":
+                    {
+                        var words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Third, 100);
+                        newWords = words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(); break;
+                    }
                 default: MessageBox.Show("bad name of method"); break;
             }
 
-            TotalCount = words.Count;
+            TotalCount = newWords.Count;
                 
-            foreach (var item in words)
+            foreach (var item in newWords)
             {
                 Words.Add(item);
             }
 
+
+            SelectedWord = null;
             try
             {
-                var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
                 int index = Words.IndexOf(SelectedWord);
+                var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()), index);
                 Words.RemoveAt(index);
                 Words.Insert(index, word);
                 SelectedWord = word;

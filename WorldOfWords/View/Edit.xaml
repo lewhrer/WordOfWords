@@ -36,10 +36,16 @@
                 Margin="50,0"
                 DataContext="{Binding NewWord}"
                 >
-                <TextBlock
-                    FontSize="{Binding Source={StaticResource SizeText}}"
-                    Text="Слово: "
-                    />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        FontSize="{Binding Source={StaticResource SizeText}}"
+                        Text="{Binding Source={StaticResource Word}}"
+                        />
+                    <TextBlock
+                        FontSize="{Binding Source={StaticResource SizeText}}"
+                        Text=": "
+                        />
+                </StackPanel>
                 <TextBox 
                     FontSize="{Binding Source={StaticResource SizeText}}"
                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
@@ -51,10 +57,16 @@
                 Margin="50,0"
                 DataContext="{Binding NewWord}"
                 >
-                <TextBlock
-                     FontSize="{Binding Source={StaticResource SizeText}}"
-                     Text="Переклад: "
-                     />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                         FontSize="{Binding Source={StaticResource SizeText}}"
+                         Text="{Binding Source={StaticResource Translate}}"
+                         />
+                    <TextBlock
+                         FontSize="{Binding Source={StaticResource SizeText}}"
+                         Text=": "
+                         />
+                </StackPanel>
                 <TextBox 
                      FontSize="{Binding Source={StaticResource SizeText}}"
                      Text="{Binding Translate, UpdateSourceTrigger=PropertyChanged}"
@@ -69,11 +81,16 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock
-                     FontSize="{Binding Source={StaticResource SizeText}}"
-                     Grid.Row="0"
-                     Text="Фото: "
-                     />
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <TextBlock
+                         FontSize="{Binding Source={StaticResource SizeText}}"
+                         Text="{Binding Source={StaticResource Picture}}"
+                         />
+                    <TextBlock
+                         FontSize="{Binding Source={StaticResource SizeText}}"
+                         Text=": "
+                         />
+                </StackPanel>
 
                 <Grid
                     Grid.Row="1"
@@ -121,11 +138,16 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    FontSize="{Binding Source={StaticResource SizeText}}"
-                    Text="Приклади: "
-                    />
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <TextBlock
+                        FontSize="{Binding Source={StaticResource SizeText}}"
+                        Text="{Binding Source={StaticResource Examples}}"
+                        />
+                    <TextBlock
+                        FontSize="{Binding Source={StaticResource SizeText}}"
+                        Text=": "
+                        />
+                </StackPanel>
                 <TextBox
                     AcceptsReturn="True"
                     HorizontalScrollBarVisibility="Auto"
@@ -145,7 +167,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Content="Додати"
+                <Button Content="{Binding Source={StaticResource Add}}"
                     Grid.Column="0"
                     Width="100"
                     Background="DarkGreen"
@@ -153,7 +175,7 @@
                     HorizontalAlignment="Right"
                     Command="{Binding AddCommand}"
                     />
-                <Button Content="Видалити"
+                <Button Content="{Binding Source={StaticResource Delete}}"
                     Grid.Column="1"
                     Width="100"
                     Background="DarkRed"
@@ -174,7 +196,13 @@
                 <TextBlock
                     FontSize="{Binding Source={StaticResource SizeText}}"
                     Grid.Row="0"
-                    Text="Пріорітет: "
+                    Text="{Binding Source={StaticResource Priority}}"
+                    VerticalAlignment="Center"
+                    />
+                <TextBlock
+                    FontSize="{Binding Source={StaticResource SizeText}}"
+                    Grid.Row="0"
+                    Text=": "
                     VerticalAlignment="Center"
                     />
                 <ComboBox  
@@ -187,7 +215,7 @@
             </StackPanel>
 
             <Button 
-                Content="Назад" 
+                Content="{Binding Source={StaticResource Back}}" 
                 Grid.Column="0"
                 Grid.Row="3"
                 HorizontalAlignment="Right"
@@ -196,7 +224,7 @@
                 Command="{Binding GoBackCommand}"
                 />
             <Button 
-                Content="Зберегти" 
+                Content="{Binding Source={StaticResource Save}}" 
                 Grid.Column="1"
                 Grid.Row="3"
                 HorizontalAlignment="Left"

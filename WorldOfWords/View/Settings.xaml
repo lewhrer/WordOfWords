@@ -26,7 +26,7 @@
                 <TextBlock 
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
-                    Text="Вибір Теми"
+                    Text="{Binding Source={StaticResource ChoiseOfTheme}}"
                     HorizontalAlignment="Center"
                     FontSize="20"
                     Margin="10"
@@ -46,7 +46,7 @@
                         Margin="0,10"
                         Foreground="Black"
                         FontSize="20"
-                        Text="Світла тема"
+                        Text="{Binding Source={StaticResource LightTheme}}"
                         />
                     <Grid
                         Grid.Row="1"
@@ -320,7 +320,7 @@
                         Margin="0,10"
                         Foreground="White"
                         FontSize="20"
-                        Text="Темна тема"
+                        Text="{Binding Source={StaticResource DarkTheme}}"
                         />
                     <Grid
                         Grid.Row="1"

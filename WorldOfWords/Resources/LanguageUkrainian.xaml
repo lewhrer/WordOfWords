@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:WorldOfWords.Resources">
+    
+    <system:String x:Key="DontKnow">Не знаю</system:String>
+    <system:String x:Key="DontRemember">Не пригадую</system:String>
+    <system:String x:Key="Remember">Пригадую</system:String>
+    <system:String x:Key="Know">Знаю</system:String>
+
+    <system:String x:Key="Level">Рівень</system:String>
+    <system:String x:Key="Priority">Пріорітет</system:String>
+    <system:String x:Key="Updated">Оновлено</system:String>
+    <system:String x:Key="Index">Індекс</system:String>
+
+    <system:String x:Key="Back">Назад</system:String>
+    <system:String x:Key="Browse">Переглянути</system:String>
+    <system:String x:Key="Edit">Редагувати</system:String>
+    <system:String x:Key="Delete">Видалити</system:String>
+    <system:String x:Key="TotalCount">Загальна кількість</system:String>
+    <system:String x:Key="Word">Слово</system:String>
+    <system:String x:Key="Translate">Переклад</system:String>
+
+    <system:String x:Key="Next">Наступний</system:String>
+    <system:String x:Key="Previous">Попередній</system:String>
+
+    <system:String x:Key="Words">Слова</system:String>
+    <system:String x:Key="Create">Створити</system:String>
+    <system:String x:Key="Train">Тренувати</system:String>
+    <system:String x:Key="Settings">Налаштування</system:String>
+
+    <system:String x:Key="Unknown">Невідомі</system:String>
+    <system:String x:Key="NotMemorized">Не запам'ятовані</system:String>
+    <system:String x:Key="Memorized">Запам'ятовані</system:String>
+    <system:String x:Key="Learned">Вивчені</system:String>
+    <system:String x:Key="Everything">Всі</system:String>
+
+    <system:String x:Key="UnknownWords">Невідомі слова</system:String>
+    <system:String x:Key="NotMemorizedWords">Не запам'ятовані слова</system:String>
+    <system:String x:Key="MemorizedWords">Запам'ятовані слова</system:String>
+    <system:String x:Key="LearnedWords">Вивчені слова</system:String>
+    <system:String x:Key="AllWords">Всі слова</system:String>
+
+    <system:String x:Key="TrainingUnknownWords">Тренування невідомих слів</system:String>
+    <system:String x:Key="TrainingNotMemorizedWords">Тренування не запам'ятованих слів</system:String>
+    <system:String x:Key="TrainingMemorizedWords">Тренування запам'ятованих слів</system:String>
+    <system:String x:Key="TrainingLearnedWords">Тренування вивчених слів</system:String>
+    <system:String x:Key="TrainingAllWords">Тренування всіх слів</system:String>
+
+    <system:String x:Key="Examples">Приклади</system:String>
+    <system:String x:Key="Save">Зберегти</system:String>
+    <system:String x:Key="Add">Додати</system:String>
+    <system:String x:Key="Picture">Картинка</system:String>
+
+    <system:String x:Key="ChoiseOfTheme">Вибір теми</system:String>
+    <system:String x:Key="LightTheme">Світла тема</system:String>
+    <system:String x:Key="DarkTheme">Темна тема</system:String>
+
+
+</ResourceDictionary>

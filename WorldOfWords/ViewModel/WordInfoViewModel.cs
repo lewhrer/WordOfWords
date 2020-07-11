@@ -92,13 +92,51 @@ namespace WorldOfWords.ViewModel
                 return mouseDownOnPictureCommand ??
                   (mouseDownOnPictureCommand = new RelayCommand(obj =>
                   {
-                      if(SelectedWord.IsPhoto)
-                      {
-                            if(SelectedWord.SourcePicture == SelectedWord.SourcePictureCorectly)
-                            {
-                              Resource.getInstance().MenuFrame.Navigate(new PhotoViewer(SelectedWord.SourcePicture));
-                          }
-                      }
+                        if(SelectedWord.SourcePicture != null)
+                        {
+                            Resource.getInstance().MenuFrame.Navigate(new PhotoViewer(SelectedWord.SourcePicture));
+                        }
+                  }));
+            }
+        }
+
+        private RelayCommand mouseDownOnHidedPictureCommand;
+        public RelayCommand MouseDownOnHidedPictureCommand
+        {
+            get
+            {
+                return mouseDownOnHidedPictureCommand ??
+                  (mouseDownOnHidedPictureCommand = new RelayCommand(obj =>
+                  {
+                      SelectedWord.HidedPicture = null;
+                      SelectedWord.SourcePicture = SelectedWord.SourcePictureCorectly;
+                  }));
+            }
+        }
+
+        private RelayCommand mouseDownOnTranslateCommand;
+        public RelayCommand MouseDownOnTranslateCommand
+        {
+            get
+            {
+                return mouseDownOnTranslateCommand ??
+                  (mouseDownOnTranslateCommand = new RelayCommand(obj =>
+                  {
+                      SelectedWord.HidedTranslate = SelectedWord.Translate;
+                  }));
+            }
+        }
+
+        private RelayCommand mouseDownOnExampleCommand;
+        public RelayCommand MouseDownOnExampleCommand
+        {
+            get
+            {
+                return mouseDownOnExampleCommand ??
+                  (mouseDownOnExampleCommand = new RelayCommand(obj =>
+                  {
+                      SelectedWord.Example = SelectedWord.ExampleCorectly;
+                      SelectedWord.HidedExample = null;
                   }));
             }
         }
@@ -279,8 +317,8 @@ namespace WorldOfWords.ViewModel
             if (SelectedWord != null)
             {
                 Resource.getInstance().WordService.SetKnow(SelectedWord.Id.ToString(), percent);
-                var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
                 int index = Words.IndexOf(SelectedWord);
+                var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()), index);
                 Words.RemoveAt(index);
                 Words.Insert(index, word);
                 if (index + 1 != Words.Count)
@@ -298,8 +336,8 @@ namespace WorldOfWords.ViewModel
 
         public void Update()
         {
-            var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()));
             int index = Words.IndexOf(SelectedWord);
+            var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()), index);
             Words.RemoveAt(index);
             Words.Insert(index, word);
             SelectedWord = null;

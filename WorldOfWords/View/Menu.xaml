@@ -14,22 +14,22 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu>
-            <MenuItem Header="Слова">
-                <MenuItem Header="Невідомі" Command="{Binding UnknownWordsCommand}" />
-                <MenuItem Header="Не запам'ятовані" Command="{Binding NotMemorizedWordsCommand}" />
-                <MenuItem Header="Запам'ятовані" Command="{Binding MemorizedWordsCommand}" />
-                <MenuItem Header="Вивчені" Command="{Binding LearnedWordsCommand}" />
-                <MenuItem Header="Всі" Command="{Binding AllWordsCommand}" />
+            <MenuItem Header="{Binding Source={StaticResource Words}}">
+                <MenuItem Header="{Binding Source={StaticResource Unknown}}" Command="{Binding UnknownWordsCommand}" />
+                <MenuItem Header="{Binding Source={StaticResource NotMemorized}}" Command="{Binding NotMemorizedWordsCommand}" />
+                <MenuItem Header="{Binding Source={StaticResource Memorized}}" Command="{Binding MemorizedWordsCommand}" />
+                <MenuItem Header="{Binding Source={StaticResource Learned}}" Command="{Binding LearnedWordsCommand}" />
+                <MenuItem Header="{Binding Source={StaticResource Everything}}" Command="{Binding AllWordsCommand}" />
             </MenuItem>
-            <MenuItem Header="Створити" Command="{Binding CreateCommand}" />
-            <MenuItem Header="Тренування">
-                <MenuItem Header="Неідомі" Command="{Binding TrainOfUnknownWords}" />
-                <MenuItem Header="Не запам'ятовані" Command="{Binding TrainNotMemorizedWords}" />
-                <MenuItem Header="Запам'ятовані" Command="{Binding TrainMemorizedWords}" />
-                <MenuItem Header="Вивчені" Command="{Binding TrainLearnedWords}" />
-                <MenuItem Header="Всі" Command="{Binding TrainAllWordsCommand}" />
+            <MenuItem Header="{Binding Source={StaticResource Create}}" Command="{Binding CreateCommand}" />
+            <MenuItem Header="{Binding Source={StaticResource Train}}">
+                <MenuItem Header="{Binding Source={StaticResource Unknown}}" Command="{Binding TrainOfUnknownWords}" />
+                <MenuItem Header="{Binding Source={StaticResource NotMemorized}}" Command="{Binding TrainNotMemorizedWords}" />
+                <MenuItem Header="{Binding Source={StaticResource Memorized}}" Command="{Binding TrainMemorizedWords}" />
+                <MenuItem Header="{Binding Source={StaticResource Learned}}" Command="{Binding TrainLearnedWords}" />
+                <MenuItem Header="{Binding Source={StaticResource Everything}}" Command="{Binding TrainAllWordsCommand}" />
             </MenuItem>
-            <MenuItem Header="Налаштування" Command="{Binding SettingsCommand}" />
+            <MenuItem Header="{Binding Source={StaticResource Settings}}" Command="{Binding SettingsCommand}" />
         </Menu>
         <Frame 
             Name="MenuFrame"

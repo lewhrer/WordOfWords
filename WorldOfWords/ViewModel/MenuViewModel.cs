@@ -30,7 +30,8 @@ namespace WorldOfWords.ViewModel
                 return allWordsCommand ??
                   (allWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("All", "Всі слова"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("All", Application.Current.Resources["AllWords"].ToString(),
+                          Application.Current.Resources["TrainingAllWords"].ToString()));
                   }));
             }
         }
@@ -58,7 +59,8 @@ namespace WorldOfWords.ViewModel
                 return trainAllWordsCommand ??
                   (trainAllWordsCommand = new RelayCommand(obj =>
                   {
-                      TrainCommand(Resource.getInstance().WordService.GetTrainAllWords(), "Тренування всіх слів", "All", "Всі слова");
+                      TrainCommand(Resource.getInstance().WordService.GetTrainAllWords(), 
+                          Application.Current.Resources["TrainingAllWords"].ToString(), "All", Application.Current.Resources["AllWords"].ToString());
                   }));
             }
         }
@@ -72,7 +74,7 @@ namespace WorldOfWords.ViewModel
                   (trainOfUnknownWords = new RelayCommand(obj =>
                   {
                       TrainCommand(Resource.getInstance().WordService.GetTrainWords(0, Resource.getInstance().Level.First, 
-                          Resource.getInstance().TrainDate.Unknown), "Тренування невідомих слів", "0", "Невідомі слова");
+                          Resource.getInstance().TrainDate.Unknown), Application.Current.Resources["TrainingUnknownWords"].ToString(), "0", Application.Current.Resources["UnknownWords"].ToString());
                   }));
             }
         }
@@ -86,8 +88,8 @@ namespace WorldOfWords.ViewModel
                   (trainNotMemorizedWords = new RelayCommand(obj =>
                   {
                       TrainCommand(Resource.getInstance().WordService.GetTrainWords(Resource.getInstance().Level.First, 
-                          Resource.getInstance().Level.Second, Resource.getInstance().TrainDate.NotMemorized), 
-                          "Тренування не запам'ятованих слів", "33", "Незапам'ятовані слова");
+                          Resource.getInstance().Level.Second, Resource.getInstance().TrainDate.NotMemorized),
+                          Application.Current.Resources["TrainingNotMemorizedWords"].ToString(), "33", Application.Current.Resources["NotMemorizedWords"].ToString());
                   }));
             }
         }
@@ -101,8 +103,8 @@ namespace WorldOfWords.ViewModel
                   (trainMemorizedWords = new RelayCommand(obj =>
                   {
                       TrainCommand(Resource.getInstance().WordService.GetTrainWords(Resource.getInstance().Level.Second, 
-                          Resource.getInstance().Level.Third, Resource.getInstance().TrainDate.Memorized), 
-                          "Тренування зам'ятованих слів", "66", "Запам'ятовані слова");
+                          Resource.getInstance().Level.Third, Resource.getInstance().TrainDate.Memorized),
+                          Application.Current.Resources["TrainingMemorizedWords"].ToString(), "66", Application.Current.Resources["MemorizedWords"].ToString());
                   }));
             }
         }
@@ -116,7 +118,8 @@ namespace WorldOfWords.ViewModel
                   (trainLearnedWords = new RelayCommand(obj =>
                   {
                         TrainCommand(Resource.getInstance().WordService.GetTrainWords(Resource.getInstance().Level.Third, 
-                            100, Resource.getInstance().TrainDate.Learned), "Тренування вивчених слів", "100", "Вивчені слова");
+                            100, Resource.getInstance().TrainDate.Learned), Application.Current.Resources["TrainingLearnedWords"].ToString(), 
+                            "100", Application.Current.Resources["LearnedWords"].ToString());
                   }));
             }
         }
@@ -132,7 +135,8 @@ namespace WorldOfWords.ViewModel
                 return unknownWordsCommand ??
                   (unknownWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("0", "Невідомі слова"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("0", Application.Current.Resources["UnknownWords"].ToString(), 
+                          Application.Current.Resources["TrainingUnknownWords"].ToString()));
                   }));
             }
         }
@@ -145,7 +149,8 @@ namespace WorldOfWords.ViewModel
                 return notMemorizedWordsCommand ??
                   (notMemorizedWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("33", "Не запам'ятовані слова"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("33", Application.Current.Resources["NotMemorizedWords"].ToString(),
+                          Application.Current.Resources["TrainingNotMemorizedWords"].ToString()));
                   }));
             }
         }
@@ -158,7 +163,8 @@ namespace WorldOfWords.ViewModel
                 return memorizedWordsCommand ??
                   (memorizedWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("66", "Запам'ятовані слова"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("66", Application.Current.Resources["MemorizedWords"].ToString(),
+                          Application.Current.Resources["TrainingMemorizedWords"].ToString()));
                   }));
             }
         }
@@ -171,7 +177,8 @@ namespace WorldOfWords.ViewModel
                 return learnedWordsCommand ??
                   (learnedWordsCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("100", "Вивчені слова"));
+                      Resource.getInstance().MenuFrame.Navigate(new ListOfWords("100", Application.Current.Resources["LearnedWords"].ToString(),
+                          Application.Current.Resources["TrainingLearnedWords"].ToString()));
                   }));
             }
         }
@@ -200,7 +207,8 @@ namespace WorldOfWords.ViewModel
                           }
                           catch (Exception)
                           {
-                              Resource.getInstance().MenuFrame.Navigate(new ListOfWords("All", "Всі слова"));
+                              Resource.getInstance().MenuFrame.Navigate(new ListOfWords("All", Application.Current.Resources["AllWords"].ToString(),
+                                  Application.Current.Resources["TrainingAllWords"].ToString()));
                           }
                       }
                   }));
@@ -214,7 +222,7 @@ namespace WorldOfWords.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        private void TrainCommand(List<Word> words, string trainPaage, string listPageId, string listPageName)
+        private void TrainCommand(List<Word> words, string trainPage, string listPageId, string listPageName)
         {
             try
             {
@@ -222,7 +230,7 @@ namespace WorldOfWords.ViewModel
                 {
                     var viewModel = ((ListOfWords)Resource.getInstance().MenuFrame.Content).ViewModel;
 
-                    Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x)).ToList(), viewModel, trainPaage));
+                    Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(), viewModel, trainPage));
                 }
                 else
                 {
@@ -236,7 +244,7 @@ namespace WorldOfWords.ViewModel
                     if (words.Any())
                     {
                         var viewModel = ((WordInfo)Resource.getInstance().MenuFrame.Content).ViewModel;
-                        Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x)).ToList(), viewModel, trainPaage));
+                        Resource.getInstance().MenuFrame.Navigate(new WordInfo(words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList(), viewModel, trainPage));
                     }
                     else
                     {
@@ -245,7 +253,7 @@ namespace WorldOfWords.ViewModel
                 }
                 catch (Exception)
                 {
-                    Resource.getInstance().MenuFrame.Navigate(new ListOfWords(listPageId, listPageName));
+                    Resource.getInstance().MenuFrame.Navigate(new ListOfWords(listPageId, listPageName, trainPage));
                 }
             }
         }

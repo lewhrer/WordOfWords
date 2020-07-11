@@ -34,5 +34,10 @@ namespace WorldOfWords.View
             ViewModel = new WordInfoViewModel(words, updater, namePage, indexWord);
             DataContext = ViewModel;
         }
+
+        private void DownOnTranslate(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBlock).Text = (sender as TextBlock).Tag.ToString();
+        }
     }
 }

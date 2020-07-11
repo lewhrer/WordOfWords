@@ -25,10 +25,10 @@ namespace WorldOfWords.View
     {
         public ListOfWordsViewModel ViewModel { get; set; }
         
-        public ListOfWords(string nameMethod, string namePage)
+        public ListOfWords(string nameMethod, string namePage, string nameTrainPage)
         {
             InitializeComponent();
-            ViewModel = new ListOfWordsViewModel(nameMethod, namePage);
+            ViewModel = new ListOfWordsViewModel(nameMethod, namePage, nameTrainPage);
             DataContext = ViewModel;
         }
     }

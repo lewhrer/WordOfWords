@@ -26,12 +26,21 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border 
-                Grid.RowSpan="2"
+                Grid.Row="0"
                 Grid.Column="0"
                 HorizontalAlignment="Right"
                 Width="2"
                 Background="Black"
-                Margin="0,15"
+                Margin="0,15,-1,15"
+                />
+
+            <Border 
+                Grid.Row="1"
+                Grid.Column="0"
+                HorizontalAlignment="Right"
+                Width="2"
+                Background="Black"
+                Margin="0,15,-1,15"
                 />
 
             <Border 
@@ -40,7 +49,7 @@
                 VerticalAlignment="Bottom"
                 Height="2"
                 Background="Black"
-                Margin="15,0"
+                Margin="15,0,15,-1"
                 />
 
             <Border 
@@ -49,7 +58,7 @@
                 VerticalAlignment="Bottom"
                 Height="2"
                 Background="Black"
-                Margin="15,0"
+                Margin="15,0,15,-1"
                 />
 
             <Grid
@@ -67,17 +76,28 @@
             </Grid>
 
             <Grid
-                DataContext="{Binding SelectedWord}"
                 Grid.Row="1"
                 Grid.Column="1"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"
                 >
-                <TextBlock 
-                    TextWrapping="Wrap" 
-                    Text="{Binding Translate}" 
-                    FontSize="30"
-                    />
+                <Grid 
+                    DataContext="{Binding SelectedWord}"
+                    >
+                    <TextBlock 
+                        TextWrapping="Wrap" 
+                        Text="{Binding HidedTranslate}"
+                        FontSize="30"
+                        />
+                </Grid>
+                
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <i:InvokeCommandAction
+                                Command="{Binding MouseDownOnTranslateCommand}"
+                             />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </Grid>
             <StackPanel 
                 Grid.Row="1"
@@ -89,7 +109,11 @@
                 >
                 <StackPanel Orientation="Horizontal">
                     <TextBlock 
-                        Text="Рівень: " 
+                        Text="{Binding Source={StaticResource Level}}" 
+                        FontSize="20"
+                        />
+                    <TextBlock 
+                        Text=": " 
                         FontSize="20"
                         />
                     <TextBlock 
@@ -99,7 +123,25 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock 
-                        Text="Оновлено: " 
+                        Text="{Binding Source={StaticResource Priority}}" 
+                        FontSize="20"
+                        />
+                    <TextBlock 
+                        Text=": " 
+                        FontSize="20"
+                        />
+                    <TextBlock 
+                        Text="{Binding Priority}" 
+                        FontSize="20"
+                        />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock 
+                        Text="{Binding Source={StaticResource Updated}}" 
+                        FontSize="20"
+                        />
+                    <TextBlock 
+                        Text=": " 
                         FontSize="20"
                         />
                     <TextBlock 
@@ -113,7 +155,7 @@
                 
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="50,15,50,35"
+                Margin="50,15"
                 >
                 <Border 
                     Background="Black"
@@ -135,66 +177,85 @@
                     Height="3"
                     VerticalAlignment="Bottom"
                     />
+
+                <Grid>
+                    <Grid
+                        DataContext="{Binding SelectedWord}"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Margin="3"
+                        >
+                        <Image 
+                            Name="ImgPicture" 
+                            Source="{Binding SourcePicture}"
+                            />
+
+                    </Grid>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <i:InvokeCommandAction
+                                    Command="{Binding MouseDownOnPictureCommand}"
+                                 />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Grid>
                 <Grid
-                    DataContext="{Binding SelectedWord}"
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
-                    Margin="3"
                     >
-                    <Image 
-                        Name="ImgPicture" 
-                        Source="{Binding SourcePicture}"
-                        />
-
+                    <Grid
+                        DataContext="{Binding SelectedWord}"
+                        >
+                        <TextBlock 
+                            Text="{Binding HidedPicture}" 
+                            FontSize="30"
+                            />
+                    </Grid>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <i:InvokeCommandAction
+                                    Command="{Binding MouseDownOnHidedPictureCommand}"
+                                    />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </Grid>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDown">
-                        <i:InvokeCommandAction
-                                Command="{Binding MouseDownOnPictureCommand}"
-                             />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
             </Grid>
-
-            <Button 
-                Grid.Column="1"
-                Grid.Row="0"
-                Content="Показати"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="50,5"
-                Command="{Binding ShowPictureCommand}" 
-                />
-
-            <Button 
-                Grid.Column="0"
-                Grid.Row="1"
-                Content="Показати"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Margin="50,5"
-                Command="{Binding ShowExampleCommand}" 
-                />
 
             <Grid
                 Grid.Column="0"
                 Grid.Row="1"
-                Margin="50,35,50,15"
-                DataContext="{Binding SelectedWord}"
+                Margin="50,15"
                 >
-                <TextBox 
-                    Name="TbxExample" 
-                    TextWrapping="Wrap"
-                    FontSize="25"
-                    IsReadOnly="True"
-                    Text="{Binding Example}"
-                    />
-                <Image 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="3"
-                    Source="{Binding SourcePictureExample}"
-                       />
+                <Grid
+                    DataContext="{Binding SelectedWord}"
+                    >
+                    <TextBox 
+                        Name="TbxExample" 
+                        TextWrapping="Wrap"
+                        FontSize="25"
+                        IsReadOnly="True"
+                        Text="{Binding Example}"
+                        />
+                </Grid>
+                <Grid>
+                    <Grid
+                        DataContext="{Binding SelectedWord}"
+                        >
+                        <TextBlock 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Text="{Binding HidedExample}" 
+                            FontSize="30"
+                            />
+                    </Grid>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <i:InvokeCommandAction
+                                Command="{Binding MouseDownOnExampleCommand}"
+                                />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Grid>
             </Grid>
         </Grid>
         <Grid Name="ButtonsKnows"
@@ -214,45 +275,53 @@
 
             <Button 
                 Grid.Column="0"
-                Content="Попередній"
+                Grid.ColumnSpan="2"
+                Content="{Binding Source={StaticResource Previous}}"
                 HorizontalAlignment="Left"
                 Margin="15,0"
+                Width="80"
                 Command="{Binding PreviouslyCommand}" 
                 />
             <Button 
                 Grid.Column="2"
-                Content="Не знаю" 
+                Content="{Binding Source={StaticResource DontKnow}}" 
                 Command="{Binding UnknownWordsCommand}"
                 Background="Red"
+                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
                 Grid.Column="3"
-                Content="Не пригадую" 
+                Content="{Binding Source={StaticResource DontRemember}}" 
                 Command="{Binding NotMemorizedWordsCommand}"
                 Background="Orange"
+                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
                 Grid.Column="4"
-                Content="Пригадую" 
+                Content="{Binding Source={StaticResource Remember}}" 
                 Command="{Binding MemorizedWordsCommand}"
                 Background="GreenYellow"
+                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
                 Grid.Column="5"
-                Content="Знаю" 
+                Content="{Binding Source={StaticResource Know}}" 
                 Command="{Binding LearnedWordsCommand}"
                 Background="Green"
-                Margin="5,0"
+                Foreground="Black"
+                Margin="5,0" Height="27" VerticalAlignment="Top"
                 />
             <Button 
                 Name="btnNext"
-                Grid.Column="7"
-                Content="Наступний" 
+                Grid.Column="6"
+                Grid.ColumnSpan="2"
+                Content="{Binding Source={StaticResource Next}}" 
                 HorizontalAlignment="Right"
                 Margin="15,0"
+                Width="80"
                 Command="{Binding NextCommand}"
                 />
         </Grid>
@@ -266,7 +335,7 @@
             >
             <Button 
                 Margin="10,0"
-                Content="Назад" 
+                Content="{Binding Source={StaticResource Back}}" 
                 Command="{Binding GoBackCommand}" 
                 />
 
@@ -275,7 +344,7 @@
                 Grid.Row="0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Content="Редагувати" 
+                Content="{Binding Source={StaticResource Edit}}" 
                 Command="{Binding EditCommand}"
                 Margin="5,0"
                 Background="DarkSlateGray"
@@ -284,7 +353,7 @@
                 Grid.Column="2"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Content="Видалити" 
+                Content="{Binding Source={StaticResource Delete}}" 
                 Command="{Binding DeleteCommand}"
                 Margin="5,0"
                 Background="DarkSlateGray"
@@ -306,7 +375,11 @@
             Margin="15,0"
             >
             <TextBlock 
-                Text="Індекс: " 
+                Text="{Binding Source={StaticResource Index}}" 
+                FontSize="20"
+                />
+            <TextBlock 
+                Text=": " 
                 FontSize="20"
                 />
             <TextBlock 

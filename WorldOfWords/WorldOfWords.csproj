@@ -126,6 +126,10 @@
     <Compile Include="View\WordInfo.xaml.cs">
       <DependentUpon>WordInfo.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\LanguageUkrainian.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\DarkTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

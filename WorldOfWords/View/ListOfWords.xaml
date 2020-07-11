@@ -28,7 +28,7 @@
                 Margin="10,0,10,5"
             Grid.Row="0"
             >
-        
+
             <StackPanel Name="TotalCount"
                 Orientation="Horizontal"
                 VerticalAlignment="Top"
@@ -37,14 +37,18 @@
                         HorizontalAlignment="Right"
                 >
                 <TextBlock 
-                    Text="Загальна кількість: "
+                    Text="{Binding Source={StaticResource TotalCount}}"
+                    FontSize="20" 
+                    />
+                <TextBlock 
+                    Text=": "
                     FontSize="20" 
                     />
                 <TextBlock 
                     Text="{Binding TotalCount}" 
                     FontSize="20" 
                     />
-            
+
             </StackPanel>
             <Grid
                 VerticalAlignment="Bottom"
@@ -56,104 +60,171 @@
                 </Grid.ColumnDefinitions>
                 <Button 
                     Grid.Column="0"
-                    Content="Переглянути" 
+                    Content="{Binding Source={StaticResource Browse}}" 
                     Command="{Binding MoreCommand}"
                     Margin="2.5,0"
                     Background="DarkSlateGray"
                     />
                 <Button 
                     Grid.Column="1"
-                    Content="Редагувати" 
+                    Content="{Binding Source={StaticResource Edit}}" 
                     Command="{Binding EditCommand}"
                     Margin="2.5,0"
                     Background="DarkSlateGray"
                     />
                 <Button 
                     Grid.Column="2"
-                    Content="Видалити" 
+                    Content="{Binding Source={StaticResource Delete}}" 
                     Command="{Binding DeleteCommand}"
                     Margin="2.5,0"
                     Background="DarkSlateGray"
                     />
-                
+
             </Grid>
         </Grid>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Words}"
-                 SelectedItem="{Binding SelectedWord}"
-                 >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Border 
-                            Grid.Row="0"
-                            Background="Black"
-                            Margin="-10,0,-10,0"
-                            />
-                        <Grid Grid.Row="1" Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="1" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="180" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock 
-                                Grid.Column="0" 
-                                FontSize="28" 
-                                Text="{Binding Path=Level}"
-                                VerticalAlignment="Center"
-                                />
-                            <Border 
-                                Grid.Column="1"
-                                Background="Black"
-                                Margin="0,3"
-                                />
-                            <TextBlock 
-                                Grid.Column="2" 
-                                FontSize="28" 
-                                Width="auto"
-                                Margin="10,0"
-                                Text="{Binding Path=Name}" 
-                                TextWrapping="Wrap" 
-                                VerticalAlignment="Center"
-                                />
-                            <TextBlock 
-                                Grid.Column="3" 
-                                FontSize="20"
-                                Width="auto"
-                                Text="{Binding Path=Translate}" 
-                                TextWrapping="Wrap" 
-                                VerticalAlignment="Center"
-                                />
+        <Grid Grid.Row="1" Margin="30,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid 
+                Grid.Row="0" 
+                Margin="5"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="1" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="180" />
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                    Grid.Column="0" 
+                    FontSize="21" 
+                    Text="{Binding Source={StaticResource Level}}"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    />
+                <Border 
+                    Grid.Column="1"
+                    Background="Black"
+                    Margin="0,3"
+                    />
+                <TextBlock 
+                    Grid.Column="2" 
+                    FontSize="21" 
+                    Width="auto"
+                    FontWeight="Bold"
+                    Margin="10,0"
+                    Text="{Binding Source={StaticResource Word}}" 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Center"
+                    />
+                <TextBlock 
+                    Grid.Column="3" 
+                    FontSize="21"
+                    FontWeight="Bold"
+                    Width="auto"
+                    Text="{Binding Source={StaticResource Translate}}" 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Center"
+                    />
+            </Grid>
 
+            <ListBox ItemsSource="{Binding Words}"
+                     SelectedItem="{Binding SelectedWord}"
+                     Grid.Row="1"
+                     >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
                             <Grid
-                                Grid.Column="4"
-                                HorizontalAlignment="Right"
+                                Grid.RowSpan="2"
+                                Background="{Binding Path=RowColor}"
+                                Opacity="0.2"
+                                Margin="-10,0,-10,0"
                                 >
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Updated: " />
-                                    <TextBlock  Text="{Binding Path=LastUpdate}" />
-                                </StackPanel>
-                                <StackPanel 
-                                    VerticalAlignment="Bottom" 
-                                    HorizontalAlignment="Right" 
-                                    Orientation="Horizontal"
-                                    >
-                                    <TextBlock Text="Priority: " />
-                                    <TextBlock  Text="{Binding Path=Priority}" />
-                                </StackPanel>
                             </Grid>
-                        </Grid>
+                            <Border 
+                                Grid.Row="0"
+                                Background="Black"
+                                Margin="-10,0,-10,0"
+                                />
+                            <Grid Grid.Row="1"
+                                    >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="1" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="180" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Grid.Column="0" >
+                                    <TextBlock 
+                                        FontSize="28" 
+                                        Text="{Binding Path=Level}"
+                                        VerticalAlignment="Center"
+                                        />
+                                    <TextBlock 
+                                        FontSize="28" 
+                                        Text=" %"
+                                        VerticalAlignment="Center"
+                                        />
+                                </StackPanel>
+                                <Border 
+                                    Grid.Column="1"
+                                    Background="Black"
+                                    Margin="0,3"
+                                    />
+                                <TextBlock 
+                                    Grid.Column="2" 
+                                    FontSize="28" 
+                                    Width="auto"
+                                    Margin="10,0"
+                                    Text="{Binding Path=Name}" 
+                                    TextWrapping="Wrap" 
+                                    VerticalAlignment="Center"
+                                    />
+                                <TextBlock 
+                                    Grid.Column="3" 
+                                    FontSize="20"
+                                    Width="auto"
+                                    Text="{Binding Path=Translate}" 
+                                    TextWrapping="Wrap" 
+                                    VerticalAlignment="Center"
+                                    />
+
+                                <Grid
+                                    Grid.Column="4"
+                                    HorizontalAlignment="Right"
+                                    Margin="5,0"
+                                    >
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Оновлено: " />
+                                        <TextBlock  Text="{Binding Path=LastUpdate}" />
+                                    </StackPanel>
+                                    <StackPanel 
+                                        VerticalAlignment="Bottom" 
+                                        HorizontalAlignment="Right" 
+                                        Orientation="Horizontal"
+                                        >
+                                        <TextBlock Text="Пріорітет: " />
+                                        <TextBlock  Text="{Binding Path=Priority}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
                         
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         
+            
+        </Grid>
         <!--<ListBox Grid.Row="1" >
             <ListBoxItem
                 >
@@ -245,30 +316,34 @@
            
             <Button 
                 Grid.Column="2"
-                Content="Не знаю" 
+                Content="{Binding Source={StaticResource DontKnow}}" 
                 Command="{Binding UnknownWordsCommand}"
                 Background="Red"
+                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
                 Grid.Column="3"
-                Content="Не пригадую" 
+                Content="{Binding Source={StaticResource DontRemember}}" 
                 Command="{Binding NotMemorizedWordsCommand}"
                 Background="Orange"
+                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
                 Grid.Column="4"
-                Content="Пригадую" 
+                Content="{Binding Source={StaticResource Remember}}" 
                 Command="{Binding MemorizedWordsCommand}"
-                Background="GreenYellow"
+                Background="LimeGreen"
+                Foreground="Black"
                 Margin="5,0"
                 />
             <Button 
                 Grid.Column="5"
-                Content="Знаю" 
+                Content="{Binding Source={StaticResource Know}}" 
                 Command="{Binding LearnedWordsCommand}"
                 Background="Green"
+                Foreground="Black"
                 Margin="5,0"
                 />
         

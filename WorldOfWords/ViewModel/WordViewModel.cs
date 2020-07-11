@@ -8,32 +8,36 @@ using System.Windows;
 using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
 using WorldOfWords.Model;
-using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace WorldOfWords.ViewModel
 {
     public class WordViewModel : INotifyPropertyChanged
     {
+        private string name;
+        private string translate;
+        private string example;
+        private string hidedTranslate;
+        private string hidedExample;
+        private string hidedPicture;
+        private ComboBoxItem wordPriority;
+
         public Guid Id { get; set; }
-        public string name { get; set; }
-        public string translate { get; set; }
         public string LastUpdate { get; set; }
         public DateTime LastUpdateDate { get; set; }
-        public string example;
         public string ExampleCorectly { get; set; }
         public byte[] Picture { get; set; }
         public BitmapImage sourcePicture;
         public BitmapImage SourcePictureCorectly { get; set; }
         public BitmapImage sourcePictureExample { get; set; }
-        public bool IsPhoto { get; set; } = false;
         public int Level { get; set; }
         public int Priority { get; set; }
         public ObservableCollection<ComboBoxItem> Priorities { get; set; }
-        private ComboBoxItem wordPriority;
+        public Brush RowColor { get; set; }
 
         public WordViewModel(int priority = 0)
         {
@@ -46,11 +50,12 @@ namespace WorldOfWords.ViewModel
             WordPriority = Priorities[priority];
         }
 
-        public WordViewModel(Word word)
+        public WordViewModel(Word word, int index)
         {
             Id = word.Id;
             Name = word.Name;
             Translate = word.Translate;
+            HidedTranslate = "...???...";
             LastUpdate = word.LastUpdate.ToShortDateString();
             Level = word.Level;
             Priority = word.Priority;
@@ -59,19 +64,22 @@ namespace WorldOfWords.ViewModel
 
             if (word.Example != null)
             {
-                SourcePictureExample = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/HideImage.png"));
+                HidedExample = "...???...";
             }
 
             if(word.Picture != null)
             {
-                IsPhoto = true;
+                HidedPicture = "...???...";
                 SourcePictureCorectly = GetSourceImage(word.Picture);
-                SourcePicture = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/HideImage.png"));
+            }
+
+            if(index % 2 == 0)
+            {
+                RowColor = new SolidColorBrush(Colors.Black);
             }
             else
             {
-                SourcePictureCorectly = new BitmapImage(new Uri("pack://application:,,,/WorldOfWords;component/Resources/NotImage2.png"));
-                SourcePicture = SourcePictureCorectly;
+                RowColor = null;
             }
         }
 
@@ -115,6 +123,16 @@ namespace WorldOfWords.ViewModel
             }
         }
 
+        public string HidedTranslate
+        {
+            get { return hidedTranslate; }
+            set
+            {
+                hidedTranslate = value;
+                OnPropertyChanged("HidedTranslate");
+            }
+        }
+
         public string Example
         {
             get { return example; }
@@ -122,6 +140,26 @@ namespace WorldOfWords.ViewModel
             {
                 example = value;
                 OnPropertyChanged("Example");
+            }
+        }
+
+        public string HidedExample
+        {
+            get { return hidedExample; }
+            set
+            {
+                hidedExample = value;
+                OnPropertyChanged("HidedExample");
+            }
+        }
+
+        public string HidedPicture
+        {
+            get { return hidedPicture; }
+            set
+            {
+                hidedPicture = value;
+                OnPropertyChanged("HidedPicture");
             }
         }
 
