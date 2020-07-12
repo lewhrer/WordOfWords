@@ -110,6 +110,9 @@
     <Compile Include="View\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
     <Compile Include="View\WordInfo.xaml.cs">
       <DependentUpon>WordInfo.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\LanguageEnglish.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\LanguageUkrainian.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Edit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -34,9 +34,12 @@ namespace WorldOfWords
                     if (resource != null)
                     {
                         Resource.getInstance().ThemePath = resource.ThemePath;
+                        Resource.getInstance().Theme = resource.Theme;
                         Resource.getInstance().PathNoImage = resource.PathNoImage;
                         Resource.getInstance().Level = resource.Level;
                         Resource.getInstance().TrainDate = resource.TrainDate;
+                        Resource.getInstance().Language = resource.Language;
+                        Resource.getInstance().LanguagePath = resource.LanguagePath;
                     }
                 }
             }
@@ -63,6 +66,9 @@ namespace WorldOfWords
                 theme.Source = new Uri($"pack://application:,,,/WorldOfWords;component/Themes/LightTheme.xaml");
                 Application.Current.Resources.MergedDictionaries.Add(theme);
             }
+            ResourceDictionary language = new ResourceDictionary();
+            language.Source = new Uri(Resource.getInstance().LanguagePath);
+            Application.Current.Resources.MergedDictionaries.Add(language);
         }
     }
 }

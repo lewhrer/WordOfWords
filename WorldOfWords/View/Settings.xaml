@@ -725,6 +725,13 @@
                     Text="{Binding Learned, UpdateSourceTrigger=PropertyChanged}"
                     />
             </Grid>
+            <Grid>
+                <ComboBox  
+                    SelectedItem="{Binding Language}"
+                    ItemsSource="{Binding Languages}"
+                    Width="150"
+                    VerticalAlignment="Top"/>
+            </Grid>
             <Button 
                     Grid.Row="1" 
                     Content="Зберегти" 

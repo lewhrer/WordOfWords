@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -11,18 +12,27 @@ using System.Windows;
 using System.Windows.Controls;
 using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.Model;
+using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
     public class SettingsViewModel : INotifyPropertyChanged
     {
+        private ComboBoxItem language;
         public Level Level { get; set; }
         public TrainDate TrainDate { get; set; }
+        public ObservableCollection<ComboBoxItem> Languages { get; set; }
 
         public SettingsViewModel()
         {
             Level = Resource.getInstance().Level;
             TrainDate = Resource.getInstance().TrainDate;
+            Languages = new ObservableCollection<ComboBoxItem>()
+            {
+                new ComboBoxItem(){ Content = "Українська", Tag="pack://application:,,,/WorldOfWords;component/Resources/LanguageUkrainian.xaml"},
+                new ComboBoxItem(){ Content = "English", Tag="pack://application:,,,/WorldOfWords;component/Resources/LanguageEnglish.xaml"},
+            };
+            Language = Languages[Languages.IndexOf(Languages.First(x => x.Content.ToString() == Resource.getInstance().Language))];
         }
 
         private RelayCommand makeReserveCommand;
@@ -72,6 +82,12 @@ namespace WorldOfWords.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
+                      ResourceDictionary myResourceDictionary = new ResourceDictionary();
+                      myResourceDictionary.Source = new Uri(Language.Tag.ToString());
+                      Application.Current.Resources.MergedDictionaries.Add(myResourceDictionary);
+                      Resource.getInstance().Language = Language.Content.ToString();
+                      Resource.getInstance().LanguagePath = Language.Tag.ToString();
+
                       Resource.getInstance().Level = Level;
                       Resource.getInstance().TrainDate = TrainDate;
                       DeleteFile("Settings.json");
@@ -83,6 +99,7 @@ namespace WorldOfWords.ViewModel
                           jsonFormatter.WriteObject(fs, Resource.getInstance());
                       }
                       MessageBox.Show("Дані збережено успішно!");
+                      MainWindow.Frame.Navigate(new View.Menu(0));
                   }));
             }
         }
@@ -102,14 +119,26 @@ namespace WorldOfWords.ViewModel
                         ResourceDictionary theme = new ResourceDictionary();
                         if (obj.ToString().Contains("Dark"))
                         {
-                            theme.Source = new Uri($"pack://application:,,,/WorldOfWords;component/Themes/DarkTheme.xaml");
+                            Resource.getInstance().Theme = "pack://application:,,,/WorldOfWords;component/Themes/DarkTheme.xaml";
+                            theme.Source = new Uri(Resource.getInstance().Theme);
                         }
                         else
                         {
-                            theme.Source = new Uri($"pack://application:,,,/WorldOfWords;component/Themes/LightTheme.xaml");
+                            Resource.getInstance().Theme = "pack://application:,,,/WorldOfWords;component/Themes/LightTheme.xaml";
+                            theme.Source = new Uri(Resource.getInstance().Theme);
                         }
                         Application.Current.Resources.MergedDictionaries.Add(theme);
                     }));
+            }
+        }
+
+        public ComboBoxItem Language
+        {
+            get { return language; }
+            set
+            {
+                language = value;
+                OnPropertyChanged("Language");
             }
         }
 

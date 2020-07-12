@@ -25,12 +25,18 @@ namespace WorldOfWords
         private Level level;
         [DataMember]
         private TrainDate trainDate;
+        [DataMember]
+        private string languagePath;
+        [DataMember]
+        private string language;
 
         public Resource()
         {
             PathNoImage = "pack://application:,,,/WorldOfWords;component/Resources/Image.png";
+            Theme = "pack://application:,,,/WorldOfWords;component/Themes/DarkTheme.xaml";
             ThemePath = "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml";
-            Theme = "Dark";
+            LanguagePath = "pack://application:,,,/WorldOfWords;component/Resources/LanguageUkrainian.xaml";
+            Language = "Українська";
             WordService = new WordService(new WorldOfWordsDbContext());
             Level = new Level();
             TrainDate = new TrainDate();
@@ -55,7 +61,6 @@ namespace WorldOfWords
             set { level = value; }
         }
 
-
         public TrainDate TrainDate
         {
             get { return trainDate; }
@@ -68,6 +73,23 @@ namespace WorldOfWords
             set
             {
                 themePath = value;
+            }
+        }
+
+        public string LanguagePath
+        {
+            get { return languagePath; }
+            set
+            {
+                languagePath = value;
+            }
+        }
+        public string Language
+        {
+            get { return language; }
+            set
+            {
+                language = value;
             }
         }
 
