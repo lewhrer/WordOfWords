@@ -6,7 +6,6 @@ namespace WorldOfWords.Model
     [DataContract]
     public class Word
     {
-        [DataMember]
         public Guid Id { get; set; }
         [DataMember]
         public string Name { get; set; }

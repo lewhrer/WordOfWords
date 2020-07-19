@@ -46,6 +46,7 @@ namespace WorldOfWords.Infrastructure.Services
         {
             foreach (var item in words)
             {
+                item.Id = Guid.NewGuid();
                 _context.Words.Add(item);
             }
 

@@ -56,4 +56,20 @@
     <system:String x:Key="LightTheme">Light theme</system:String>
     <system:String x:Key="DarkTheme">Dark theme</system:String>
 
+    <system:String x:Key="BackupCopying">Backup copying</system:String>
+    <system:String x:Key="RestoreBackup">Restore backup</system:String>
+    <system:String x:Key="ClearTheWordDatabase">Clear the word database</system:String>
+    <system:String x:Key="MoreDetailed">More detailed</system:String>
+    <system:String x:Key="Language">Language</system:String>
+    <system:String x:Key="Apply">Apply</system:String>
+    <system:String x:Key="SettingLimit">Setting a limit for the level of knowledge</system:String>
+    <system:String x:Key="RepeatedDays">Days after which they will be repeated</system:String>
+
+    <system:String x:Key="Ok">Ok</system:String>
+    <system:String x:Key="Cancel">Cancel</system:String>
+
+    <system:String x:Key="ReserveMessage">Make a backup copy of words in a separate file? You can restore your words from this file.</system:String>
+    <system:String x:Key="DereserveMessage">To restore a previously saved backup of the words? Note that words will be added to an existing words database.</system:String>
+    <system:String x:Key="AllDeleteMessage">Delete all the words? Please note that this operation cannot be canceled in the future. We recommend that you make a backup first.</system:String>
+
 </ResourceDictionary>

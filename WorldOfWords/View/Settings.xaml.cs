@@ -15,10 +15,12 @@ namespace WorldOfWords.View
     /// </summary>
     public partial class Settings : Page
     {
+        public static Frame Details { get; set; }
         public Settings()
         {
             InitializeComponent();
             DataContext = new SettingsViewModel();
+            Details = DetailsFrame;
         }
     }
 }

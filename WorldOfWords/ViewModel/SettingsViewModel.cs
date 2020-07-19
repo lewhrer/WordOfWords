@@ -43,7 +43,7 @@ namespace WorldOfWords.ViewModel
                 return makeReserveCommand ??
                   (makeReserveCommand = new RelayCommand(obj =>
                   {
-                      Serialisation();
+                      Settings.Details.Navigate(new Details(Application.Current.Resources["ReserveMessage"].ToString(), Serialisation));
                   }));
             }
         }
@@ -56,7 +56,7 @@ namespace WorldOfWords.ViewModel
                 return uploadReserveCommand ??
                   (uploadReserveCommand = new RelayCommand(obj =>
                   {
-                      Deserialisation();
+                      Settings.Details.Navigate(new Details(Application.Current.Resources["DereserveMessage"].ToString(), Deserialisation));
                   }));
             }
         }
@@ -69,18 +69,41 @@ namespace WorldOfWords.ViewModel
                 return deleteAllCommand ??
                   (deleteAllCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().WordService.DeleteEverything();
+                      Settings.Details.Navigate(new Details(Application.Current.Resources["AllDeleteMessage"].ToString(), Resource.getInstance().WordService.DeleteEverything));
                   }));
             }
         }
 
-        private RelayCommand saveCommand;
-        public RelayCommand SaveCommand
+        private RelayCommand applyCommand;
+        public RelayCommand ApplyCommand
         {
             get
             {
-                return saveCommand ??
-                  (saveCommand = new RelayCommand(obj =>
+                return applyCommand ??
+                  (applyCommand = new RelayCommand(obj =>
+                  {
+                      Resource.getInstance().Level = Level;
+                      Resource.getInstance().TrainDate = TrainDate;
+                      DeleteFile("Settings.json");
+
+                      DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Resource));
+
+                      using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
+                      {
+                          jsonFormatter.WriteObject(fs, Resource.getInstance());
+                      }
+                      MessageBox.Show("Дані збережено успішно!");
+                  }));
+            }
+        }
+
+        private RelayCommand applyLanguageCommand;
+        public RelayCommand ApplyLanguageCommand
+        {
+            get
+            {
+                return applyLanguageCommand ??
+                  (applyLanguageCommand = new RelayCommand(obj =>
                   {
                       ResourceDictionary myResourceDictionary = new ResourceDictionary();
                       myResourceDictionary.Source = new Uri(Language.Tag.ToString());
@@ -88,8 +111,6 @@ namespace WorldOfWords.ViewModel
                       Resource.getInstance().Language = Language.Content.ToString();
                       Resource.getInstance().LanguagePath = Language.Tag.ToString();
 
-                      Resource.getInstance().Level = Level;
-                      Resource.getInstance().TrainDate = TrainDate;
                       DeleteFile("Settings.json");
 
                       DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Resource));
@@ -161,8 +182,6 @@ namespace WorldOfWords.ViewModel
             {
                 jsonFormatter.WriteObject(fs, words);
             }
-
-            Console.ReadLine();
         }
 
         private void Deserialisation()
@@ -173,7 +192,6 @@ namespace WorldOfWords.ViewModel
             {
                 Word[] words = (Word[])jsonFormatter.ReadObject(fs);
 
-                Resource.getInstance().WordService.DeleteEverything();
                 Resource.getInstance().WordService.AddRange(words);
             }
         }
