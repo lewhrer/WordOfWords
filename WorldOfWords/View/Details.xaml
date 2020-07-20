@@ -23,13 +23,13 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="black" Height="5" VerticalAlignment="Top"/>
-            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="black" Height="5" VerticalAlignment="Bottom"/>
-            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="black" Width="5" HorizontalAlignment="Left"/>
-            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="black" Width="5" HorizontalAlignment="Right"/>
+            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{Binding Source={StaticResource BorderBackground}}" Height="2" VerticalAlignment="Top"/>
+            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{Binding Source={StaticResource BorderBackground}}" Height="2" VerticalAlignment="Bottom"/>
+            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{Binding Source={StaticResource BorderBackground}}" Width="2" HorizontalAlignment="Left"/>
+            <Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="{Binding Source={StaticResource BorderBackground}}" Width="2" HorizontalAlignment="Right"/>
             <TextBlock
                 Text="{Binding Message}"
-                FontSize="20"
+                FontSize="{Binding Source={StaticResource SizeText}}"
                 MaxWidth="360"
                 TextWrapping="Wrap"
                 Margin="0,30"

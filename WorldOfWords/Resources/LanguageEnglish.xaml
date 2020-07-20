@@ -72,4 +72,11 @@
     <system:String x:Key="DereserveMessage">To restore a previously saved backup of the words? Note that words will be added to an existing words database.</system:String>
     <system:String x:Key="AllDeleteMessage">Delete all the words? Please note that this operation cannot be canceled in the future. We recommend that you make a backup first.</system:String>
 
+    <system:String x:Key="DontWroteWord">You have not entered the name of the word!</system:String>
+    <system:String x:Key="DontWroteTranslate">Do not enter a translation of the word!</system:String>
+    <system:String x:Key="WordCreatedSucsassfull">The word was created successfully!</system:String>
+    <system:String x:Key="FirstSelectWord">First, select a word!</system:String>
+    <system:String x:Key="NoWordsInThisCategory">There are no words in this category.</system:String>
+    <system:String x:Key="DataWasSavedSuccessfully">Data was saved successfully!</system:String>
+
 </ResourceDictionary>

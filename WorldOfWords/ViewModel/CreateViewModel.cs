@@ -2,10 +2,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using WorldOfWords.Infrastructure.Arguments;
-using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
@@ -71,12 +69,12 @@ namespace WorldOfWords.ViewModel
                   {
                       if(string.IsNullOrEmpty(NewWord.Name))
                       {
-                          CreatePage.ActionResult(new SolidColorBrush(Colors.Red), "Не введено назву слова!");
+                          CreatePage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteWord"].ToString());
                           return;
                       }
                       if(string.IsNullOrEmpty(NewWord.Translate))
                       {
-                          CreatePage.ActionResult(new SolidColorBrush(Colors.Red), "Не введено переклад слова!");
+                          CreatePage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteTranslate"].ToString());
                           return;
                       }
 
@@ -85,7 +83,7 @@ namespace WorldOfWords.ViewModel
                           Example = NewWord.Example,
                           Name = NewWord.Name,
                           Picture = NewWord.Picture,
-                          LastUpdate = new DateTime(2000, 1, 1),
+                          LastUpdate = DateTime.Now,
                           Translate = NewWord.Translate,
                           Level = 0,
                           Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
@@ -93,8 +91,8 @@ namespace WorldOfWords.ViewModel
 
                       Resource.getInstance().WordService.Create(args);
                       var create = new Create(updater);
-                      Resource.getInstance().MenuFrame.Navigate(create);
-                      create.ActionResult(new SolidColorBrush(Colors.Green), "Слово створене успішно!");
+                      Menu.Frame.Navigate(create);
+                      create.ActionResult(new SolidColorBrush(Colors.Green), Application.Current.Resources["WordCreatedSucsassfull"].ToString());
                   }));
             }
         }
@@ -107,8 +105,9 @@ namespace WorldOfWords.ViewModel
                 return goBackCommand ??
                   (goBackCommand = new RelayCommand(obj =>
                   {
-                      updater.Update();
-                      Resource.getInstance().MenuFrame.GoBack();
+                      View.Menu.Frame.NavigationService.GoBack();
+                      if(updater != null)
+                        updater.Update();
                   }));
             }
         }

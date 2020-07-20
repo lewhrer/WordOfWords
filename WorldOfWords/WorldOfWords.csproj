@@ -144,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Resourses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\DarkTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -220,10 +224,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\WorldOfWords.Infrastructure\WorldOfWords.Infrastructure.csproj">
       <Project>{2A2F0380-E321-4B8D-8B39-066CA1F30D36}</Project>
@@ -233,15 +234,6 @@
       <Project>{2D7D9B99-8058-43C8-B350-4EB1F1770FA1}</Project>
       <Name>WorldOfWords.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\temp.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\HideImage.png" />
-    <Resource Include="Resources\NotImage1.png" />
-    <Resource Include="Resources\NotImage2.png" />
-    <Resource Include="Resources\NotImage3.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Image.png" />

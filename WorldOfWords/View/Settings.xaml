@@ -583,10 +583,10 @@
                     </Grid>
                 </Grid>
                 <Border 
-                            Height="2"
-                            Background="Black"
-                            Margin="50,20"
-                            />
+                    Height="2"
+                    Background="Black"
+                    Margin="50,20"
+                    />
                 <Grid Name="BackupCopying"
                         Margin="10,10"
                         >
@@ -731,9 +731,9 @@
                             Margin="50,20"
                             />
                 <Grid Name="ChangeLevel" 
-                          Margin="50,10"
-                          DataContext="{Binding Level}"
-                        >
+                        Margin="50,10"
+                        DataContext="{Binding Level}"
+                    >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />

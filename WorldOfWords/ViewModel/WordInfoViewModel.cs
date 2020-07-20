@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using WorldOfWords.Infrastructure.Services;
-using WorldOfWords.Model;
 using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
@@ -94,7 +85,7 @@ namespace WorldOfWords.ViewModel
                   {
                         if(SelectedWord.SourcePicture != null)
                         {
-                            Resource.getInstance().MenuFrame.Navigate(new PhotoViewer(SelectedWord.SourcePicture));
+                            View.Menu.Frame.Navigate(new PhotoViewer(SelectedWord.SourcePicture));
                         }
                   }));
             }
@@ -163,7 +154,7 @@ namespace WorldOfWords.ViewModel
                 return goBackCommand ??
                   (goBackCommand = new RelayCommand(obj =>
                   {
-                      Resource.getInstance().MenuFrame.GoBack();
+                      View.Menu.Frame.NavigationService.GoBack();
                       if(updater != null)
                           updater.Update();
                   }));
@@ -198,7 +189,7 @@ namespace WorldOfWords.ViewModel
                   {
                       if (SelectedWord != null)
                       {
-                          Resource.getInstance().MenuFrame.Navigate(new Edit(SelectedWord.Id.ToString(), this));
+                          View.Menu.Frame.Navigate(new Edit(SelectedWord.Id.ToString(), this));
                       }
                   }));
             }

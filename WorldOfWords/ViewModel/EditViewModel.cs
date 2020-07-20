@@ -2,10 +2,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using WorldOfWords.Infrastructure.Arguments;
-using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
@@ -84,12 +82,12 @@ namespace WorldOfWords.ViewModel
                   {
                       if (string.IsNullOrEmpty(NewWord.Name))
                       {
-                          EditPage.ActionResult(new SolidColorBrush(Colors.Red), "Не введено назву слова!");
+                          EditPage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteWord"].ToString());
                           return;
                       }
                       if (string.IsNullOrEmpty(NewWord.Translate))
                       {
-                          EditPage.ActionResult(new SolidColorBrush(Colors.Red), "Не введено переклад слова!");
+                          EditPage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteTranslate"].ToString());
                           return;
                       }
 
@@ -107,7 +105,7 @@ namespace WorldOfWords.ViewModel
 
                       Resource.getInstance().WordService.Edit(args);
                       updater.Update();
-                      Resource.getInstance().MenuFrame.GoBack();
+                      View.Menu.Frame.NavigationService.GoBack();
                   }));
             }
         }
@@ -120,8 +118,8 @@ namespace WorldOfWords.ViewModel
                 return goBackCommand ??
                   (goBackCommand = new RelayCommand(obj =>
                   {
+                      View.Menu.Frame.NavigationService.GoBack();
                       updater.Update();
-                      Resource.getInstance().MenuFrame.GoBack();
                   }));
             }
         }

@@ -4,7 +4,8 @@
                     xmlns:local="clr-namespace:WorldOfWords.Themes">
 
     <system:String x:Key="DetailsBackground">White</system:String>
-
+    <system:String x:Key="BorderCreateEditBackground">Gray</system:String>
+    <system:String x:Key="BorderBackground">Black</system:String>
 
     <!-- TextBlock -->
     <Style TargetType="{x:Type TextBlock}">

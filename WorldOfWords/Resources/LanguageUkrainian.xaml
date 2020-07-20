@@ -72,6 +72,12 @@
     <system:String x:Key="DereserveMessage">Відновити раніше резервно збережені слова? Увага, слова будуть добавлені до вже існуючої бази слів.</system:String>
     <system:String x:Key="AllDeleteMessage">Видалити всі слова? Увага, цю операцію не можна буде відмінити в майбутньому, рекомендуємо спочатку зробити резервну копію.</system:String>
 
+    <system:String x:Key="DontWroteWord">Не введено назву слова!</system:String>
+    <system:String x:Key="DontWroteTranslate">Не введено переклад слова!</system:String>
+    <system:String x:Key="WordCreatedSucsassfull">Слово створене успішно!</system:String>
+    <system:String x:Key="FirstSelectWord">Спочатку виберіть слово!</system:String>
+    <system:String x:Key="NoWordsInThisCategory">В даній категорії слів нема.</system:String>
+    <system:String x:Key="DataWasSavedSuccessfully">Дані збережено успішно!</system:String>
 
 
 </ResourceDictionary>

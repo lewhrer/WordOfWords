@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Runtime.Serialization;
 using WorldOfWords.Infrastructure.Services;
-using System.Windows.Controls;
 using WorldOfWords.Infrastructure;
 
 namespace WorldOfWords
@@ -52,8 +47,6 @@ namespace WorldOfWords
         public BitmapImage SourceNoImage { get { return new BitmapImage(new Uri(pathNoImage)); } }
 
         public IWordService WordService { get; set; }
-
-        public Frame MenuFrame { get; set; }
 
         public Level Level
         {

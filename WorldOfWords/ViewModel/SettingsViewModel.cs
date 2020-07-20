@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.Model;
 using WorldOfWords.View;
 
@@ -92,7 +88,7 @@ namespace WorldOfWords.ViewModel
                       {
                           jsonFormatter.WriteObject(fs, Resource.getInstance());
                       }
-                      (new Warning("Дані збережено успішно!")).ShowDialog(); 
+                      (new Warning(Application.Current.Resources["DataWasSavedSuccessfully"].ToString())).ShowDialog(); 
                   }));
             }
         }
@@ -119,7 +115,6 @@ namespace WorldOfWords.ViewModel
                       {
                           jsonFormatter.WriteObject(fs, Resource.getInstance());
                       }
-                      MessageBox.Show("Дані збережено успішно!");
                       MainWindow.Frame.Navigate(new View.Menu(0));
                   }));
             }
@@ -184,10 +179,10 @@ namespace WorldOfWords.ViewModel
         private void Serialisation()
         {
             var words = Resource.getInstance().WordService.GetAllWords().ToArray();
-
+            DeleteFile("words.json");
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
 
-            using (FileStream fs = new FileStream("words.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("words.json", FileMode.Create))
             {
                 jsonFormatter.WriteObject(fs, words);
             }

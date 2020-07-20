@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
-using WorldOfWords.Infrastructure.Services;
 using WorldOfWords.ViewModel;
 
 namespace WorldOfWords.View
 {
     public partial class Create : Page
     {
-        public Create(IUpdater updater)
+        public Create(IUpdater updater = null)
         {
             InitializeComponent();
             DataContext = new CreateViewModel(updater, this);
