@@ -92,7 +92,7 @@ namespace WorldOfWords.ViewModel
                       {
                           jsonFormatter.WriteObject(fs, Resource.getInstance());
                       }
-                      MessageBox.Show("Дані збережено успішно!");
+                      (new Warning("Дані збережено успішно!")).ShowDialog(); 
                   }));
             }
         }
@@ -149,6 +149,15 @@ namespace WorldOfWords.ViewModel
                             theme.Source = new Uri(Resource.getInstance().Theme);
                         }
                         Application.Current.Resources.MergedDictionaries.Add(theme);
+
+                        DeleteFile("Settings.json");
+
+                        DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Resource));
+
+                        using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
+                        {
+                            jsonFormatter.WriteObject(fs, Resource.getInstance());
+                        }
                     }));
             }
         }
