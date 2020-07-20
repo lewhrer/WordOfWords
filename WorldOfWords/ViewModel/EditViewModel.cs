@@ -27,7 +27,7 @@ namespace WorldOfWords.ViewModel
                 Level = word.Level,
                 LastUpdateDate = word.LastUpdate,
                 Picture = word.Picture,
-                SourcePicture = Resource.getInstance().WordService.GetSourceImage(word.Picture),
+                SourcePicture = word.Picture != null ? Resource.getInstance().WordService.GetSourceImage(word.Picture) : null,
             };
 
             if(NewWord.Picture == null)

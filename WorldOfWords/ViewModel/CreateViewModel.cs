@@ -90,9 +90,13 @@ namespace WorldOfWords.ViewModel
                       };
 
                       Resource.getInstance().WordService.Create(args);
-                      var create = new Create(updater);
-                      Menu.Frame.Navigate(create);
-                      create.ActionResult(new SolidColorBrush(Colors.Green), Application.Current.Resources["WordCreatedSucsassfull"].ToString());
+
+                      NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
+                      NewWord.Example = null;
+                      NewWord.Name = null;
+                      NewWord.Translate = null;
+                      NewWord.WordPriority = NewWord.Priorities[0];
+                      CreatePage.ActionResult(new SolidColorBrush(Colors.Green), Application.Current.Resources["WordCreatedSucsassfull"].ToString());
                   }));
             }
         }

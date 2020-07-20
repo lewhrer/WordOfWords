@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
@@ -40,6 +41,22 @@ namespace WorldOfWords.ViewModel
                           Resource.getInstance().WordService.Delete(SelectedWord.Id.ToString());
                           Words.RemoveAt(Words.IndexOf(SelectedWord));
                           TotalCount--;
+                          (new Warning(Application.Current.Resources["WordWasDeletedSuccessfully"].ToString())).ShowDialog();
+                          if(Words.Count == 0)
+                          {
+                              View.Menu.Frame.NavigationService.GoBack();
+                              if (updater != null)
+                                  updater.Update();
+                          }
+                          else if(Words.Count == IndexSelectedWord - 1)
+                          {
+                              IndexSelectedWord--;
+                              SelectedWord = Words[IndexSelectedWord - 1];
+                          }
+                          else
+                          {
+                              SelectedWord = Words[IndexSelectedWord - 1];
+                          }
                       }
                   }));
             }
@@ -55,7 +72,6 @@ namespace WorldOfWords.ViewModel
                   {
                       if (IndexSelectedWord != Words.Count)
                       {
-                          SelectedWord = null;
                           SelectedWord = Words[IndexSelectedWord++];
                       }
                   }));
@@ -171,9 +187,8 @@ namespace WorldOfWords.ViewModel
                   {
                       if (IndexSelectedWord - 1 != 0)
                       {
-                          SelectedWord = null;
-                          IndexSelectedWord = IndexSelectedWord - 2;
-                          SelectedWord = Words[IndexSelectedWord++];
+                          IndexSelectedWord--;
+                          SelectedWord = Words[IndexSelectedWord - 1];
                       }
                   }));
             }

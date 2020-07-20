@@ -78,6 +78,7 @@
     <system:String x:Key="FirstSelectWord">Спочатку виберіть слово!</system:String>
     <system:String x:Key="NoWordsInThisCategory">В даній категорії слів нема.</system:String>
     <system:String x:Key="DataWasSavedSuccessfully">Дані збережено успішно!</system:String>
+    <system:String x:Key="WordWasDeletedSuccessfully">Слово видалено успішно!</system:String>
 
 
 </ResourceDictionary>

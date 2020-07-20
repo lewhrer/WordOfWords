@@ -78,5 +78,6 @@
     <system:String x:Key="FirstSelectWord">First, select a word!</system:String>
     <system:String x:Key="NoWordsInThisCategory">There are no words in this category.</system:String>
     <system:String x:Key="DataWasSavedSuccessfully">Data was saved successfully!</system:String>
+    <system:String x:Key="WordWasDeletedSuccessfully">The Word was deleted successfully!</system:String>
 
 </ResourceDictionary>
