@@ -30,7 +30,8 @@ namespace WorldOfWords
 
             try
             {
-                using (FileStream fs = new FileStream("Settings.json", FileMode.Open))
+                Directory.CreateDirectory("Data");
+                using (FileStream fs = new FileStream("Data/Settings.json", FileMode.OpenOrCreate))
                 {
                     var resource = (Resource)jsonFormatter.ReadObject(fs);
                     if (resource != null)
@@ -45,9 +46,9 @@ namespace WorldOfWords
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.Message);
+                
             }
         }
 

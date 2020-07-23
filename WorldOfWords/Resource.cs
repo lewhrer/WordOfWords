@@ -27,11 +27,11 @@ namespace WorldOfWords
 
         public Resource()
         {
-            PathNoImage = "pack://application:,,,/WorldOfWords;component/Resources/Image.png";
+            PathNoImage = "pack://application:,,,/WorldOfWords;component/Resources/Images/Image.png";
             Theme = "pack://application:,,,/WorldOfWords;component/Themes/DarkTheme.xaml";
             ThemePath = "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml";
-            LanguagePath = "pack://application:,,,/WorldOfWords;component/Resources/LanguageUkrainian.xaml";
-            Language = "Українська";
+            LanguagePath = "pack://application:,,,/WorldOfWords;component/Resources/LanguageEnglish.xaml";
+            Language = "English";
             WordService = new WordService(new WorldOfWordsDbContext());
             Level = new Level();
             TrainDate = new TrainDate();

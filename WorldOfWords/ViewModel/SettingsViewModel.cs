@@ -15,9 +15,12 @@ namespace WorldOfWords.ViewModel
     public class SettingsViewModel : INotifyPropertyChanged
     {
         private ComboBoxItem language;
+        private readonly string settingsPath = "Data/Settings.json";
+        private readonly string wordsPath = "Data/Words.json";
         public Level Level { get; set; }
         public TrainDate TrainDate { get; set; }
         public ObservableCollection<ComboBoxItem> Languages { get; set; }
+
 
         public SettingsViewModel()
         {
@@ -80,11 +83,11 @@ namespace WorldOfWords.ViewModel
                   {
                       Resource.getInstance().Level = Level;
                       Resource.getInstance().TrainDate = TrainDate;
-                      DeleteFile("Settings.json");
+                      DeleteFile(settingsPath);
 
                       DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Resource));
 
-                      using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
+                      using (FileStream fs = new FileStream(settingsPath, FileMode.OpenOrCreate))
                       {
                           jsonFormatter.WriteObject(fs, Resource.getInstance());
                       }
@@ -107,11 +110,11 @@ namespace WorldOfWords.ViewModel
                       Resource.getInstance().Language = Language.Content.ToString();
                       Resource.getInstance().LanguagePath = Language.Tag.ToString();
 
-                      DeleteFile("Settings.json");
+                      DeleteFile(settingsPath);
 
                       DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Resource));
 
-                      using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
+                      using (FileStream fs = new FileStream(settingsPath, FileMode.OpenOrCreate))
                       {
                           jsonFormatter.WriteObject(fs, Resource.getInstance());
                       }
@@ -145,11 +148,11 @@ namespace WorldOfWords.ViewModel
                         }
                         Application.Current.Resources.MergedDictionaries.Add(theme);
 
-                        DeleteFile("Settings.json");
+                        DeleteFile(settingsPath);
 
                         DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Resource));
 
-                        using (FileStream fs = new FileStream("Settings.json", FileMode.OpenOrCreate))
+                        using (FileStream fs = new FileStream(settingsPath, FileMode.OpenOrCreate))
                         {
                             jsonFormatter.WriteObject(fs, Resource.getInstance());
                         }
@@ -179,10 +182,10 @@ namespace WorldOfWords.ViewModel
         private void Serialisation()
         {
             var words = Resource.getInstance().WordService.GetAllWords().ToArray();
-            DeleteFile("words.json");
+            DeleteFile(wordsPath);
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
 
-            using (FileStream fs = new FileStream("words.json", FileMode.Create))
+            using (FileStream fs = new FileStream(wordsPath, FileMode.Create))
             {
                 jsonFormatter.WriteObject(fs, words);
             }
@@ -192,11 +195,17 @@ namespace WorldOfWords.ViewModel
         {
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(Word[]));
 
-            using (FileStream fs = new FileStream("words.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(wordsPath, FileMode.OpenOrCreate))
             {
-                Word[] words = (Word[])jsonFormatter.ReadObject(fs);
-
-                Resource.getInstance().WordService.AddRange(words);
+                try
+                {
+                    Word[] words = (Word[])jsonFormatter.ReadObject(fs);
+                    Resource.getInstance().WordService.AddRange(words);
+                }
+                catch(Exception)
+                {
+                    (new Warning(Application.Current.Resources["ReserveIsEmpty"].ToString())).ShowDialog();
+                }
             }
         }
 

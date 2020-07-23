@@ -106,7 +106,7 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetWords(int bottomLine, int topLine)
         {
-            return _context.Words.Where(x => x.Level >= bottomLine && x.Level <= bottomLine).OrderByDescending(x => x.Priority).ToList();
+            return _context.Words.AsEnumerable().Where(x => x.Level >= bottomLine && x.Level <= bottomLine).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetAllWords()
@@ -156,7 +156,7 @@ namespace WorldOfWords.Infrastructure.Services
 
         public Word GetWord(string id)
         {
-            return _context.Words.FirstOrDefault(x => x.Id.ToString() == id);
+            return _context.Words.AsEnumerable().FirstOrDefault(x => x.Id.ToString() == id);
         }
 
         public void SetKnow(string id, int percent)
