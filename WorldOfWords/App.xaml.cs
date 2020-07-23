@@ -7,6 +7,8 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using WorldOfWords.Infrastructure;
+using WorldOfWords.Model;
 
 namespace WorldOfWords
 {
@@ -48,6 +50,7 @@ namespace WorldOfWords
                 MessageBox.Show(e.Message);
             }
         }
+
 
         private void BeginInitial()
         {

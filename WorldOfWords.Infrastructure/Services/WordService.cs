@@ -113,7 +113,7 @@ namespace WorldOfWords.Infrastructure.Services
         {
             var dateNow = DateTime.Now;
             
-            return _context.Words.OrderByDescending(x => x.Priority).ThenByDescending(x => DbFunctions.DiffDays(x.LastUpdate, dateNow)).ToList();
+            return _context.Words.AsEnumerable().OrderByDescending(x => x.Priority).ThenByDescending(x => (dateNow - x.LastUpdate).Days ).ToList();
         }
 
         public BitmapImage GetSourceImage(byte[] array)
@@ -145,13 +145,13 @@ namespace WorldOfWords.Infrastructure.Services
         public List<Word> GetTrainWords(int bottomLine, int topLine, int days)
         {
             var dateNow = DateTime.Now;
-            return _context.Words.Where(x => x.Level >= bottomLine && x.Level <= topLine && DbFunctions.DiffDays(x.LastUpdate, dateNow) >= days).OrderByDescending(x => x.Priority).ToList();
+            return _context.Words.AsEnumerable().Where(x => x.Level >= bottomLine && x.Level <= topLine && (dateNow - x.LastUpdate).Days >= days).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetTrainAllWords()
         {
             var dateNow = DateTime.Now;
-            return _context.Words.OrderByDescending(x => x.Priority).ThenByDescending(x => DbFunctions.DiffDays(x.LastUpdate, dateNow)).ToList();
+            return _context.Words.AsEnumerable().OrderByDescending(x => x.Priority).ThenByDescending(x => (dateNow - x.LastUpdate).Days).ToList();
         }
 
         public Word GetWord(string id)
