@@ -54,15 +54,7 @@ namespace WorldOfWords.ViewModel
                 return deleteCommand ??
                   (deleteCommand = new RelayCommand(obj =>
                   {
-                      NewWord.Picture = null;
-                      try
-                      {
-                          NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
-                      }
-                      catch(Exception e)
-                      {
-                          MessageBox.Show(e.Message);
-                      }
+                      DeletePicture();
                   }));
             }
         }
@@ -75,35 +67,20 @@ namespace WorldOfWords.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
-                      if(string.IsNullOrEmpty(NewWord.Name))
+                      if(!IsEnteredName())
                       {
                           CreatePage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteWord"].ToString());
                           return;
                       }
-                      if(string.IsNullOrEmpty(NewWord.Translate))
+                      if(!IsEnteredTranslate())
                       {
                           CreatePage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteTranslate"].ToString());
                           return;
                       }
 
-                      var args = new WordArgs()
-                      {
-                          Example = NewWord.Example,
-                          Name = NewWord.Name,
-                          Picture = NewWord.Picture,
-                          LastUpdate = DateTime.Now,
-                          Translate = NewWord.Translate,
-                          Level = 0,
-                          Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
-                      };
+                      Resource.getInstance().WordService.Create(CreateWordArgs());
+                      ResetNewWord();
 
-                      Resource.getInstance().WordService.Create(args);
-
-                      NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
-                      NewWord.Example = null;
-                      NewWord.Name = null;
-                      NewWord.Translate = null;
-                      NewWord.WordPriority = NewWord.Priorities[0];
                       CreatePage.ActionResult(new SolidColorBrush(Colors.Green), Application.Current.Resources["WordCreatedSucsassfull"].ToString());
                   }));
             }
@@ -128,6 +105,52 @@ namespace WorldOfWords.ViewModel
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public bool IsEnteredName()
+        {
+            return string.IsNullOrEmpty(NewWord.Name);
+        }
+
+        public bool IsEnteredTranslate()
+        {
+            return string.IsNullOrEmpty(NewWord.Translate);
+        }
+
+        public void ResetNewWord()
+        {
+            NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
+            NewWord.Example = null;
+            NewWord.Name = null;
+            NewWord.Translate = null;
+            NewWord.WordPriority = NewWord.Priorities[0];
+        }
+
+        public WordArgs CreateWordArgs()
+        {
+            return new WordArgs()
+            {
+                Example = NewWord.Example,
+                Name = NewWord.Name,
+                Picture = NewWord.Picture,
+                LastUpdate = DateTime.Now,
+                Translate = NewWord.Translate,
+                Level = 0,
+                Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
+            };
+        }
+
+        public void DeletePicture()
+        {
+            NewWord.Picture = null;
+            try
+            {
+                NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }
