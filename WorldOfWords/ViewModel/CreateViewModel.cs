@@ -32,8 +32,16 @@ namespace WorldOfWords.ViewModel
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      NewWord.Picture = Resource.getInstance().WordService.FindImage();
-                      NewWord.SourcePicture = Resource.getInstance().WordService.GetSourceImage(NewWord.Picture);
+                      NewWord.Picture = Resource.getInstance().WordService.FindImage() ?? NewWord.Picture;
+
+                      if (NewWord.Picture != null)
+                      {
+                          NewWord.SourcePicture = Resource.getInstance().WordService.GetSourceImage(NewWord.Picture);
+                      }
+                      else
+                      {
+                          NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
+                      }
                   }));
             }
         }

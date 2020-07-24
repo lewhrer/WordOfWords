@@ -237,10 +237,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -251,6 +251,7 @@
                 Command="{Binding UnknownWordsCommand}"
                 Background="Red"
                 Margin="5,0"
+                Width="110"
                 />
             <Button 
                 Grid.Column="3"
@@ -258,6 +259,7 @@
                 Command="{Binding NotMemorizedWordsCommand}"
                 Background="Orange"
                 Margin="5,0"
+                Width="110"
                 />
             <Button 
                 Grid.Column="4"
@@ -265,6 +267,7 @@
                 Command="{Binding MemorizedWordsCommand}"
                 Background="LimeGreen"
                 Margin="5,0"
+                Width="110"
                 />
             <Button 
                 Grid.Column="5"
@@ -272,6 +275,7 @@
                 Command="{Binding LearnedWordsCommand}"
                 Background="Green"
                 Margin="5,0"
+                Width="110"
                 />
         </Grid>
     </Grid>

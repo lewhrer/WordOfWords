@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldOfWords.Model", "World
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldOfWords.Infrastructure", "WorldOfWords.Infrastructure\WorldOfWords.Infrastructure.csproj", "{2A2F0380-E321-4B8D-8B39-066CA1F30D36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldOfWords.Tests", "WorldOfWords.Tests\WorldOfWords.Tests.csproj", "{BC95B311-488E-44CE-B863-F182AE72E7CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2A2F0380-E321-4B8D-8B39-066CA1F30D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A2F0380-E321-4B8D-8B39-066CA1F30D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A2F0380-E321-4B8D-8B39-066CA1F30D36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC95B311-488E-44CE-B863-F182AE72E7CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC95B311-488E-44CE-B863-F182AE72E7CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC95B311-488E-44CE-B863-F182AE72E7CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC95B311-488E-44CE-B863-F182AE72E7CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WorldOfWords.View"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
         mc:Ignorable="d"
-        Title="Warning" MinHeight="200" MinWidth="300" Height="200" Width="300"
+        Title="{Binding Source={StaticResource Warning}}" MinHeight="200" MinWidth="300" Height="200" Width="300"
         HorizontalContentAlignment="Center"
         ShowMinButton="False"
         ShowCloseButton="False"
@@ -24,6 +24,8 @@
         <TextBlock
             Name="MainTextBlock"
             Grid.Row="0"
+            TextWrapping="Wrap"
+            TextAlignment="Center"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="{Binding Source={StaticResource SizeText}}"

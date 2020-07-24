@@ -80,6 +80,7 @@
     <system:String x:Key="DataWasSavedSuccessfully">Дані збережено успішно!</system:String>
     <system:String x:Key="WordWasDeletedSuccessfully">Слово видалено успішно!</system:String>
     <system:String x:Key="ReserveIsEmpty">Резерв слів пустий.</system:String>
+    <system:String x:Key="Warning">Увага</system:String>
 
 
 </ResourceDictionary>

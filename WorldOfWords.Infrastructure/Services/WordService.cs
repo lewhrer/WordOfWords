@@ -97,9 +97,9 @@ namespace WorldOfWords.Infrastructure.Services
                 }
                 return array;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                
             }
             return null;
         }
@@ -112,8 +112,8 @@ namespace WorldOfWords.Infrastructure.Services
         public List<Word> GetAllWords()
         {
             var dateNow = DateTime.Now;
-            
-            return _context.Words.AsEnumerable().OrderByDescending(x => x.Priority).ThenByDescending(x => (dateNow - x.LastUpdate).Days ).ToList();
+
+            return _context.Words.AsEnumerable().OrderByDescending(x => x.Priority).ThenByDescending(x => (dateNow - x.LastUpdate).Days).ToList();
         }
 
         public BitmapImage GetSourceImage(byte[] array)

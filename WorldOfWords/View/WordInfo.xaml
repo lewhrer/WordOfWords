@@ -12,11 +12,12 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Margin="6,0,-6,0" >
+        <Grid Grid.Row="2" Margin="6,0,-6,0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -265,17 +266,15 @@
             </Grid>
         </Grid>
         <Grid Name="ButtonsKnows"
-            Grid.Row="2"
+            Grid.Row="3"
             VerticalAlignment="Center"  
               >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -289,40 +288,44 @@
                 Command="{Binding PreviouslyCommand}" 
                 />
             <Button 
-                Grid.Column="2"
+                Grid.Column="1"
                 Content="{Binding Source={StaticResource DontKnow}}" 
                 Command="{Binding UnknownWordsCommand}"
                 Background="Red"
                 Foreground="Black"
                 Margin="5,0"
+                Width="110"
                 />
             <Button 
-                Grid.Column="3"
+                Grid.Column="2"
                 Content="{Binding Source={StaticResource DontRemember}}" 
                 Command="{Binding NotMemorizedWordsCommand}"
                 Background="Orange"
                 Foreground="Black"
                 Margin="5,0"
+                Width="110"
                 />
             <Button 
-                Grid.Column="4"
+                Grid.Column="3"
                 Content="{Binding Source={StaticResource Remember}}" 
                 Command="{Binding MemorizedWordsCommand}"
                 Background="LimeGreen"
                 Foreground="Black"
                 Margin="5,0"
+                Width="110"
                 />
             <Button 
-                Grid.Column="5"
+                Grid.Column="4"
                 Content="{Binding Source={StaticResource Know}}" 
                 Command="{Binding LearnedWordsCommand}"
                 Background="Green"
                 Foreground="Black"
-                Margin="5,0" Height="27" VerticalAlignment="Top"
+                Margin="5,0"
+                Width="110"
                 />
             <Button 
                 Name="btnNext"
-                Grid.Column="6"
+                Grid.Column="4"
                 Grid.ColumnSpan="2"
                 Content="{Binding Source={StaticResource Next}}" 
                 HorizontalAlignment="Right"
@@ -367,7 +370,7 @@
         </StackPanel>
 
         <TextBlock 
-            Grid.Row="0"
+            Grid.Row="1"
             HorizontalAlignment="Center" 
             Text="{Binding NamePage}" 
             VerticalAlignment="Center"
