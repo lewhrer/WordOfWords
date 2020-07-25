@@ -16,24 +16,37 @@ namespace WorldOfWords.ViewModel
 
         public EditViewModel(string id, IUpdater updater, Edit editPage)
         {
-            var word = Resource.getInstance().WordService.GetWord(id);
-            this.updater = updater;
-            NewWord = new WordViewModel(word.Priority)
+            if(id != null)
             {
-                Id = word.Id,
-                Name = word.Name,
-                Translate = word.Translate,
-                Example = word.Example,
-                Level = word.Level,
-                LastUpdateDate = word.LastUpdate,
-                Picture = word.Picture,
-                SourcePicture = word.Picture != null ? Resource.getInstance().WordService.GetSourceImage(word.Picture) : null,
-            };
+                var word = Resource.getInstance().WordService.GetWord(id);  
+                if(word != null)
+                {
+                    NewWord = new WordViewModel(word.Priority)
+                    {
+                        Id = word.Id,
+                        Name = word.Name,
+                        Translate = word.Translate,
+                        Example = word.Example,
+                        Level = word.Level,
+                        LastUpdateDate = word.LastUpdate,
+                        Picture = word.Picture,
+                        SourcePicture = word.Picture != null ? Resource.getInstance().WordService.GetSourceImage(word.Picture) : null,
+                    };
 
-            if(NewWord.Picture == null)
-            {
-                NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
+                    if(NewWord.Picture == null)
+                    {
+                        NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
+                    }
+                }
             }
+            else
+            {
+                NewWord = new WordViewModel(0)
+                {
+                    SourcePicture = Resource.getInstance().SourceNoImage,
+                };
+            }
+            this.updater = updater;
             EditPage = editPage;
         }
 
@@ -66,15 +79,7 @@ namespace WorldOfWords.ViewModel
                 return deleteCommand ??
                   (deleteCommand = new RelayCommand(obj =>
                   {
-                      NewWord.Picture = null;
-                      try
-                      {
-                          NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
-                      }
-                      catch (Exception e)
-                      {
-                          MessageBox.Show(e.Message);
-                      }
+                      DeletePicture();
                   }));
             }
         }
@@ -87,30 +92,18 @@ namespace WorldOfWords.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
-                      if (string.IsNullOrEmpty(NewWord.Name))
+                      if (!IsEnteredName())
                       {
                           EditPage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteWord"].ToString());
                           return;
                       }
-                      if (string.IsNullOrEmpty(NewWord.Translate))
+                      if (!IsEnteredTranslate())
                       {
                           EditPage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteTranslate"].ToString());
                           return;
                       }
 
-                      var args = new WordArgs()
-                      {
-                          Id = NewWord.Id.ToString(),
-                          Example = NewWord.Example,
-                          Name = NewWord.Name,
-                          Picture = NewWord.Picture,
-                          LastUpdate = NewWord.LastUpdateDate,
-                          Translate = NewWord.Translate,
-                          Level = NewWord.Level,
-                          Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
-                      };
-
-                      Resource.getInstance().WordService.Edit(args);
+                      Resource.getInstance().WordService.Edit(CreateWordArgs());
                       updater.Update();
                       View.Menu.Frame.NavigationService.GoBack();
                   }));
@@ -135,6 +128,45 @@ namespace WorldOfWords.ViewModel
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+
+        public bool IsEnteredName()
+        {
+            return string.IsNullOrEmpty(NewWord.Name);
+        }
+
+        public bool IsEnteredTranslate()
+        {
+            return string.IsNullOrEmpty(NewWord.Translate);
+        }
+
+        public WordArgs CreateWordArgs()
+        {
+            return new WordArgs()
+            {
+                Id = NewWord.Id.ToString(),
+                Example = NewWord.Example,
+                Name = NewWord.Name,
+                Picture = NewWord.Picture,
+                LastUpdate = NewWord.LastUpdateDate,
+                Translate = NewWord.Translate,
+                Level = NewWord.Level,
+                Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
+            };
+        }
+
+        public void DeletePicture()
+        {
+            NewWord.Picture = null;
+            try
+            {
+                NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

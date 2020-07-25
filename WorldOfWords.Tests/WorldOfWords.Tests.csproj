@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreateViewModelTest.cs" />
+    <Compile Include="EditViewModelTest.cs" />
     <Compile Include="WordServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
