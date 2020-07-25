@@ -60,8 +60,7 @@ namespace WorldOfWords.ViewModel
                       if (selectedWord != null)
                       {
                           Resource.getInstance().WordService.Delete(SelectedWord.Id.ToString());
-                          Words.RemoveAt(Words.IndexOf(selectedWord));
-                          TotalCount--;
+                          DeleteWord();
                       }
                       else
                       {
@@ -183,7 +182,13 @@ namespace WorldOfWords.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        private void KnowCommand(int percent)
+        public void DeleteWord()
+        {
+            Words.RemoveAt(Words.IndexOf(SelectedWord));
+            TotalCount--;
+        }
+
+        public void KnowCommand(int percent)
         {
             if (selectedWord != null)
             {
@@ -229,7 +234,7 @@ namespace WorldOfWords.ViewModel
                         var words = Resource.getInstance().WordService.GetWords(Resource.getInstance().Level.Third, 100);
                         return words.Select(x => new WordViewModel(x, words.IndexOf(x))).ToList();
                     }
-                default: return null;
+                default: return new List<WordViewModel>();
             }
         }
 

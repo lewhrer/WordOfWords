@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldOfWords.ViewModel;
 
-
 namespace WorldOfWords.Tests
 {
     [TestClass]
