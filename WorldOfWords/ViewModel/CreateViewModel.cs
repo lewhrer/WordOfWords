@@ -67,12 +67,12 @@ namespace WorldOfWords.ViewModel
                 return saveCommand ??
                   (saveCommand = new RelayCommand(obj =>
                   {
-                      if(!IsEnteredName())
+                      if(IsEnteredName())
                       {
                           CreatePage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteWord"].ToString());
                           return;
                       }
-                      if(!IsEnteredTranslate())
+                      if(IsEnteredTranslate())
                       {
                           CreatePage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteTranslate"].ToString());
                           return;
