@@ -81,6 +81,7 @@
     <system:String x:Key="WordWasDeletedSuccessfully">Слово видалено успішно!</system:String>
     <system:String x:Key="ReserveIsEmpty">Резерв слів пустий.</system:String>
     <system:String x:Key="Warning">Увага</system:String>
+    <system:String x:Key="EndOfList">Кінець списку.</system:String>
 
 
 </ResourceDictionary>

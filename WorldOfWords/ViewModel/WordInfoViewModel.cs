@@ -74,6 +74,10 @@ namespace WorldOfWords.ViewModel
                       {
                           SelectedWord = Words[IndexSelectedWord++];
                       }
+                      else
+                      {
+                          (new Warning(Application.Current.Resources["EndOfList"].ToString())).ShowDialog();
+                      }
                   }));
             }
         }
@@ -337,6 +341,7 @@ namespace WorldOfWords.ViewModel
                 {
                     SelectedWord = null;
                     SelectedWord = Words[index];
+                    (new Warning(Application.Current.Resources["EndOfList"].ToString())).ShowDialog();
                 }
             }
         }

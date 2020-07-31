@@ -122,6 +122,7 @@ namespace WorldOfWords.ViewModel
             NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
             NewWord.Example = null;
             NewWord.Name = null;
+            NewWord.Picture = null;
             NewWord.Translate = null;
             NewWord.WordPriority = NewWord.Priorities[0];
         }

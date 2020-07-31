@@ -81,5 +81,6 @@
     <system:String x:Key="WordWasDeletedSuccessfully">The Word was deleted successfully!</system:String>
     <system:String x:Key="ReserveIsEmpty">The reserve of words is empty.</system:String>
     <system:String x:Key="Warning">Warning</system:String>
+    <system:String x:Key="EndOfList">The end of list.</system:String>
 
 </ResourceDictionary>
