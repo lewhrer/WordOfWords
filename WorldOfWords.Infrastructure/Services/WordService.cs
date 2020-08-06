@@ -106,7 +106,7 @@ namespace WorldOfWords.Infrastructure.Services
 
         public List<Word> GetWords(int bottomLine, int topLine)
         {
-            return _context.Words.AsEnumerable().Where(x => x.Level >= bottomLine && x.Level <= bottomLine).OrderByDescending(x => x.Priority).ToList();
+            return _context.Words.AsEnumerable().Where(x => x.Level >= bottomLine && x.Level <= topLine).OrderByDescending(x => x.Priority).ToList();
         }
 
         public List<Word> GetAllWords()
