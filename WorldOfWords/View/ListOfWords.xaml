@@ -139,6 +139,7 @@
             <ListBox ItemsSource="{Binding Words}"
                      SelectedItem="{Binding SelectedWord}"
                      Grid.Row="2"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -190,18 +191,19 @@
                                     Grid.Column="2" 
                                     FontSize="28" 
                                     Width="auto"
-                                    Margin="10,0"
+                                    Margin="10,0,10,8"
                                     Text="{Binding Path=Name}" 
                                     TextWrapping="Wrap" 
-                                    VerticalAlignment="Center"
+                                    VerticalAlignment="Top"
                                     />
                                 <TextBlock 
                                     Grid.Column="3" 
                                     FontSize="20"
                                     Width="auto"
+                                    Margin="0,5,0,0"
                                     Text="{Binding Path=Translate}" 
                                     TextWrapping="Wrap" 
-                                    VerticalAlignment="Center"
+                                    VerticalAlignment="Top"
                                     />
 
                                 <Grid
@@ -209,15 +211,21 @@
                                     HorizontalAlignment="Right"
                                     Margin="5,0"
                                     >
-                                    <StackPanel Orientation="Horizontal">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
                                         <TextBlock Text="{Binding Source={StaticResource Updated}}" />
                                         <TextBlock Text=": " />
                                         <TextBlock  Text="{Binding Path=LastUpdate}" />
                                     </StackPanel>
                                     <StackPanel 
-                                        VerticalAlignment="Bottom" 
+                                        Grid.Row="1"
+                                        VerticalAlignment="Top" 
                                         HorizontalAlignment="Right" 
                                         Orientation="Horizontal"
+                                        Margin="0,5,0,0"
                                         >
                                         <TextBlock Text="{Binding Source={StaticResource Priority}}" />
                                         <TextBlock Text=": " />
