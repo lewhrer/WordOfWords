@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using WorldOfWords.Model;
 using WorldOfWords.ViewModel;
 
 namespace WorldOfWords.View
@@ -11,6 +12,12 @@ namespace WorldOfWords.View
         {
             InitializeComponent();
             ViewModel = new ListOfWordsViewModel(nameMethod, namePage, nameTrainPage);
+            DataContext = ViewModel;
+        }
+        public ListOfWords(Theme theme)
+        {
+            InitializeComponent();
+            ViewModel = new ListOfWordsViewModel(theme);
             DataContext = ViewModel;
         }
     }

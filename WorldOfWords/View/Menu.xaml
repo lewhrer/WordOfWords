@@ -13,6 +13,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu>
+            <MenuItem Header="Themes" Command="{Binding ThemesCommand}" />
             <MenuItem Header="{Binding Source={StaticResource Words}}">
                 <MenuItem Header="{Binding Source={StaticResource Unknown}}" Command="{Binding UnknownWordsCommand}" />
                 <MenuItem Header="{Binding Source={StaticResource NotMemorized}}" Command="{Binding NotMemorizedWordsCommand}" />
@@ -20,7 +21,7 @@
                 <MenuItem Header="{Binding Source={StaticResource Learned}}" Command="{Binding LearnedWordsCommand}" />
                 <MenuItem Header="{Binding Source={StaticResource Everything}}" Command="{Binding AllWordsCommand}" />
             </MenuItem>
-            <MenuItem Header="{Binding Source={StaticResource Create}}" Command="{Binding CreateCommand}" />
+            <!--<MenuItem Header="{Binding Source={StaticResource Create}}" Command="{Binding CreateCommand}" />-->
             <MenuItem Header="{Binding Source={StaticResource Train}}">
                 <MenuItem Header="{Binding Source={StaticResource Unknown}}" Command="{Binding TrainOfUnknownWords}" />
                 <MenuItem Header="{Binding Source={StaticResource NotMemorized}}" Command="{Binding TrainNotMemorizedWords}" />
@@ -29,6 +30,7 @@
                 <MenuItem Header="{Binding Source={StaticResource Everything}}" Command="{Binding TrainAllWordsCommand}" />
             </MenuItem>
             <MenuItem Header="{Binding Source={StaticResource Settings}}" Command="{Binding SettingsCommand}" />
+            <MenuItem Header="{Binding Source={StaticResource Help}}" Command="{Binding HelpCommand}" />
         </Menu>
         <Frame 
             Name="MenuFrame"

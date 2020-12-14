@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WorldOfWords.Model;
 using WorldOfWords.ViewModel;
 
 namespace WorldOfWords.View
@@ -11,6 +12,11 @@ namespace WorldOfWords.View
         {
             InitializeComponent();
             DataContext = new CreateViewModel(updater, this);
+        }
+        public Create(Theme the, IUpdater updater = null)
+        {
+            InitializeComponent();
+            DataContext = new CreateViewModel(the, updater, this);
         }
 
         public async void ActionResult(Brush color, string text)

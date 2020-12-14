@@ -35,7 +35,8 @@ namespace WorldOfWords.Infrastructure.Services
                 Level = args.Level,
                 Translate = args.Translate,
                 LastUpdate = args.LastUpdate,
-                Priority = args.Priority
+                Priority = args.Priority,
+                ThemeId = args.ThemeId
             };
 
             _context.Words.Add(word);
@@ -112,7 +113,6 @@ namespace WorldOfWords.Infrastructure.Services
         public List<Word> GetAllWords()
         {
             var dateNow = DateTime.Now;
-
             return _context.Words.AsEnumerable().OrderByDescending(x => x.Priority).ThenByDescending(x => (dateNow - x.LastUpdate).Days).ToList();
         }
 

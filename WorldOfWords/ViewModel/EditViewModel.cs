@@ -8,7 +8,7 @@ using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
-    public class EditViewModel : INotifyPropertyChanged
+    public class EditViewModel : BaseViewModel
     {
         IUpdater updater;
         Edit EditPage { get; set; }
@@ -123,13 +123,6 @@ namespace WorldOfWords.ViewModel
                   }));
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
 
         public bool IsEnteredName()
         {

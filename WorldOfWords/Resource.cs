@@ -32,7 +32,9 @@ namespace WorldOfWords
             ThemePath = "pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml";
             LanguagePath = "pack://application:,,,/WorldOfWords;component/Resources/LanguageEnglish.xaml";
             Language = "English";
-            WordService = new WordService(new WorldOfWordsDbContext());
+            var dbc = new WorldOfWordsDbContext();
+            WordService = new WordService(dbc);
+            ThemeService = new ThemeService(dbc);
             Level = new Level();
             TrainDate = new TrainDate();
         }
@@ -47,6 +49,7 @@ namespace WorldOfWords
         public BitmapImage SourceNoImage { get { return new BitmapImage(new Uri(pathNoImage)); } }
 
         public IWordService WordService { get; set; }
+        public ThemeService ThemeService { get; set; }
 
         public Level Level
         {

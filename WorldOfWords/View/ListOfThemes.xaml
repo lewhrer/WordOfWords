@@ -1,0 +1,162 @@
+﻿<Page x:Class="WorldOfWords.View.ListOfThemes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WorldOfWords.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListOfThemes">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <TextBlock Name="NamePage"
+            Grid.Row="0" 
+            Text="Themes" 
+            FontSize="30" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="15,0,0,0"
+            />
+        <Grid
+            HorizontalAlignment="Right"
+            Margin="10,0,10,5"
+            Grid.Row="0"
+            >
+
+            <StackPanel Name="TotalCount"
+                Orientation="Horizontal"
+                VerticalAlignment="Top"
+                Margin="0,0,5,0"
+                Grid.Row="0"
+                HorizontalAlignment="Right"
+                >
+                <TextBlock 
+                    Text="{Binding Source={StaticResource TotalCount}}"
+                    FontSize="{Binding Source={StaticResource SizeText}}" 
+                    />
+                <TextBlock 
+                    Text=": "
+                    FontSize="{Binding Source={StaticResource SizeText}}" 
+                    />
+                <TextBlock 
+                    Text="{Binding TotalCount}" 
+                    FontSize="{Binding Source={StaticResource SizeText}}" 
+                    />
+
+            </StackPanel>
+            <Grid
+                VerticalAlignment="Bottom"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button 
+                    Grid.Column="0"
+                    Content="{Binding Source={StaticResource Train}}" 
+                    Command="{Binding TrainCommand}"
+                    MinWidth="90"
+                    Margin="2.5,0"
+                    />
+                <Button 
+                    Grid.Column="1"
+                    Content="{Binding Source={StaticResource Browse}}" 
+                    Command="{Binding MoreCommand}"
+                    MinWidth="90"
+                    Margin="2.5,0"
+                    />
+                <Button 
+                    Grid.Column="2"
+                    Content="{Binding Source={StaticResource Edit}}" 
+                    Command="{Binding EditCommand}"
+                    MinWidth="90"
+                    Margin="2.5,0"
+                    />
+                <Button 
+                    Grid.Column="3"
+                    Content="{Binding Source={StaticResource Delete}}" 
+                    Command="{Binding DeleteCommand}"
+                    MinWidth="90"
+                    Margin="2.5,0"
+                    />
+
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" Margin="30,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid 
+                Grid.Row="0" 
+                Margin="5"
+                >
+                <TextBlock 
+                    Grid.Column="0" 
+                    FontSize="{Binding Source={StaticResource SizeText}}" 
+                    Text="Name"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    />
+            </Grid>
+            <Border 
+                Grid.Row="1"
+                Height="1"
+                Background="Black"
+                />
+            <ListBox ItemsSource="{Binding Themes}"
+                     SelectedItem="{Binding SelectedTheme}"
+                     Grid.Row="2"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid
+                                Grid.RowSpan="2"
+                                Background="{Binding Path=RowColor}"
+                                Opacity="0.2"
+                                Margin="-10,0"
+                                >
+                            </Grid>
+
+                            <Border 
+                                Grid.Row="0"
+                                Background="Black"
+                                Margin="-10,0"
+                                />
+                            <Grid Grid.Row="1">
+                                <TextBlock 
+                                    Grid.Column="2" 
+                                    FontSize="28" 
+                                    Width="auto"
+                                    Margin="10,0,10,8"
+                                    Text="{Binding Path=Name}" 
+                                    TextWrapping="Wrap" 
+                                    VerticalAlignment="Top"
+                                    />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Frame 
+            Name="CreateEditFrame"
+            Grid.Row="2"
+			NavigationUIVisibility="Hidden"
+            />
+    </Grid>
+</Page>

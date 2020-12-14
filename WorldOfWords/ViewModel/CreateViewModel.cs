@@ -4,16 +4,17 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 using WorldOfWords.Infrastructure.Arguments;
+using WorldOfWords.Model;
 using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
-    public class CreateViewModel : INotifyPropertyChanged
+    public class CreateViewModel : BaseViewModel
     {
         IUpdater updater;
         Create CreatePage { get; set; }
         public WordViewModel NewWord { get; set; }
-
+        Theme theme;
         public CreateViewModel(IUpdater updater, Create createPage)
         {
             NewWord = new WordViewModel()
@@ -23,56 +24,61 @@ namespace WorldOfWords.ViewModel
             this.updater = updater;
             CreatePage = createPage;
         }
+        public CreateViewModel(Theme the, IUpdater updater, Create createPage)
+        {
+            theme = the;
+            NewWord = new WordViewModel()
+            {
+                SourcePicture = Resource.getInstance().SourceNoImage,
+            };
+            this.updater = updater;
+            CreatePage = createPage;
+        }
 
-        private RelayCommand addCommand;
+
         public RelayCommand AddCommand
         {
             get
             {
-                return addCommand ??
-                  (addCommand = new RelayCommand(obj =>
-                  {
-                      NewWord.Picture = Resource.getInstance().WordService.FindImage() ?? NewWord.Picture;
+                return new RelayCommand(obj =>
+                 {
+                     NewWord.Picture = Resource.getInstance().WordService.FindImage() ?? NewWord.Picture;
 
-                      if (NewWord.Picture != null)
-                      {
-                          NewWord.SourcePicture = Resource.getInstance().WordService.GetSourceImage(NewWord.Picture);
-                      }
-                      else
-                      {
-                          NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
-                      }
-                  }));
+                     if (NewWord.Picture != null)
+                     {
+                         NewWord.SourcePicture = Resource.getInstance().WordService.GetSourceImage(NewWord.Picture);
+                     }
+                     else
+                     {
+                         NewWord.SourcePicture = Resource.getInstance().SourceNoImage;
+                     }
+                 });
             }
         }
 
-        private RelayCommand deleteCommand;
         public RelayCommand DeleteCommand
         {
             get
             {
-                return deleteCommand ??
-                  (deleteCommand = new RelayCommand(obj =>
+                return new RelayCommand(obj =>
                   {
                       DeletePicture();
-                  }));
+                  });
             }
         }
 
-        private RelayCommand saveCommand;
         public RelayCommand SaveCommand
         {
             get
             {
-                return saveCommand ??
-                  (saveCommand = new RelayCommand(obj =>
+                return new RelayCommand(obj =>
                   {
-                      if(IsEnteredName())
+                      if (IsEnteredName())
                       {
                           CreatePage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteWord"].ToString());
                           return;
                       }
-                      if(IsEnteredTranslate())
+                      if (IsEnteredTranslate())
                       {
                           CreatePage.ActionResult(new SolidColorBrush(Colors.Red), Application.Current.Resources["DontWroteTranslate"].ToString());
                           return;
@@ -82,30 +88,20 @@ namespace WorldOfWords.ViewModel
                       ResetNewWord();
 
                       CreatePage.ActionResult(new SolidColorBrush(Colors.Green), Application.Current.Resources["WordCreatedSucsassfull"].ToString());
-                  }));
+                  });
             }
         }
-
-        private RelayCommand goBackCommand;
         public RelayCommand GoBackCommand
         {
             get
             {
-                return goBackCommand ??
-                  (goBackCommand = new RelayCommand(obj =>
-                  {
-                      View.Menu.Frame.NavigationService.GoBack();
-                      if(updater != null)
-                        updater.Update();
-                  }));
+                return new RelayCommand(obj =>
+                {
+                    View.Menu.Frame.Navigate(new ListOfWords(theme));
+                });
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
 
         public bool IsEnteredName()
         {
@@ -138,6 +134,7 @@ namespace WorldOfWords.ViewModel
                 Translate = NewWord.Translate,
                 Level = 0,
                 Priority = int.Parse(NewWord.WordPriority.Content.ToString()),
+                ThemeId = theme.Id,
             };
         }
 

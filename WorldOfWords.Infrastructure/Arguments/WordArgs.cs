@@ -17,5 +17,7 @@ namespace WorldOfWords.Infrastructure.Arguments
         public int Level { get; set; }
         public int Priority { get; set; }
         public DateTime LastUpdate { get; set; }
+        public Guid ThemeId { get; set; }
+        public Theme Theme { get; set; }
     }
 }

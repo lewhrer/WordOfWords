@@ -12,6 +12,7 @@ namespace WorldOfWords.Infrastructure
     public class WorldOfWordsDbContext : DbContext
     {
         public DbSet<Word> Words { get; set; }
+        public DbSet<Theme> Themes { get; set; }
 
         //static WorldOfWordsDbContext()
         //{

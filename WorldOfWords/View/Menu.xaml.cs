@@ -13,8 +13,7 @@ namespace WorldOfWords.View
             InitializeComponent();
             Frame = MenuFrame;
             DataContext = new MenuViewModel();
-            Frame.Navigate(new ListOfWords("All", Application.Current.Resources["AllWords"].ToString(), 
-                Application.Current.Resources["TrainingAllWords"].ToString()));
+            Frame.Navigate(new ListOfThemes());
         }
 
         public Menu(int someInt)

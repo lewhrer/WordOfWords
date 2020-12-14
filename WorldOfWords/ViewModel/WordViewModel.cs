@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace WorldOfWords.ViewModel
 {
-    public class WordViewModel : INotifyPropertyChanged
+    public class WordViewModel : BaseViewModel
     {
         private string name;
         private string translate;
@@ -125,7 +125,7 @@ namespace WorldOfWords.ViewModel
             set
             {
                 hidedTranslate = value;
-                OnPropertyChanged("HidedTranslate");
+                OnPropertyChanged(nameof(HidedTranslate));
             }
         }
 
@@ -193,13 +193,6 @@ namespace WorldOfWords.ViewModel
             bi.StreamSource = ms;
             bi.EndInit();
             return bi;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

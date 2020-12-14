@@ -5,13 +5,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using WorldOfWords.Model;
 using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
-    public class ListOfWordsViewModel : INotifyPropertyChanged, IUpdater
+    public class ListOfWordsViewModel : BaseViewModel, IUpdater
     {
         WordViewModel selectedWord;
+        Theme theme;
         string nameMethod;
         string namePage;
         string nameTrainPage;
@@ -27,66 +29,81 @@ namespace WorldOfWords.ViewModel
             Words = new ObservableCollection<WordViewModel>(GetWords(nameMethod));
             TotalCount = Words.Count;
         }
+        public ListOfWordsViewModel(Theme the)
+        {
+            theme = the;
 
-        private RelayCommand moreCommand;
+            var th = Resource.getInstance().ThemeService.GetTheme(the.Id.ToString()).Words;
+            if (th != null)
+            {
+                var t = th.Select(x => new WordViewModel() { Id = x.Id, Name = x.Name, Picture = x.Picture, Translate = x.Translate });
+                Words = new ObservableCollection<WordViewModel>(t);
+            }
+        }
         public RelayCommand MoreCommand
         {
             get
             {
-                return moreCommand ??
-                  (moreCommand = new RelayCommand(obj =>
-                  {
-                      if(selectedWord != null)
-                      {
+                return new RelayCommand(obj =>
+                {
+                    if (selectedWord != null)
+                    {
                         int index = Words.IndexOf(selectedWord);
-                          View.Menu.Frame.Navigate(new WordInfo(Words.ToList(), nameTrainPage, this, index));
-                      }
-                      else
-                      {
-                          (new Warning(Application.Current.Resources["FirstSelectWord"].ToString())).ShowDialog();
-                      }
-                  }));
+                        View.Menu.Frame.Navigate(new WordInfo(Words.ToList(), nameTrainPage, this, index));
+                    }
+                    else
+                    {
+                        (new Warning(Application.Current.Resources["FirstSelectWord"].ToString())).ShowDialog();
+                    }
+                });
             }
         }
-
-        private RelayCommand deleteCommand;
         public RelayCommand DeleteCommand
         {
             get
             {
-                return deleteCommand ??
-                  (deleteCommand = new RelayCommand(obj =>
-                  {
-                      if (selectedWord != null)
-                      {
-                          Resource.getInstance().WordService.Delete(SelectedWord.Id.ToString());
-                          DeleteWord();
-                      }
-                      else
-                      {
-                          (new Warning(Application.Current.Resources["FirstSelectWord"].ToString())).ShowDialog();
-                      }
-                  }));
+                return new RelayCommand(obj =>
+                {
+                    if (selectedWord != null)
+                    {
+                        Resource.getInstance().WordService.Delete(SelectedWord.Id.ToString());
+                        DeleteWord();
+                    }
+                    else
+                    {
+                        (new Warning(Application.Current.Resources["FirstSelectWord"].ToString())).ShowDialog();
+                    }
+                });
             }
         }
 
-        private RelayCommand editCommand;
+
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    View.Menu.Frame.Navigate(new Create(theme));
+                });
+            }
+        }
+
         public RelayCommand EditCommand
         {
             get
             {
-                return editCommand ??
-                  (editCommand = new RelayCommand(obj =>
-                  {
-                      if (selectedWord != null)
-                      {
-                          View.Menu.Frame.Navigate(new Edit(SelectedWord.Id.ToString(), this));
-                      }
-                      else
-                      {
-                          (new Warning(Application.Current.Resources["FirstSelectWord"].ToString())).ShowDialog();
-                      }
-                  }));
+                return new RelayCommand(obj =>
+                {
+                    if (selectedWord != null)
+                    {
+                        View.Menu.Frame.Navigate(new Edit(SelectedWord.Id.ToString(), this));
+                    }
+                    else
+                    {
+                        (new Warning(Application.Current.Resources["FirstSelectWord"].ToString())).ShowDialog();
+                    }
+                });
             }
         }
 
@@ -175,13 +192,6 @@ namespace WorldOfWords.ViewModel
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
         public void DeleteWord()
         {
             Words.RemoveAt(Words.IndexOf(SelectedWord));
@@ -243,22 +253,22 @@ namespace WorldOfWords.ViewModel
             Words.Clear();
             List<WordViewModel> newWords = GetWords(nameMethod);
             TotalCount = newWords.Count;
-                
+
             foreach (var item in newWords)
             {
                 Words.Add(item);
             }
-
-            SelectedWord = null;
-            try
+            if (theme == null)
             {
-                int index = Words.IndexOf(SelectedWord);
-                var word = new WordViewModel(Resource.getInstance().WordService.GetWord(SelectedWord.Id.ToString()), index);
-                Words.RemoveAt(index);
-                Words.Insert(index, word);
-                SelectedWord = word;
+                View.Menu.Frame.Navigate(new ListOfThemes());
+
             }
-            catch (Exception) { }
+            else
+            {
+                View.Menu.Frame.Navigate(new ListOfWords(theme));
+            }
+            SelectedWord = null;
+
         }
     }
 }

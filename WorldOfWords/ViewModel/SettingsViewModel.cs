@@ -12,7 +12,7 @@ using WorldOfWords.View;
 
 namespace WorldOfWords.ViewModel
 {
-    public class SettingsViewModel : INotifyPropertyChanged
+    public class SettingsViewModel : BaseViewModel
     {
         private ComboBoxItem language;
         private readonly string settingsPath = "Data/Settings.json";
@@ -207,12 +207,6 @@ namespace WorldOfWords.ViewModel
                     (new Warning(Application.Current.Resources["ReserveIsEmpty"].ToString())).ShowDialog();
                 }
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
