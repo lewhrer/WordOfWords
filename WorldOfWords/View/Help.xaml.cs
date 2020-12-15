@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace WorldOfWords.View
         public Help()
         {
             InitializeComponent();
+            HelpText.Text = File.ReadAllText(Application.Current.Resources["Helps"].ToString());
         }
     }
 }

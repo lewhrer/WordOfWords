@@ -86,30 +86,7 @@
     <system:String x:Key="EndOfList">The end of list.</system:String>
     <system:String x:Key="Help">Help</system:String>
 
-    <system:String x:Key="Helps">Program for learning foreign words.
-   
-        Usage:\n
-            Theme:
-                -add
-                -edit
-                -delete
-                -browes
-                -train
-            Word:
-                -add
-                -edit
-                -delete
-                -browes
-            Train:
-                -words by level
-                -words in theme
-            Settings:
-                -themes(light, dark)
-                -backup
-                -level
-                -day repeater
-                
-    </system:String>
+    <system:String x:Key="Helps">../../Resources/HelpENG.txt</system:String>
 
 
 </ResourceDictionary>

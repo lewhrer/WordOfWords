@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -53,7 +54,7 @@ namespace WorldOfWords.ViewModel
             {
                 return new RelayCommand(obj =>
                 {
-                    View.Menu.Frame.Navigate(new Help());
+                    View.Menu.Frame.Navigate(new Help()); 
                 });
             }
         }

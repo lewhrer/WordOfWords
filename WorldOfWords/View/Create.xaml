@@ -137,7 +137,7 @@
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                     <TextBlock
                         FontSize="{Binding Source={StaticResource SizeText}}"
-                        Text="{Binding Source={StaticResource Theme}}"
+                        Text="{Binding Source={StaticResource Examples}}" Height="26" VerticalAlignment="Top"
                         />
                     <TextBlock
                         FontSize="{Binding Source={StaticResource SizeText}}"

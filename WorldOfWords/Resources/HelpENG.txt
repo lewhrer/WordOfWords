@@ -1,0 +1,23 @@
+Program for learning foreign words.
+   
+        Usage:
+            Theme:
+                -add
+                -edit
+                -delete
+                -browes
+                -train
+            Word:
+                -add
+                -edit
+                -delete
+                -browes
+            Train:
+                -words by level
+                -words in theme
+            Settings:
+                -themes(light, dark)
+                -backup
+                -level
+                -day repeater
+                

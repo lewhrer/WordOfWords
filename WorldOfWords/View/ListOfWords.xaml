@@ -57,23 +57,31 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button 
                     Grid.Column="0"
+                    Content="{Binding Source={StaticResource Add}}" 
+                    Command="{Binding AddCommand}"
+                    MinWidth="90"
+                    Margin="2.5,0"
+                    />
+                <Button 
+                    Grid.Column="1"
                     Content="{Binding Source={StaticResource Browse}}" 
                     Command="{Binding MoreCommand}"
                     MinWidth="90"
                     Margin="2.5,0"
                     />
                 <Button 
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Content="{Binding Source={StaticResource Edit}}" 
                     Command="{Binding EditCommand}"
                     MinWidth="90"
                     Margin="2.5,0"
                     />
                 <Button 
-                    Grid.Column="2"
+                    Grid.Column="3"
                     Content="{Binding Source={StaticResource Delete}}" 
                     Command="{Binding DeleteCommand}"
                     MinWidth="90"

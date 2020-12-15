@@ -82,7 +82,7 @@
 
                 >
                 <Grid 
-                    DataContext="{Binding SelectedWord}"
+                    DataContext="{Binding SelectedWord}" Margin="8,0,-8,0.2"
                     
                     >
                     <Grid.RowDefinitions>

@@ -77,7 +77,7 @@
     <system:String x:Key="WordCreatedSucsassfull">Слово створене успішно!</system:String>
     <system:String x:Key="FirstSelectWord">Спочатку виберіть слово!</system:String>
     <system:String x:Key="FirstSelectTheme">Спочатку виберіть тему!</system:String>
-    <system:String x:Key="Theme">Тими</system:String>
+    <system:String x:Key="Theme">Тема</system:String>
     <system:String x:Key="NoWordsInThisCategory">В даній категорії слів нема.</system:String>
     <system:String x:Key="DataWasSavedSuccessfully">Дані збережено успішно!</system:String>
     <system:String x:Key="WordWasDeletedSuccessfully">Слово видалено успішно!</system:String>
@@ -86,30 +86,7 @@
     <system:String x:Key="EndOfList">Кінець списку.</system:String>
     <system:String x:Key="Help">Допомога</system:String>
 
-    <system:String x:Key="Helps">Програма для вивчення іноземних слів.
-   
-        Використання:
-            Теми:
-                -додати
-                -редагувати
-                -видалити
-                -відкрити
-                -вивчати
-            Слова:
-                -додати
-                -редагувати
-                -видалити
-                -відкрити
-            Вивчати:
-                -слова за рівнем
-                -слова теми
-            Налаштування:
-                -тема(світла, темна)
-                -резервне копіювання
-                -рівень
-                -день повторення
-
-    </system:String>
+    <system:String x:Key="Helps">../../Resources/HelpUA.txt</system:String>
 
 
 </ResourceDictionary>

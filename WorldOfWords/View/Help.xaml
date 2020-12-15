@@ -9,8 +9,7 @@
       Title="Help">
 
     <Grid>
-        <TextBlock TextWrapping="Wrap"
-        Text="{Binding Source={StaticResource Helps}}"
+        <TextBlock TextWrapping="Wrap" Name="HelpText"
             />
 
     </Grid>
