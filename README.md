@@ -5,7 +5,7 @@ Program for learning foreign words. The user has the ability to create a word, t
 ## Technologies
 
 * WPF 
-* SQLite local db.
+* Entity Framework.
 
 ## Patterns
 * MVVM
